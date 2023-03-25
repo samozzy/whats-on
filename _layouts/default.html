@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}?cachebust={{ site.time | date: "%Y%m%d%H%M"}}">
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/e464ea3a91.js" crossorigin="anonymous"></script>
+
+
+    <title>{{ title | default: site.title }}</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-md-8 offset-md-2">
+				{{ content | markdownify }}
+			</div>
+		</div>
+	</div>
+
+  <!-- Bootstrap JS -->
+  <!-- Popper is optional so uncomment if you use dropdowns, popovers, or tooltips. -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+  </body>
+</html>
+

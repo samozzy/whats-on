@@ -1,0 +1,64 @@
+name: Build to GitHub pages
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main 
+
+jobs: 
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      ### PREP ###
+      - name: Checkout repo
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false # needed for JamesIves/github-pages-deploy-action
+
+      ### RUBY ###
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: Cache Ruby gems
+        id: cache-gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-1-${{ hashFiles('Gemfile.lock') }}
+      - name: Set deployment flag 
+        run: bundle config set --local deployment 'true' 
+      - name: Set Ruby gems directory
+        run: bundle config path vendor/bundle
+      - name: Install Ruby gems
+        run: bundle install --jobs 4 --retry 3
+
+      ### BUILD ###
+      - name: Build Jekyll 
+        run: bundle exec jekyll build 
+
+      ### HTMLTEST ###
+      # (This tool makes sure all the links work; may require some tweaking and is optional)
+      # You may find it helpful to create a .htmltest.yml file to set a config. Go wild.
+      - name: Cache htmltest files
+        uses: actions/cache@v2
+        with:
+          path: tmp/htmltest
+          key: htmltest-1
+      - name: Test built site with htmltest
+        uses: wjdp/htmltest-action@v0.13.0-rc1 
+        continue-on-error: true
+        with:
+          path: _site
+
+      ### DEPLOY ###
+      # Uncomment this for your repository.
+      # - name: Publish to GH Pages 🚀
+      #   uses: JamesIves/github-pages-deploy-action@4.4.0
+      #   with:
+      #     branch: gh-pages # The branch the action should deploy to.
+      #     folder: _site # The folder the action should deploy.
+
+      ### SUCCESS ### 
