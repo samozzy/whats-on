@@ -6,6 +6,9 @@ on:
   pull_request:
     branches:
       - main 
+  workflow_dispatch:
+    branches:
+      - main
 
 jobs: 
   build:
@@ -37,7 +40,7 @@ jobs:
 
       ### BUILD ###
       - name: Build Jekyll 
-        run: bundle exec jekyll build 
+        run: bundle exec jekyll build --baseurl /whatson
 
       ### HTMLTEST ###
       # (This tool makes sure all the links work; may require some tweaking and is optional)
