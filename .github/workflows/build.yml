@@ -40,7 +40,7 @@ jobs:
 
       ### BUILD ###
       - name: Build Jekyll 
-        run: bundle exec jekyll build --baseurl /whatson
+        run: bundle exec jekyll build --baseurl /pgp-whatson
 
       ### HTMLTEST ###
       # (This tool makes sure all the links work; may require some tweaking and is optional)
