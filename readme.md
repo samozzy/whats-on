@@ -1,10 +1,12 @@
-# Jekyll Starter Template
+# Paradise Green What's On
 
-A basic Jekyll installation with some sensible config flags.
+Made using Jekyll and Bootstrap.
 
-Set up to use Bootstrap and be deployed using GitHub Pages and/or Netlify. GH Pages and Netlify handle the bundle install directories differently so they're included in the `load_paths` sass flag in `_config.yml`.
+Set up to be deployed with GitHub Pages, Netlify, or Docker. All of which have different ways of configuring bundler directories, so each are included in the the `load_paths` sass flag in `_config.yml`.
 
-## Installation
+# Local Installation
+
+## Bundler 
 
 This has been tested to work on macOS or Ubuntu. Other Linux systems should 'just work'. Requires Ruby and Bundler as per (https://jekyllrb.com/docs/)[Jekyll's specification]
 
@@ -16,3 +18,14 @@ Install the dependencies
 
 Run Jekyll
 `bundle exec jekyll server`
+
+## Docker
+
+With Docker installed, run:
+`docker-compose up`
+
+And it should 'just work'. This has only been tested on macOS.
+
+## Viewing
+
+In either case, open your web browser to `localhost:4000` to view the site locally.

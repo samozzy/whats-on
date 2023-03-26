@@ -1,11 +1,12 @@
-title: 
-email: 
+title: What's On
+email: boxoffice@paradise-green.co.uk
 description: >- # this means to ignore newlines until "baseurl:"
+  What's On at Paradise Green
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: 
+twitter_username: paradisegreenuk 
 github_username:  samozzy
-timezone: Europe/London
+timezone: Europe/Edinburgh
 
 
 # Exclude from processing.
@@ -41,6 +42,7 @@ sass:
       - _sass 
       - vendor/bundle/ruby/*/gems/bootstrap*/assets/stylesheets/ # GitHub Pages/Action 
       - /opt/build/cache/bundle/ruby/*/gems/bootstrap*/assets/stylesheets/ #Netlify 
+      - /usr/local/bundle/gems/bootstrap*/assets/stylesheets/ # Docker 
 
 
 collections:
