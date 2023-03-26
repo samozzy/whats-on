@@ -1,6 +1,6 @@
 .show-card-col {
 	hr {
-		width: 90%;
+		width: 97%;
 		@extend .mx-auto, .m-0;
 	}
 }
@@ -8,7 +8,6 @@
 .show-card {
 	@extend .card, .rounded-0, .border-0;
 	@extend .bg-transparent;
-	@extend .pb-4;
 
 	.card-header {
 	    background: inherit;
@@ -16,7 +15,7 @@
 	    @extend .pb-0;
 	}
 	.card-body {
-		@extend .py-0;
+		@extend .py-0, .px-3;
 	}
 
 	.poster-wrap {
@@ -39,6 +38,8 @@
 		p:last-child {
 			@extend .mb-0;
 		}
+		background-color: rgb(226, 236, 255);
+		@extend .px-1, .py-4;
 	}
 	.show-card-buttons {
 		@extend .d-flex, .flex-column;
