@@ -26,7 +26,7 @@
   - Strong Language/Swearing
   - Audience Participation
   content_warning_detail: []
-  image: "/static/ben-miller-stand-up-science.jpeg"
+  # image: "/static/ben-miller-stand-up-science.jpeg"
   image_alt: ''
   video_embeds: []
   links: []
@@ -77,7 +77,7 @@
   - Strong Language/Swearing
   - Audience Participation
   content_warning_detail: []
-  image: "/static/ben-miller-stand-up-science.jpeg"
+  image: "https://placekitten.com/210/297?image=6"
   image_alt: ''
   video_embeds: []
   links: []
@@ -127,7 +127,7 @@
   - Strong Language/Swearing
   - Audience Participation
   content_warning_detail: []
-  image: "/static/ben-miller-stand-up-science.jpeg"
+  image: "https://placekitten.com/210/297?image=2"
   image_alt: ''
   video_embeds: []
   links: []
@@ -177,7 +177,7 @@
   - Strong Language/Swearing
   - Audience Participation
   content_warning_detail: []
-  image: "/static/ben-miller-stand-up-science.jpeg"
+  image: "https://placekitten.com/210/297?image=4"
   image_alt: ''
   video_embeds: []
   links: []
