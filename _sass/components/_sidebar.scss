@@ -1,0 +1,51 @@
+.whatson-wrapper {
+  @include media-breakpoint-up(lg) {
+    display: grid;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: 1fr 4fr;
+    gap: $grid-gutter-width;
+  }
+}
+.sidebar {
+  @extend .bg-primary; // Ensure the background is full height of the page when the page is longer than the viewport
+  grid-area: sidebar;
+  @include media-breakpoint-up(lg) {
+    padding: 1rem;
+    margin-left: -1rem;
+  }
+  #whatson-sidebar {  
+    @extend .sticky-lg-top;
+    @include media-breakpoint-up(lg) {
+      // Override collapse behaviors
+      display: block !important;
+      height: 100vh;
+      overflow-y: auto; // Takes full height of the viewport and then independently scrolls 
+      align-self: start;  // For position sticky
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    .offcanvas-lg {
+      border-right-color: var(--bs-border-color);
+      box-shadow: $box-shadow-lg;
+    }
+  }
+  // ul.sidebar-navigation {
+  //   margin-left: -1rem;
+  // }
+  // ul.sidebar-navigation, ul.sidebar-navigation ul {
+  //   list-style-type: none;
+  //   line-height: 2;
+  //   li span {
+  //     margin-left: 2px;
+  //     text-indent: -2px;
+  //   }
+  // }
+}
+main {
+  // @extend .mx-lg-5;
+  @include media-breakpoint-up(lg){
+    grid-area: main;
+    min-height: 100vh;
+  }
+}

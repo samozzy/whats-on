@@ -1,0 +1,29 @@
+{% assign show = include.show %}
+<div class="show-card h-100">
+  <div class="poster-wrap">
+    <div class="show-card-poster">
+      {% if show.poster and show.poster != empty %}
+        <img class="show-poster" src="{{ show.poster }}" alt="{% if show.poster_alt %}{{ show.poster_alt }}{% else %}{{ show.title }} poster{% endif %}">
+      {% else %}
+        <img class="show-poster show-poster-holding" src="{% link static/poster-tbc.png %}" alt="Poster coming soon">
+      {% endif %}
+      <div class="show-card-buttons">
+        <a href="#" class="btn btn-book">Book Tickets</a>
+        <a href="#" class="btn btn-read-more">Read more</a>
+      </div>
+    </div>
+    <div class="wrap-content">
+      <div class="card-header">
+        <h2>{{ show.title }}</h2>
+        <p class="lead">{{ show.company }}</p>
+      </div>
+      <div class="card-body">
+        <div class="show-meta">
+          <p><i class="fa fa-fw fa-clock"></i> {{ show.start_time }} ({{ show.duration }})</p>
+          <p><i class="fa fa-fw fa-house"></i> {{ show.performance_space }} ({{ show.venue }})</p>
+          <p><i class="fa fa-fw fa-masks-theater"></i> {{ show.genre | join: ", " }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+// Branding Colours 
+
+// Base Colours 
+// Paradise Blue
+$color-paradise: (
+	"paradise-blue": $color-paradise-blue,
+	"paradise-blue-dark": darken($color-paradise-blue, 20%),
+	"paradise-blue-light": lighten($color-paradise-blue, 10%),
+	"paradise-blue-lighter": lighten($color-paradise-blue, 60%),
+
+	"background": $color-paradise-blue,
+	"background-dark": darken($color-paradise-blue, 25%),
+
+	"paradise-white": #f1f1f1,
+);
+
+$color-genres: (
+	"comedy": map-get($color-paradise, "paradise-blue"),
+	"theatre": green,
+	"dance": red,
+	"musical": orange,
+	"poetry": purple,
+);
+
+$color-black: #1c1c1c;
+
+$color-text-white: #eee;
+$color-text:       $color-text-white;
+$color-text-black: #111;
+
+$color-white: map-get($color-paradise, "paradise-white");
+
+// Body colour 
+$color-background: map-get($color-paradise, "background");
+
+$link-color: $color-text-black;
+$link-color-visited: darken($link-color, 07%);
+$link-hover-color: $link-color;
+$link-decoration: none; 
+$link-hover-decoration: underline; 
+$color-focus: rgba($color-text-white, 0.3);
+
+// $color-error: #601111;
+// $color-warning: #864116;
+// $color-success: #116019;
+// $color-info: #114560;
+
+$color-grey:       #828282;
+$color-grey-light: lighten($color-grey, 40%);
+$color-grey-dark:  darken($color-grey, 25%);

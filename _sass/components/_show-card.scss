@@ -1,0 +1,64 @@
+.show-card-col {
+	hr {
+		width: 90%;
+		@extend .mx-auto, .m-0;
+	}
+}
+
+.show-card {
+	@extend .card, .rounded-0, .border-0;
+	@extend .bg-transparent;
+	@extend .pb-4;
+
+	.card-header {
+	    background: inherit;
+	    border: none;
+	    @extend .pb-0;
+	}
+	.card-body {
+		@extend .py-0;
+	}
+
+	.poster-wrap {
+		@extend .d-grid;
+
+	    grid-template-areas: "poster title";
+	    grid-template-columns: 2fr 4fr;
+	    gap: 0;
+
+	    .show-card-poster {
+	    	grid-area: poster;
+	    }
+	    .wrap-content {
+	    	grid-area: title;
+	    }
+	}
+	.show-meta {
+		@extend .text-paradise-blue;
+		@extend .d-flex, .flex-column;
+		p:last-child {
+			@extend .mb-0;
+		}
+	}
+	.show-card-buttons {
+		@extend .d-flex, .flex-column;
+
+		.btn {
+			@extend .rounded-0, .w-100;
+			@extend .mt-2;
+		}
+
+		.btn-book {
+			@extend .btn-primary;
+		}
+		.btn-read-more {
+			@extend .btn-secondary;
+		}
+	}
+}
+
+img.show-poster {
+	max-width: 100%;
+	height: auto;
+	@extend .shadow;
+}
