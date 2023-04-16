@@ -34,6 +34,7 @@ livereload: true
 
 plugins:
   - bootstrap 
+  - jekyll-datapage-generator
 
 sass:
     sass_dir: _sass
@@ -50,6 +51,13 @@ collections:
     output: true
     permalink: :path/
 permalink: pretty 
+
+page_gen-dirs: true 
+page_gen:
+  - data: 'shows'
+    template: 'show' 
+    name: 'title'  
+    dir: '/' 
 
 defaults:
   # Defaults for pages
