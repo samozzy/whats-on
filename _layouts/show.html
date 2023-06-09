@@ -2,9 +2,53 @@
 layout: default
 ---
 {% assign show = page %}
+{% include show/show-date-range.html show=show %}
 
-<h1>{{ show.title }}</h1>
+<div class="row">
+	<div class="col-12">
+		<div class="poster-wrap">
+			<div class="show-poster">
+				{% include show/show-get-poster.html show=show %}
+				{% include show/show-meta.html show=show %}
+			</div>
+			<div class="wrap-content px-4">
+				<p class="lead"><strong>Performances:</strong> {{ date_list }}</p>
+				<p>{{ show.copy_long }}</p>
+				<div class="show-buttons mb-4">
+					{% include show/show-book-button.html show=show classes='w-100' %}
+				</div>
+				{% if show.content_warnings and show.content_warnings != empty %}
+					{% assign has_cw = true %}
+				{% elsif show.content_warning_detail and show.content_warning_detail != empty %}
+					{% assign has_cw = true %}
+				{% elsif show.age_guidance and show.age_guidance != empty %}
+					{% assign has_cw = true %}
+				{% elsif show.age_restricted %}
+					{% assign has_cw = true %}
+				{% endif %}
+				{% if has_cw %}
+					<h2>Content Warnings</h2>
+					{% if show.age_guidance and show.age_guidance != empty %}
+						<p class="lead text-primary">Age {% if show.age_restricted %}restriction{% else %}guidance{% endif %}: {{ show.age_guidance }}</p>
+					{% endif %}
+					{% if show.content_warnings and show.content_warnings != empty %}
+						<ul>
+							{% for cw in show.content_warnings %}
+								<li>{{ cw }}</li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+					{% if show.content_warning_detail and show.content_warning_detail != empty %}
+						{{ show.content_warning_detail | markdownify }}
+					{% endif %}
+				{% endif %}
+				{% if show.access and show.access != empty %}
+					<h2>Accessibility</h2>
+					{{ show.access | markdownify }}
+				{% endif %}
 
-<p>{{ show.copy_long }}</p>
+			</div>
+		</div>
+	</div>
+</div>
 
-<p><a href="{{ show.ticket_url }}" class="btn btn-secondary w-100">Book Tickets</a></p>
