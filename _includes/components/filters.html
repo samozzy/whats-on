@@ -1,0 +1,39 @@
+<div class="filters">
+	<h2 class="text-center">Search & Filter</h2>
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Dates</span></a>
+		<div class="filter-body collapse" id="datesCollapse">
+			<span class="placeholder col-7"></span>
+			<span class="placeholder col-4"></span>
+			<span class="placeholder col-4"></span>
+		</div>
+	</div>
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
+		<div class="filter-body collapse" id="venuesCollapse">
+			{% for space in site.data.venues %}
+				<span>{{ space.space }}</span><br>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
+		<div class="filter-body collapse show" id="genresCollapse">
+			{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
+			{% assign all_genres = site.data.genres | map: "name" %}
+			{% assign show_genres = site.data.shows | map: "genre" | uniq %}
+			{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
+			{% for g in all_genres %}
+				{% include components/genre-badge.html genre=g %}
+			{% endfor %}
+		</div>
+	</div>
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
+		<div class="filter-body collapse" id="ageCollapse">
+			3+
+			7+
+			18+
+		</div>
+	</div>
+</div>

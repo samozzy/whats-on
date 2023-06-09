@@ -18,18 +18,7 @@
 						</nav>
 						{% endif %}
 						{% if page.layout == 'whatson' %}
-							<div class="filters">
-								<h2 class="text-center">Search & Filter</h2>
-								{% for i in (1..5) %}
-									<div class="my-4">
-										<span class="placeholder col-7"></span>
-										<span class="placeholder col-4"></span>
-										<span class="placeholder col-4"></span>
-										<span class="placeholder col-6"></span>
-										<span class="placeholder col-8"></span>
-									</div>
-								{% endfor %}
-							</div>
+							{% include components/filters.html %}
 						{% endif %}
 					</div>
 				</div>
