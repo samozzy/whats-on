@@ -1,4 +1,4 @@
 <div class="show-meta">
-  <p><i class="fa fa-fw fa-house"></i> {{ include.show.performance_space }} <br>({{ include.show.venue }})</p>
-  <p><i class="fa fa-fw fa-masks-theater"></i> {{ include.show.genre | join: ", " }}</p>
+  <p class="text-center">{{ include.show.performance_space }} <br><small class="mt-2">{{ include.show.venue }}</small></p>
+  <p>{% for g in include.show.genre %}{% include components/genre-badge.html genre=g %}{% endfor %}</p>
 </div>
