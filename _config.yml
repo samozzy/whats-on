@@ -7,7 +7,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: paradisegreenuk 
 github_username:  samozzy
 timezone: Europe/Edinburgh
-
+event_title: Fringe 2023 
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -46,11 +46,11 @@ sass:
       - /usr/local/bundle/gems/bootstrap*/assets/stylesheets/ # Docker 
 
 
+permalink: pretty 
 collections:
   content:
     output: true
     permalink: :path/
-permalink: pretty 
 
 page_gen-dirs: true 
 page_gen:

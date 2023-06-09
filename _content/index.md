@@ -1,5 +1,6 @@
 ---
 layout: whatson 
 permalink: / 
-title: What's On - Fringe 2023
+title: What's On 
+append_event: true 
 ---
