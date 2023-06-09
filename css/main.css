@@ -33,6 +33,13 @@
     align-self: start;
   }
 }
+.sidebar .pgp-nav a.nav-link:hover span, .sidebar .pgp-nav a.nav-link:focus span, .sidebar .pgp-nav a.nav-link:focus-within span {
+  text-decoration: underline;
+}
+.sidebar .pgp-nav a.nav-link.active {
+  background-color: white;
+  font-weight: bold;
+}
 @media (max-width: 991.98px) {
   .sidebar .offcanvas-lg {
     border-right-color: var(--bs-border-color);
@@ -45,6 +52,10 @@
     grid-area: main;
     min-height: 100vh;
   }
+}
+
+.filters {
+  border: 3px solid white;
 }
 
 .show-card-col hr {
@@ -6390,10 +6401,10 @@ progress {
   background-color: RGBA(241, 241, 241, var(--bs-bg-opacity, 1)) !important;
 }
 
-.link-primary {
+.link-primary, .sidebar .pgp-nav a.nav-link.active {
   color: #0B0099 !important;
 }
-.link-primary:hover, .link-primary:focus {
+.link-primary:hover, .sidebar .pgp-nav a.nav-link.active:hover, .link-primary:focus, .sidebar .pgp-nav a.nav-link.active:focus {
   color: #09007a !important;
 }
 
@@ -6432,10 +6443,10 @@ progress {
   color: #b02a37 !important;
 }
 
-.link-light, .footer a {
+.link-light, .sidebar .pgp-nav a.nav-link, .footer a {
   color: #f8f9fa !important;
 }
-.link-light:hover, .footer a:hover, .link-light:focus, .footer a:focus {
+.link-light:hover, .sidebar .pgp-nav a.nav-link:hover, .footer a:hover, .link-light:focus, .sidebar .pgp-nav a.nav-link:focus, .footer a:focus {
   color: #f9fafb !important;
 }
 
@@ -7490,7 +7501,7 @@ progress {
   padding: 0.25rem !important;
 }
 
-.p-2 {
+.p-2, .filters {
   padding: 0.5rem !important;
 }
 
@@ -7702,7 +7713,7 @@ progress {
   font-size: calc(1.3rem + 0.6vw) !important;
 }
 
-.fs-4 {
+.fs-4, .sidebar .pgp-nav a.nav-link {
   font-size: calc(1.275rem + 0.3vw) !important;
 }
 
@@ -7770,7 +7781,7 @@ progress {
   text-align: right !important;
 }
 
-.text-center {
+.text-center, .sidebar .pgp-nav a.nav-link {
   text-align: center !important;
 }
 
@@ -10632,7 +10643,7 @@ progress {
   .fs-3 {
     font-size: 1.75rem !important;
   }
-  .fs-4 {
+  .fs-4, .sidebar .pgp-nav a.nav-link {
     font-size: 1.5rem !important;
   }
 }
