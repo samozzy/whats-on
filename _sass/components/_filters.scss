@@ -1,4 +1,17 @@
 .filters {
 	border: 3px solid white;
 	@extend .p-2;
+
+	.filter-header {
+		@extend .link-light;
+		&:hover, &:focus, &:focus-within {
+			text-decoration: none;
+			span {
+				text-decoration: underline;
+			}
+		}
+	}
+	.filter-body {
+		@extend .ms-2;
+	}
 }
