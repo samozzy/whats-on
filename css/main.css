@@ -54,6 +54,10 @@
   }
 }
 
+.filters {
+  border: 3px solid white;
+}
+
 .show-card-col hr {
   width: 97%;
 }
@@ -7497,7 +7501,7 @@ progress {
   padding: 0.25rem !important;
 }
 
-.p-2 {
+.p-2, .filters {
   padding: 0.5rem !important;
 }
 
