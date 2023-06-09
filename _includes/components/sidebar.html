@@ -3,6 +3,20 @@
 						<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body d-flex flex-column">
+						{% if site.data.navigation %}
+						<nav class="pgp-nav">
+							<ul class="nav flex-column">
+								{% for item in site.data.navigation %}
+									<li class="nav-item">
+										<a class="nav-link {% if page.path == item.link %}active {% endif %}" href="{% link {{ item.link }}  %}">
+											{% if item.icon %}<i class="fa fa-fw {{ item.icon }}"></i>&nbsp;{% endif %}
+											<span>{{ item.title }}</span>
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</nav>
+						{% endif %}
 						<h2 class="text-center">Search & Filter</h2>
 						{% for i in (1..5) %}
 							<div class="my-4">
