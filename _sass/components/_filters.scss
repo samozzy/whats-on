@@ -1,6 +1,6 @@
 .filters {
 	border: 3px solid white;
-	@extend .p-2;
+	@extend .p-2, .pb-3;
 
 	.filter-header {
 		@extend .link-light;
@@ -14,4 +14,10 @@
 	.filter-body {
 		@extend .ms-2;
 	}
+}
+button.update-results {
+	@extend .rounded-0, .text-center;
+	@extend .btn, .btn-outline-light, .fs-5;
+	border-width: 3px !important;
+	border-top: none !important;
 }
