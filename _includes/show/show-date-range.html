@@ -1,0 +1,48 @@
+{% assign show = include.show %}
+{% if show.performances and show.performances != empty %}
+	{% assign performances_sorted = show.performances | sort %}
+	{% assign first_performance = performances_sorted | first %}
+	{% assign last_performance = performances_sorted | reverse | first %}
+	{% if first_performance == last_performance %}
+		{% comment %}Assume show is a one-day{% endcomment %}
+		{% assign date_string = first_performance | date_to_long_string: "ordinal" %}
+		{% assign date_list = date_string %}
+	{% else %}
+		{% assign first_month_year = first_performance | date: "%B %Y" %}
+		{% assign last_month_year = last_performance | date: "%B %Y" %}
+		{% assign date_list = '' | split: ''  %}
+		{% if first_month_year == last_month_year %}
+			{% capture date_string %}{{- first_performance | date_to_long_string: "ordinal" | remove: first_month_year | strip -}}-{{ last_performance | date_to_long_string: "ordinal" | remove: last_month_year | strip }} {{ first_performance | date: "%b" }}{% endcapture %}
+			{% for perf in performances_sorted %}
+				{% capture this_date %}{{ perf | date_to_long_string: "ordinal" | remove: first_month_year }}{% endcapture %}
+				{% assign this_date = this_date | strip %}
+				{% assign date_list = date_list | push: this_date %}
+			{% endfor %}
+			{% assign first_month = first_performance | date: "%B" %}
+			{% assign date_list = date_list | join: ', ' | append: ' ' | append: first_month %}
+		{% else %}
+			{% assign first_year = first_performance | date: "%Y" %}
+			{% assign last_year = last_performance | date: "%Y" %}
+			{% if first_year == last_year %}
+				{% capture date_string %}{{ first_performance | date_to_long_string: "ordinal" | remove: first_year }} - {{ last_performance | date_to_long_string: "ordinal" | remove: last_year }}{% endcapture %}
+				{% for perf in performances_sorted %}
+					{% capture this_date %}{{ perf | date_to_long_string: "ordinal" | remove: first_year }}{% endcapture %}
+					{% assign this_date = this_date | strip %}
+					{% assign date_list = date_list | push: this_date %}
+				{% endfor %}
+				{% assign date_list = date_list | join: ", " %}
+			{% else %}
+				{% capture date_stirng %}{{ first_performance | date_to_long_string: "ordinal" }} - {{ last_performance | date_to_long_string: "ordinal" }}{% endcapture %}
+				{% for perf in performances_sorted %}
+					{% capture this_date %}{{ perf | date_to_long_string: "ordinal" }}{% endcapture %}
+					{% assign this_date = this_date | strip %}
+					{% assign date_list = date_list | push: this_date %}
+				{% endfor %}
+				{% assign date_list = date_list | join: ', ' %}
+			{% endif %}
+		{% endif %}
+	{% endif %}
+{% else %}
+	{% assign date_string = nil %}
+	{% assign date_list = nil %}
+{% endif %}

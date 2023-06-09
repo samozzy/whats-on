@@ -1,0 +1,6 @@
+      {% assign show = include.show %}
+      {% if show.image and show.image != empty %}
+        <img class="show-poster" src="{{ show.image }}" alt="{% if show.poster_alt %}{{ show.poster_alt }}{% else %}{{ show.title }} poster{% endif %}">
+      {% else %}
+        <img class="show-poster show-poster-holding" src="{% link static/poster-tbc.png %}" alt="Poster coming soon">
+      {% endif %}
