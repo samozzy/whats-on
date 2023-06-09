@@ -24,16 +24,11 @@
       <main class="content pt-3 mb-5 text-dark">
         <section class="top-bar container-fluid d-block">
           <div class="row py-4">
-            <div class="col-9 px-0">
-              <h1 class="display-4">{{ page.title | default: site.title }}</h1>
+            <div class="col-12 px-0 mb-auto">
+              <h1 class="display-4 mb-0">
                 {{ page.title | default: site.title }} {% if page.append_event %}&mdash; {{ site.event_title }}{% endif %}
                 {% if page.company %}<br><p class="lead fs-1">{{ page.company }}</p>{% endif %}
-              <div class="sidebar-toggler">
-                <button class="navbar-toggler p-2 btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#whatson-sidebar" aria-controls="whatson-sidebar" aria-label="Open sidebar">
-                  <i class="fa fa-bars fa-2x"></i>    
-                  <span class="d-none fs-6 pe-1">Open Sidebar</span>
-                </button>
-              </div>
+              </h1>
             </div>
           </div>
         </section>

@@ -23,6 +23,19 @@
       align-self: start;  // For position sticky
     }
   }
+  .pgp-nav a.nav-link {
+    @extend .link-light, .text-center, .fs-4;
+    &:hover, &:focus, &:focus-within {
+      span {
+        text-decoration: underline;
+      }
+    }
+    &.active {
+      background-color: white;
+      font-weight: bold;
+      @extend .link-primary;
+    }
+  }
 
   @include media-breakpoint-down(lg) {
     .offcanvas-lg {
