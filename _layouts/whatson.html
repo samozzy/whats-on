@@ -8,7 +8,7 @@ layout: default
 	<div class="row row-cols-1 row-cols-sm-2 g-4">
 		{% for show in site.data.shows %}
 			<div class="col show-card-col">
-				{% include components/show-card.html show=show %}
+				{% include show/show-card.html show=show %}
 				<hr>
 			</div>
 		{% endfor %}

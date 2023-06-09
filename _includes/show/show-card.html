@@ -1,0 +1,27 @@
+{% assign show = include.show %}
+{% include show/show-link.html show=show %}
+<div class="show-card h-100">
+  <div class="poster-wrap">
+    <div class="show-poster">
+      <a href="{{ show_link }}">{% include show/show-get-poster.html show=show %}</a>
+      {% include show/show-meta.html show=show %}
+    </div>
+    <div class="wrap-content">
+      <div class="card-header">
+        {% include show/show-date-range.html show=show %}
+        <h2><a href="{{ show_link }}">{{ show.title }}</a></h2>
+        <p class="lead">{{ show.company }}{% if date_string or show.start_time %}<br>
+          {% if date_string %}{{ date_string }} {% if show.start_time %}--{% endif %} {% endif %}{{ show.start_time }} {% if show.duration %}({{ show.duration }}){% endif %}{% endif %}
+        </p>
+        <div class="show-card-buttons d-flex flex-row justify-items-between mb-4">
+          {% include show/show-book-button.html show=show %}
+        </div>
+      </div>
+      <div class="card-body px-0 my-4 mt-4">
+        {{ show.copy_short | markdownify | truncatewords:50 | remove: '...' }} | <a href="{{ show_link }}" class="link-secondary">Read more...</a>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer bg-transparent px-0 border-0">
+  </div>
+</div>

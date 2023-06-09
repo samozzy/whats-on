@@ -17,49 +17,51 @@
 	.card-body {
 		@extend .py-0, .px-3;
 	}
-
-	.poster-wrap {
-		@extend .d-grid;
-
-	    grid-template-areas: "poster title";
-	    grid-template-columns: 2fr 4fr;
-	    gap: 0;
-
-	    .show-card-poster {
-	    	grid-area: poster;
-	    }
-	    .wrap-content {
-	    	grid-area: title;
-	    }
+}
+.show-meta {
+	@extend .text-paradise-blue;
+	@extend .d-flex, .flex-column;
+	p:last-child {
+		@extend .mb-0;
 	}
-	.show-meta {
-		@extend .text-paradise-blue;
-		@extend .d-flex, .flex-column;
-		p:last-child {
-			@extend .mb-0;
-		}
-		background-color: rgb(226, 236, 255);
-		@extend .px-1, .py-4;
+	background-color: rgb(226, 236, 255);
+	@extend .ps-2, .pe-1, .py-4;
+}
+
+.poster-wrap {
+	@extend .d-grid;
+
+    grid-template-areas: "poster title";
+    grid-template-columns: 2fr 4fr;
+    gap: 0;
+
+    div.show-poster {
+    	grid-area: poster;
+
+    }
+    .wrap-content {
+    	grid-area: title;
+    }
+}
+
+.show-card-buttons, .show-buttons {
+	@extend .d-flex, .flex-column;
+
+	.btn {
+		@extend .rounded-0, .w-100;
+		@extend .mt-2;
 	}
-	.show-card-buttons {
-		@extend .d-flex, .flex-column;
 
-		.btn {
-			@extend .rounded-0, .w-100;
-			@extend .mt-2;
-		}
-
-		.btn-book {
-			@extend .btn-primary;
-		}
-		.btn-read-more {
-			@extend .btn-secondary;
-		}
+	.btn-book {
+		@extend .btn-primary;
+	}
+	.btn-read-more {
+		@extend .btn-secondary;
 	}
 }
 
 img.show-poster {
-	max-width: 100%;
+	width: 100%;
 	height: auto;
 	@extend .shadow;
 }
