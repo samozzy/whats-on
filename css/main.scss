@@ -29,9 +29,8 @@ $body-color: $color-text;
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 
-// @import "nt-style";
-// @import "nt-components";
 @import "components/sidebar";
+@import "components/filters";
 @import "components/show-card";
 @import "components/footer";
 
