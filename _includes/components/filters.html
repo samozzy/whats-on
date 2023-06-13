@@ -1,40 +1,87 @@
-<div class="filters">
-	<h2 class="text-center">Search & Filter</h2>
-	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Dates</span></a>
-		<div class="filter-body collapse" id="datesCollapse">
-			<span class="placeholder col-7"></span>
-			<span class="placeholder col-4"></span>
-			<span class="placeholder col-4"></span>
+<form>
+	<div class="filters">
+		<h2 class="text-center">Search & Filter</h2>
+		<div class="filter-box">
+			<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Dates</span></a>
+			<div class="filter-body collapse" id="datesCollapse">
+				<span class="placeholder col-7"></span>
+				<span class="placeholder col-4"></span>
+				<span class="placeholder col-4"></span>
+			</div>
+		</div>
+
+		{% if site.data.venues %}
+		<div class="filter-box">
+			<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
+			<div class="filter-body collapse show venue-list form-check" id="venuesCollapse">
+				<ul>
+					{% for venue in site.data.venues %}
+						<li><input class="form-check-input" type="checkbox" id="venue-{{ venue.name | slugify }}"><label class="form-check-label" for="venue-{{ venue.name | slugify }}">{{ venue.name }}</label></li>
+						{% if venue.spaces %}
+						<ul>
+							{% for space in venue.spaces %}
+								<li><input class="form-check-input {{ venue.name | slugify }}-spaces" type="checkbox" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
+							{% endfor %}
+						</ul>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		{% endif %}
+		<div class="filter-box">
+			<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
+			<div class="filter-body collapse show" id="genresCollapse">
+				{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
+				{% assign all_genres = site.data.genres | map: "name" %}
+				{% assign show_genres = site.data.shows | map: "genre" | uniq %}
+				{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
+				{% for g in all_genres %}
+					{% include components/genre-badge.html genre=g %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="filter-box">
+			<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
+			<div class="filter-body collapse" id="ageCollapse">
+				3+
+				7+
+				18+
+			</div>
 		</div>
 	</div>
-	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
-		<div class="filter-body collapse" id="venuesCollapse">
-			{% for space in site.data.venues %}
-				<span>{{ space.space }}</span><br>
-			{% endfor %}
-		</div>
-	</div>
-	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
-		<div class="filter-body collapse show" id="genresCollapse">
-			{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
-			{% assign all_genres = site.data.genres | map: "name" %}
-			{% assign show_genres = site.data.shows | map: "genre" | uniq %}
-			{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
-			{% for g in all_genres %}
-				{% include components/genre-badge.html genre=g %}
-			{% endfor %}
-		</div>
-	</div>
-	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
-		<div class="filter-body collapse" id="ageCollapse">
-			3+
-			7+
-			18+
-		</div>
-	</div>
-</div>
-<button class="update-results">Update results</button>
+	<button class="update-results">Update results</button>
+</form>
+
+<script>
+	// Loop over venues and make the nested tickboxes work, including indeterminate venues for some spaces being ticked
+	{% for venue in site.data.venues %}
+		{% assign venue_slug = venue.name | slugify %}
+		{% assign venue_var = venue_slug | replace: '-', '_' %}
+		var {{ venue_var }}_checkboxes = document.querySelectorAll('input.{{ venue_slug }}-spaces');
+    	var {{ venue_var }}_checkall = document.getElementById('venue-{{ venue_slug }}');
+
+		for(var i=0; i<{{ venue_var }}_checkboxes.length; i++) {
+		  {{ venue_var }}_checkboxes[i].onclick = function() {
+		    console.log('Box has been checked')
+		    console.log("{{ venue_var }}")
+		    console.log("{{ venue_slug }}")
+		    var {{ venue_var }}_checkedCount = document.querySelectorAll('input.{{ venue_slug }}-spaces:checked').length;
+
+		    {{ venue_var }}_checkall.checked = {{ venue_var }}_checkedCount > 0;
+		    {{ venue_var }}_checkall.indeterminate = {{ venue_var }}_checkedCount > 0 && {{ venue_var }}_checkedCount < {{ venue_var }}_checkboxes.length;
+		    console.log('Indeterminate set: ')
+		    console.log({{ venue_var }}_checkedCount > 0 && {{ venue_var }}_checkedCount < {{ venue_var }}_checkboxes.length);
+		    console.log({{ venue_var }}_checkedCount)
+		    console.log({{ venue_var }}_checkboxes.length)
+		  }
+		}
+
+		{{ venue_var }}_checkall.onclick = function() {
+		  for(var i=0; i<{{ venue_var }}_checkboxes.length; i++) {
+		    {{ venue_var }}_checkboxes[i].checked = this.checked;
+		  }
+		}
+	{% endfor %}
+</script>
+

@@ -14,10 +14,18 @@
 	.filter-body {
 		@extend .ms-2;
 	}
+	.form-check {
+		padding-left: 0;
+	}
+
+	.venue-list {
+		ul {
+			list-style: none;
+		}
+	}
 }
 button.update-results {
-	@extend .rounded-0, .text-center;
-	@extend .btn, .btn-outline-light, .fs-5;
-	border-width: 3px !important;
+	@extend .pg-button; 
+	@extend .w-100, .fs-5;
 	border-top: none !important;
 }
