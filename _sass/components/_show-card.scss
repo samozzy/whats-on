@@ -15,7 +15,7 @@
 	    @extend .pb-0;
 	}
 	.card-body {
-		@extend .py-0, .px-3;
+		@extend .py-0, .px-3; 
 	}
 }
 .show-meta {
@@ -30,22 +30,32 @@
 
 .poster-wrap {
 	@extend .d-grid;
+    column-count: 2;
+    grid-template-areas: 'poster .' 'poster .';
 
-    grid-template-areas: "poster title";
-    grid-template-columns: 2fr 4fr;
+    @include media-breakpoint-up(md) {
+    	grid-template-columns: 1fr 2fr;
+    	grid-template-rows: auto 2fr;
+    }
+
+    @include media-breakpoint-down(md) {
+    	column-count: 1;
+    	grid-template-areas: '.' 'poster' '.';
+    	div.show-poster, .show-card-buttons {
+    		width: 75%;
+    		margin-left: auto;
+    		margin-right: auto;
+    	}
+    }
     gap: 0;
 
     div.show-poster {
     	grid-area: poster;
-
-    }
-    .wrap-content {
-    	grid-area: title;
     }
 }
 
 .show-card-buttons, .show-buttons {
-	@extend .d-flex, .flex-column;
+	@extend .d-flex, .flex-column, .px-3;
 
 	.btn {
 		@extend .rounded-0, .w-100;

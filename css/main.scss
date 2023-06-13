@@ -29,6 +29,12 @@ $body-color: $color-text;
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 
+.pg-button {
+	@extend .rounded-0, .text-center;
+	@extend .btn, .btn-outline-light;
+	border-width: 3px !important;
+}
+
 @import "components/sidebar";
 @import "components/filters";
 @import "components/show-card";

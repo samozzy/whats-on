@@ -14,11 +14,16 @@
   </head>
   <body class="h-100 d-flex flex-column">
 
-    <div class="container-fluid whatson-wrapper bg-paradise-white">
+    <div class="container-fluid whatson-wrapper bg-paradise-white g-0 g-lg-2">
       <aside class="sidebar bg-primary">
         <a href="{% link _content/index.md %}">
-          <img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="100px" width="auto" class="mt-2 mb-4 mx-auto d-block">
+          <img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="100px" width="auto" class="mt-lg-2 p-2 p-lg-0 mb-lg-4 mx-auto d-block">
         </a>
+        <div class="sidebar-toggler py-2 text-center">
+          <button class="pg-button fs-5" type="button" data-bs-toggle="offcanvas" data-bs-target="#whatson-sidebar" aria-controls="whatson-sidebar" aria-label="Open sidebar">
+            Menu
+          </button>
+        </div>
         {% include components/sidebar.html %}
       </aside>
       <main class="content pt-3 mb-5 text-dark">
