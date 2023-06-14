@@ -1,10 +1,9 @@
-- space: The Sanctuary
-  venue: Paradise in Augustine's
-- space: The Studio 
-  venue: Paradise in Augustine's
-- space: The Snug 
-  venue: Paradise in Augustine's
-- space: The Vault 
-  venue: Paradise in the Vault 
-- space: The Annexe
-  venue: Paradise in the Vault
+- name: "Paradise in Augustine's"
+  spaces: 
+    - The Sanctuary
+    - The Studio
+    - The Snug 
+- name: Paradise in the Vault 
+  spaces: 
+    - The Vault 
+    - The Annexe 
