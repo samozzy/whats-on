@@ -1,57 +1,55 @@
-<form>
-	<div class="filters">
-		<h2 class="text-center">Search & Filter</h2>
-		<div class="filter-box">
-			<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Dates</span></a>
-			<div class="filter-body collapse" id="datesCollapse">
-				<span class="placeholder col-7"></span>
-				<span class="placeholder col-4"></span>
-				<span class="placeholder col-4"></span>
-			</div>
-		</div>
-
-		{% if site.data.venues %}
-		<div class="filter-box">
-			<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
-			<div class="filter-body collapse show venue-list form-check" id="venuesCollapse">
-				<ul>
-					{% for venue in site.data.venues %}
-						<li><input class="form-check-input" type="checkbox" id="venue-{{ venue.name | slugify }}"><label class="form-check-label" for="venue-{{ venue.name | slugify }}">{{ venue.name }}</label></li>
-						{% if venue.spaces %}
-						<ul>
-							{% for space in venue.spaces %}
-								<li><input class="form-check-input {{ venue.name | slugify }}-spaces" name="filter-venue-item" type="checkbox" value="{{ space | slugify }}" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
-							{% endfor %}
-						</ul>
-						{% endif %}
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-		{% endif %}
-		<div class="filter-box">
-			<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
-			<div class="filter-body collapse show" id="genresCollapse">
-				{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
-				{% assign all_genres = site.data.genres | map: "name" %}
-				{% assign show_genres = site.data.shows | map: "genre" | uniq %}
-				{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
-				{% for g in all_genres %}
-					{% include components/genre-badge.html genre=g %}
-				{% endfor %}
-			</div>
-		</div>
-		<div class="filter-box">
-			<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
-			<div class="filter-body collapse" id="ageCollapse">
-				3+
-				7+
-				18+
-			</div>
+<div class="filters">
+	<h2 class="text-center">Search & Filter</h2>
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Dates</span></a>
+		<div class="filter-body collapse" id="datesCollapse">
+			<span class="placeholder col-7"></span>
+			<span class="placeholder col-4"></span>
+			<span class="placeholder col-4"></span>
 		</div>
 	</div>
-	<button class="update-results">Update results</button>
-</form>
+
+	{% if site.data.venues %}
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
+		<div class="filter-body collapse show venue-list form-check" id="venuesCollapse">
+			<ul>
+				{% for venue in site.data.venues %}
+					<li><input class="form-check-input" type="checkbox" id="venue-{{ venue.name | slugify }}"><label class="form-check-label" for="venue-{{ venue.name | slugify }}">{{ venue.name }}</label></li>
+					{% if venue.spaces %}
+					<ul>
+						{% for space in venue.spaces %}
+							<li><input class="form-check-input {{ venue.name | slugify }}-spaces" name="filter-venue-item" type="checkbox" value="{{ space | slugify }}" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	{% endif %}
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
+		<div class="filter-body collapse show" id="genresCollapse">
+			{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
+			{% assign all_genres = site.data.genres | map: "name" %}
+			{% assign show_genres = site.data.shows | map: "genre" | uniq %}
+			{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
+			{% for g in all_genres %}
+				{% include components/genre-badge.html genre=g %}
+			{% endfor %}
+		</div>
+	</div>
+	<div class="filter-box">
+		<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
+		<div class="filter-body collapse" id="ageCollapse">
+			3+
+			7+
+			18+
+		</div>
+	</div>
+</div>
+<button class="update-results" id="update_results">Update results</button>
 
 <script>
 	// Loop over venues and make the nested tickboxes work, including indeterminate venues for some spaces being ticked

@@ -42,6 +42,10 @@
     </div>
     {% include structure/footer.html %}
 
+    {% if page.layout == 'whatson' %}
+      <script src="{% link js/filters.js %}"></script>
+    {% endif %}
+
     <!-- Bootstrap JS -->
     <!-- Popper is optional so uncomment if you use dropdowns, popovers, or tooltips. -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
