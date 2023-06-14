@@ -5,12 +5,11 @@ layout: default
 {{ content }} 
 
 {% if site.data.shows %}
-	<div class="row row-cols-1 row-cols-sm-2 g-4">
+	<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-2 g-4">
 		{% for show in site.data.shows %}
-			<div class="col show-card-col">
-				{% include show/show-card.html show=show %}
-				<hr>
-			</div>
+			{% include show/show-card.html show=show %}
 		{% endfor %}
+		<p class="lead d-none results-counter" id="results_counter"></p>
+		<p class="lead text-center d-none no-results" id="no_results">There are no results, try clearing your filters or search terms.</p>
 	</div>
 {% endif %}
