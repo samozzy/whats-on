@@ -20,7 +20,7 @@
 						{% if venue.spaces %}
 						<ul>
 							{% for space in venue.spaces %}
-								<li><input class="form-check-input {{ venue.name | slugify }}-spaces" type="checkbox" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
+								<li><input class="form-check-input {{ venue.name | slugify }}-spaces" name="filter-venue-item" type="checkbox" value="{{ space | slugify }}" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
 							{% endfor %}
 						</ul>
 						{% endif %}
