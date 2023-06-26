@@ -9,6 +9,14 @@
 		</div>
 	</div>
 
+	{% if site.test_data %}
+		{% assign show_venues = '' | split: '' %}
+		{% for s in site.data.shows %}
+			{% assign show_venues = show_venues | push: s.venue.name %}
+		{% endfor %}
+		{% assign show_venues = show_venues | uniq | sort %}
+	{% endif %}
+
 	{% if site.data.venues %}
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
@@ -24,6 +32,11 @@
 					</ul>
 					{% endif %}
 				{% endfor %}
+				{% if site.test_data %}
+					{% for venue in show_venues %}
+						<li><input class="form-check-input venue-{{ venue | slugify }}" name="filter-venue-item" type="checkbox" value="{{ venue | slugify }}" id="venue-{{ venue | slugify }}"><label class="form-check-label" for="venue-{{ venue | slugify }}">{{ venue }}</label></li>
+					{% endfor %}
+				{% endif %}
 			</ul>
 		</div>
 	</div>

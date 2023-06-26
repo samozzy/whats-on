@@ -11,6 +11,8 @@ event_title: Fringe 2023
 
 paradise_blue: 0B0099
 
+test_data: true 
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
