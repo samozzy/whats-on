@@ -30,7 +30,7 @@ button.update-results {
 	border-top: none !important;
 }
 
-.filtered-out-by-venue, .filtered-out-by-genre {
+.filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-search {
 	@extend .d-none;
 }
 .genre-badge {

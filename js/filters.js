@@ -152,28 +152,69 @@ function hideActiveFilter(btn_id){
 // Search // 
 //
 search_box = document.getElementById('search-input')
-function clearSearch(){
-	// Reset the search box value, show the shows, and hide the filter
-	search_box.value = '';
-	clearFilteredOutClass('filtered-out-by-search')
-	hideActiveFilter('search')
-}
+// function clearSearch(){
+// 	// Reset the search box value, show the shows, and hide the filter
+// 	search_box.value = '';
+// 	clearFilteredOutClass('filtered-out-by-search')
+// 	hideActiveFilter('search')
+// }
 function doSearch(term){
 	// Strip any whitespace (not that there should be any)
+	console.log('SEARCHING...')
+	console.log(term)
 	search_term = term.replaceAll(' ', '');
 	// Iterate over the shows for any searchable term
-	if (term.length >= 3){
-		for (const show of the_shows){
-			// Only remove the class here so that searches for 'foo' and 'bar' include
-			// BOTH, not just the latest word in the array
-			if (show.dataset.search.includes(search_term)) {
-				show.classList.remove('filtered-out-by-search');
-			}
-			// Use the raw value so it's more human-readable than the query term
-			showActiveFilter('search',search_box.value)
+	for (const show of the_shows){
+		// Only remove the class here so that searches for 'foo' and 'bar' include
+		// BOTH, not just the latest word in the array
+		if (show.dataset.show_search.includes(search_term)) {
+			show.classList.remove('filtered-out-by-search');
 		}
+		// Use the raw value so it's more human-readable than the query term
+		// showActiveFilter('search',search_box.value)
 	}
 }
+
+search_box.addEventListener('keyup', ({ key }) => {
+	// Hit that update button when enter is pressed within the search box 
+	search_value = search_box.value.toLowerCase().replaceAll(' ', '')
+	if (key == "Enter"){
+		updateFilters();
+	}
+})
+function searchFunction(){
+	// Sanitise text input 
+	search_value = search_box.value.toLowerCase().replaceAll(' ', '');
+	// Do the search! 
+	// search_hint.classList.add('d-none');
+	for (const show of the_shows){
+		// Hide everything 
+		show.classList.add('filtered-out-by-search');
+	}
+	doSearch(search_value);
+	if (document.querySelectorAll('.filtered-out-by-search').length == the_shows.length){
+		// If searching for the entire term gets nothing, split on whitespace and 
+		// search for each word 
+		for (const show of the_shows){
+			// Hide everything 
+			show.classList.add('filtered-out-by-search');
+		}
+		search_array = search_box.value.toLowerCase().split(/\s+/);
+		if (search_array.length > 1 && search_array[1].match(/^[0-9a-z]+$/i)){
+			// Provided there are two alphanumeric words, we can do a multi-word search
+			// Quick check that they're all 3+ characters 
+			if (Math.max(...(search_array.map(el => el.length))) > 2){
+				for (const s of search_array){
+					doSearch(s)
+				}
+			}
+		}
+	}
+	else {
+		// Nothing? 
+	}
+};
+
 
 // 
 // Venue Filter //
@@ -272,13 +313,17 @@ function doGenreFilter(){
 
 
 // UPDATE RESULTS BUTTON
-
-document.getElementById('update_results').addEventListener('click', function(){
+function updateFilters(){
 	console.log('UPDATE RESULTS GO GO GO');
 	doVenueFilter();
 	doGenreFilter();
+	searchFunction();
 
 	countResults();
+}
+
+document.getElementById('update_results').addEventListener('click', function(){
+	updateFilters();
 });
 
 
