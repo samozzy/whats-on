@@ -1,6 +1,13 @@
 {% assign show = include.show %}
-{% if show.performances and show.performances != empty %}
-	{% assign performances_sorted = show.performances | sort %}
+
+{% assign p_dates = '' | split: '' %}
+{% for p in show.performances %}
+	{% assign p_date = p.start | date: "%Y-%m-%d" %}
+	{% assign p_dates = p_dates | push: p_date %}
+{% endfor %}
+
+{% if p_dates and show.performances != empty %}
+	{% assign performances_sorted = p_dates | sort %}
 	{% assign first_performance = performances_sorted | first %}
 	{% assign last_performance = performances_sorted | reverse | first %}
 	{% if first_performance == last_performance %}

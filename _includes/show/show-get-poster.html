@@ -1,6 +1,11 @@
-      {% assign show = include.show %}
-      {% if show.image and show.image != empty %}
-        <img class="show-poster" src="{{ show.image }}" alt="{% if show.poster_alt %}{{ show.poster_alt }}{% else %}{{ show.title }} poster{% endif %}">
-      {% else %}
-        <img class="show-poster show-poster-holding" src="{% link static/poster-tbc.png %}" alt="Poster coming soon">
-      {% endif %}
+{% assign show = include.show %}
+{% assign show_image = nil %}
+{% if show.images and show.images != empty %}
+  {% assign show_image = show.images | first %}
+  {% assign show_image = show_image[1].versions | where_exp: "image", "image.type contains 'square'" | last %}
+  {% assign show_image = show_image.url %}
+  <img class="show-poster" src="{{ show_image }}" alt="{% if show.poster_alt %}{{ show.poster_alt }}{% else %}{{ show.title }} poster{% endif %}">
+
+{% else %}
+  <img class="show-poster show-poster-holding" src="{% link static/poster-tbc.png %}" alt="Poster coming soon">
+{% endif %}

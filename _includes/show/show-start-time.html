@@ -1,0 +1,36 @@
+{% assign show = include.show %}
+{% assign show_start_time = nil %}
+{% assign show_duration = nil %}
+{% if show.performances and show.performances != empty %}
+	{% for p in show.performances %}
+		{% assign show_duration = p.duration_minutes %}
+		{% assign p_start_time = p.start_time | date: "%H:%M" %}
+		{% if show_start_time == nil %}
+			{% assign show_start_time = p_start_time %}
+			{% if p.is_at_fixed_time == true %}
+				{% break %}
+			{% endif %}
+		{% elsif show_start_time != p_start_time %}
+			{% assign show_start_time = "Various times" %}
+		{% endif %}
+	{% endfor %}
+	{% assign p_start_time = nil %}
+{% endif %}
+
+{% if show_duration and show_duration != nil %}
+	{% if show_duration >= 60 %}
+		{% assign hrs = show_duration | divided_by: 60 | split: '.' | first | times: 1 %}
+		{% assign hrs_mins = hrs | times: 60 %}
+		{% assign mins = show_duration | minus: hrs_mins %}
+		{% if mins == 0 %}{% assign mins = nil %}{% endif %}
+		{% capture show_duration %}{{ hrs | strip }}hr{% if hrs > 1 %}s{% endif %} {{ mins }}{% endcapture %}
+	{% else %}
+		{% capture show_duration %}{{ show_duration | strip }}mins{% endcapture %}
+	{% endif %}
+{% endif %}
+
+{% comment %}
+1. Assign the start time to be the first start time we come across
+2. Check is_at_fixed_time == true 
+3. If not, return 'Various times'
+{% endcomment %}
