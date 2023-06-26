@@ -45,6 +45,7 @@ GEM
     execjs (2.8.1)
     ffi (1.15.5)
     forwardable-extended (2.6.0)
+    google-protobuf (3.22.2-aarch64-linux)
     google-protobuf (3.22.2-x86_64-darwin)
     google-protobuf (3.22.2-x86_64-linux)
     i18n (1.12.0)
@@ -83,10 +84,12 @@ GEM
       nokogiri (>= 1.5.9)
     mercenary (0.4.0)
     method_source (1.0.0)
-    mini_portile2 (2.8.1)
     minitest (5.16.3)
-    nokogiri (1.13.8)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.13.8-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
@@ -115,6 +118,8 @@ GEM
     rexml (3.2.5)
     rouge (4.1.0)
     safe_yaml (1.0.5)
+    sass-embedded (1.60.0-aarch64-linux-gnu)
+      google-protobuf (~> 3.21)
     sass-embedded (1.60.0-x86_64-darwin)
       google-protobuf (~> 3.21)
     sass-embedded (1.60.0-x86_64-linux-gnu)
@@ -145,6 +150,7 @@ GEM
     zeitwerk (2.6.0)
 
 PLATFORMS
+  aarch64-linux
   x86_64-darwin-19
   x86_64-linux
 
