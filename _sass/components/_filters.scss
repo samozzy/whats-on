@@ -33,3 +33,10 @@ button.update-results {
 .filtered-out-by-venue, .filtered-out-by-genre {
 	@extend .d-none;
 }
+.genre-badge {
+	-webkit-mask-image: url('/static/band/white-thick.png');
+	width: 100%;
+	-webkit-mask-position: center;
+	-webkit-mask-size: 100%;
+	-webkit-mask-repeat: no-repeat;
+}

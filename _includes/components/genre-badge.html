@@ -1,5 +1,12 @@
 {% assign match = site.data.genres | where_exp: "genre", "genre.name==include.genre" | first %}
 
-<input class="d-none genre-input" name="filter-genre-item" type="checkbox" value="{{ include.genre | slugify }}" id="genre-{{ include.genre | slugify }}"><label class="badge {% unless match %}bg-secondary{% endunless %}" style="{% if match %}background-color: #{{ match.color }}{% endif %}" for="genre-{{ include.genre | slugify }}">{{ include.genre }}</label></input><br>
+<input class="d-none genre-input" name="filter-genre-item" type="checkbox" value="{{ include.genre | slugify }}" id="genre-{{ include.genre | slugify }}">
+	<label 
+		class="genre-badge badge px-4 text-dark {% unless match %}bg-secondary{% endunless %}" 
+		style="{% if match %}background-color: #{{ match.color }}{% endif %}" for="genre-{{ include.genre | slugify }}"
+	>{{ include.genre }}
+	</label>
+</input>
+<br>
 
 {% assign match = nil %}

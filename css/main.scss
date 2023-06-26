@@ -3,7 +3,7 @@
 
 /* Comment out the Bootstrap imports you're not using to save on render size and time  */
 
-$color-paradise-blue: #0B0099;
+$color-paradise-blue: #{{ site.paradise_blue }};
 $primary: $color-paradise-blue;
 
 @import "bootstrap/mixins/banner";

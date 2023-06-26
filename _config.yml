@@ -9,6 +9,8 @@ github_username:  samozzy
 timezone: Europe/Edinburgh
 event_title: Fringe 2023 
 
+paradise_blue: 0B0099
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
