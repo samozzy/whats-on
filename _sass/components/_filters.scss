@@ -18,7 +18,7 @@
 		padding-left: 0;
 	}
 
-	.venue-list {
+	.venue-list, .age-list {
 		ul {
 			list-style: none;
 		}
@@ -30,7 +30,7 @@ button.update-results {
 	border-top: none !important;
 }
 
-.filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-search {
+.filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-search, .filtered-out-by-age {
 	@extend .d-none;
 }
 .genre-badge {

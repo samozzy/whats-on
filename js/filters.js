@@ -311,13 +311,61 @@ function doGenreFilter(){
 	});
 }
 
+// 
+// Age Filter //
+//
+var age_checkboxes = document.querySelectorAll('input[name="filter-age-item"]');
+let picked_ages = [] 
+
+function clearAgeCheckboxes() {
+	clearFilteredOutClass('filtered-out-by-age', age_checkboxes, false, age_buttons)
+}
+function doAgeFilter(){
+	age_checkboxes.forEach(function(checkbox) {
+    picked_ages = 
+      Array.from(age_checkboxes) // Convert checkboxes to an array to use filter and map.
+      .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+      .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+
+    // If all checkboxes are empty, show everything (rather than nothing)
+    if (picked_ages.length == 0) {
+			for (i=0; i< the_shows.length; i++ ) {
+				if (the_shows[i].classList.contains('filtered-out-by-age')) {
+					the_shows[i].classList.remove('filtered-out-by-age');
+				}
+			}
+    }
+    else {
+    	// Assuming something is ticked, filter the shows appropriately. 
+
+    	// Hide all of them 
+    	for (const show of the_shows) {
+    		show.classList.add('filtered-out-by-age');
+    	}
+    	// Iterate over the picked ages and display shows that match
+    	for (p=0; p < picked_ages.length; p++) {
+    		// STEP 1: Apply the filter to the show classes
+    		console.log(picked_ages);
+    		for (s=0; s < the_shows.length; s++) {
+    			if (the_shows[s].dataset.show_age_guidance.includes(picked_ages[p])) {
+    				// If the age matches one ticked, unhide the show
+    				console.log('MATCH');
+						if (the_shows[s].classList.contains('filtered-out-by-age')) the_shows[s].classList.remove('filtered-out-by-age');
+					}
+				}
+    	}
+    }
+	});
+}
+
 
 // UPDATE RESULTS BUTTON
 function updateFilters(){
 	console.log('UPDATE RESULTS GO GO GO');
+	searchFunction();
 	doVenueFilter();
 	doGenreFilter();
-	searchFunction();
+	doAgeFilter();
 
 	countResults();
 }

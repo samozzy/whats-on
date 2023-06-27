@@ -61,14 +61,46 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	{% assign show_ages = site.data.shows | map: "age_category" | uniq %}
+	{% comment %} Ages can come as numbers and as strings, so we separate them; sort the numbers numerically; then add the strings back in. Sorting them all as strings sorts all the tens, then all the units, and results in 18, 5, then 7{% endcomment %}
+	{% assign age_nums = "" | split: "" %}
+	{% assign age_strings = "" | split: "" %}
+	{% for sa in show_ages %}
+		{% assign a = sa | downcase | remove: "ages" | remove: "+" | strip %}
+		{% assign a_raw = a | jsonify | remove: '"' %}
+		{% assign a_num = a_raw | times: 1 | jsonify %}
+
+		{% if a_raw == a_num %}
+			{% comment %}If multiplied by 1 is the same, then it's a number {% endcomment %}
+			{% assign a_float = a_num | times: 1.0 %}
+			{% assign age_nums = age_nums | push: a_float %}
+		{% else %}
+			{% assign age_strings = age_strings | push: a_raw %}
+		{% endif %}
+	{% endfor %}
+	{% assign show_ages = age_nums | sort %}
+	{% assign age_strings = age_strings | sort_natural %}
+	{% for a in age_strings %}
+		{% assign show_ages = show_ages | push: a %}
+	{% endfor %}
+	{% if show_ages and show_ages != empty %}
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
-		<div class="filter-body collapse" id="ageCollapse">
-			3+
-			7+
-			18+
+		<div class="filter-body collapse age-list form-check" id="ageCollapse">
+			<ul>
+				{% for age in show_ages %}
+					{% if age and age != empty %}
+						<li>
+							{% assign the_age = age | downcase | remove: "ages" %}
+							<input class="form-check-input age-{{ the_age | slugify }}" name="filter-age-item" type="checkbox" value="{{ the_age | remove: ".0"  }}" id="age-{{ the_age | slugify }}"><label class="form-check-label" for="age-{{ the_age | slugify }}">{{ the_age | replace: ".0", "+" | capitalize }}</label>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
 		</div>
 	</div>
+	{% endif %}
 </div>
 <button class="update-results" id="update_results">Update results</button>
 
