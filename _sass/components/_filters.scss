@@ -39,4 +39,13 @@ button.update-results {
 	-webkit-mask-position: center;
 	-webkit-mask-size: 100%;
 	-webkit-mask-repeat: no-repeat;
+
+	font-size: $small-font-size;
+	min-height: 2rem; 
+	@extend .d-flex;
+	span { 
+		mix-blend-mode: color-burn;
+	    font-weight: bold;
+	    @extend .text-center, .w-100, .d-inline-block, .my-auto;
+	}
 }
