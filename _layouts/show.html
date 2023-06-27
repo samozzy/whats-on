@@ -3,6 +3,7 @@ layout: default
 ---
 {% assign show = page %}
 {% include show/show-date-range.html show=show %}
+{% include show/show-start-time.html show=show %}
 
 <div class="row">
 	<div class="col-12">
@@ -12,12 +13,12 @@ layout: default
 				{% include show/show-meta.html show=show %}
 			</div>
 			<div class="wrap-content px-4">
-				<p class="lead"><strong>Performances:</strong> {{ date_list }}</p>
+				{% if date_list or show_start_time %}<p class="lead"><strong>Performances:</strong> {{ date_list }} {% if date_list and show_start_time %}<br>{% endif %}<strong>Start time: </strong>{{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}){% endif %}</p>{% endif %}
 				<p>{{ show.description }}</p>
 				<div class="show-buttons mb-4">
 					{% include show/show-book-button.html show=show classes='w-100' %}
 				</div>
-				{% if show.warnings and show.warnings != empty %}
+				{% if show.warnings and show.warnings != empty and show.warnings != "None" %}
 					{% assign has_cw = true %}
 				{% elsif show.warning_detail and show.warning_detail != empty %}
 					{% assign has_cw = true %}
@@ -31,7 +32,7 @@ layout: default
 					{% if show.age_category and show.age_category != empty %}
 						<p class="lead text-primary">Age {% if show.age_restricted %}restriction{% else %}guidance{% endif %}: {{ show.age_category }}</p>
 					{% endif %}
-					{% if show.warnings and show.warnings != empty %}
+					{% if show.warnings and show.warnings != empty and show.warnings != "None" %}
 						<ul>
 							{% for cw in show.warnings %}
 								<li>{{ cw }}</li>
@@ -45,7 +46,7 @@ layout: default
 				{% if show.disabled and show.disabled != empty %}
 					{% for i in show.disabled %}
 						{% comment %}Check if there are any accessibility concerns before determining whether to display the section {% endcomment %}
-						{% if i[1] != null %}
+						{% if i[1] != null and i[1] != false %}
 							{% assign has_access = true %}
 							{% break %}
 						{% endif %}
@@ -55,7 +56,7 @@ layout: default
 						<ul>
 							{% for i in show.disabled %}
 								{% comment %}Iterate over the accessibility options, and index for their dates if available {% endcomment %}
-								{% if i[1] != nil %}
+								{% if i[1] != nil and i[1] != false %}
 									{% if i[0] contains "_dates" or i[0] contains "_information" %}
 										{% continue %}
 									{% else %}

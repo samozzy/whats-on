@@ -1,10 +1,12 @@
 {% assign show = include.show %}
 {% assign show_start_time = nil %}
 {% assign show_duration = nil %}
+{% assign p_start_time = nil %}
+
 {% if show.performances and show.performances != empty %}
 	{% for p in show.performances %}
 		{% assign show_duration = p.duration_minutes %}
-		{% assign p_start_time = p.start_time | date: "%H:%M" %}
+		{% assign p_start_time = p.start | date: "%H:%M" %}
 		{% if show_start_time == nil %}
 			{% assign show_start_time = p_start_time %}
 			{% if p.is_at_fixed_time == true %}
@@ -14,7 +16,6 @@
 			{% assign show_start_time = "Various times" %}
 		{% endif %}
 	{% endfor %}
-	{% assign p_start_time = nil %}
 {% endif %}
 
 {% if show_duration and show_duration != nil %}
