@@ -51,7 +51,7 @@
 	{% endif %}
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
-		<div class="filter-body collapse show" id="genresCollapse">
+		<div class="filter-body collapse" id="genresCollapse">
 			{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
 			{% assign all_genres = site.data.genres | map: "name" %}
 			{% assign show_genres = site.data.shows | map: "genre" | uniq %}
