@@ -33,6 +33,15 @@ button.update-results {
 .filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-search, .filtered-out-by-age {
 	@extend .d-none;
 }
+
+.search-input {
+	border-radius: 0 !important;
+	background-color: $color-white !important;
+	@extend .ms-lg-2;
+	@include media-breakpoint-up(lg){
+		width: 75% !important;
+	}
+}
 .genre-badge {
 	-webkit-mask-image: url('/static/band/white-thick.png');
 	width: 100%;
