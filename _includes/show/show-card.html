@@ -1,6 +1,7 @@
 {% assign show = include.show %}
 {% include show/show-link.html show=show %}
 {% include show/show-start-time.html show=show %}
+{% include show/show-date-range.html show=show %}
 
 <div class="col show-card-col"
     data-show_search="{{ show.title | downcase | remove: ' ' }} {{ show.company | downcase | remove: ' ' }}" 
@@ -8,7 +9,7 @@
     data-show_date_end="{{ last_performance | date: '%Y-%m-%d' }}" 
     data-show_time="{{ show_start_time | split: ':' | first }}"
     data-show_age_guidance="{{ show.age_category | downcase | remove: 'ages' | slugify | default: '' }}"
-    data-show_performances="{% for p in show.performances %}{{ p.start }}{% endfor %}"
+    data-show_performances="{% for p in p_dates %}{{ p }}{% endfor %}"
     data-show_price="{{ show.price.standard | default: show.price.concession }}"
     data-show_genre="{{ show.genre | join:',' | slugify }}"
     data-show_access="{% if show.access and show.access != empty %}{{ show.access | join: ',' | downcase | slugify | default: '' }}{% endif %}"
@@ -25,7 +26,6 @@
       </div>
       <div class="wrap-content">
         <div class="card-header">
-          {% include show/show-date-range.html show=show %}
           <h2><a href="{{ show_link }}">{{ show.title }}</a></h2>
           <p class="lead">{{ show.artist }}{% if date_string and show.artist or show_start_time and show.artist%}<br>{% endif %}
           {% if date_string %}

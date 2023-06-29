@@ -13,7 +13,23 @@ layout: default
 				{% include show/show-meta.html show=show %}
 			</div>
 			<div class="wrap-content px-4">
-				{% if date_list or show_start_time %}<p class="lead"><strong>Performances:</strong> {{ date_list }} {% if date_list and show_start_time %}<br>{% endif %}<strong>Start time: </strong>{{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}){% endif %}</p>{% endif %}
+				{% if date_list or show_start_time %}
+					<p class="lead">
+						<strong>Performances:</strong> 
+						{% if show_start_time contains 'Various' or show_duration contains 'Various' %}
+							<ul>
+								{% for p in show.performances %}
+									{% assign p_year = p.start | date: "%Y" %}
+									<li>{{ p.start | date_to_long_string: "ordinal" | remove: p_year}} - {{ p.start | date: "%H:%M" }} {% if show_duration contains 'Various' %}({{ p.duration_minutes }}mins){% endif %}</li>
+								{% endfor %}
+							</ul>
+							{% unless show_duration contains 'Various' %}
+								<em>All performances are {{ show_duration }}</em>
+							{% endunless %}
+						{% else %}
+							{{ date_list }} {% if date_list and show_start_time %}<br>{% endif %}
+							<strong>Start time: </strong>{{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}){% endif %}</p>{% endif %}
+						{% endif %}
 				<p>{{ show.description }}</p>
 				<div class="show-buttons mb-4">
 					{% include show/show-book-button.html show=show classes='w-100' %}

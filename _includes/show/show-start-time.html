@@ -9,16 +9,22 @@
 		{% assign p_start_time = p.start | date: "%H:%M" %}
 		{% if show_start_time == nil %}
 			{% assign show_start_time = p_start_time %}
+			{% comment %}
 			{% if p.is_at_fixed_time == true %}
 				{% break %}
 			{% endif %}
+			{% endcomment %}
 		{% elsif show_start_time != p_start_time %}
 			{% assign show_start_time = "Various times" %}
+		{% endif %}
+
+		{% if show_duration != p.duration_minutes %}
+			{% assign show_duration = 'Various' %}
 		{% endif %}
 	{% endfor %}
 {% endif %}
 
-{% if show_duration and show_duration != nil %}
+{% if show_duration and show_duration != nil and show_duration != 'Various' %}
 	{% if show_duration >= 60 %}
 		{% assign hrs = show_duration | divided_by: 60 | split: '.' | first | times: 1 %}
 		{% assign hrs_mins = hrs | times: 60 %}
