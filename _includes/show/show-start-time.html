@@ -5,7 +5,6 @@
 
 {% if show.performances and show.performances != empty %}
 	{% for p in show.performances %}
-		{% assign show_duration = p.duration_minutes %}
 		{% assign p_start_time = p.start | date: "%H:%M" %}
 		{% if show_start_time == nil %}
 			{% assign show_start_time = p_start_time %}
@@ -18,8 +17,10 @@
 			{% assign show_start_time = "Various times" %}
 		{% endif %}
 
-		{% if show_duration != p.duration_minutes %}
-			{% assign show_duration = 'Various' %}
+		{% if show_duration and show_duration != p.duration_minutes %}
+			{% assign show_duration = 'Various durations' %}
+		{% else %}
+			{% assign show_duration = p.duration_minutes %}
 		{% endif %}
 	{% endfor %}
 {% endif %}
