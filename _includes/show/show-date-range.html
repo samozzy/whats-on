@@ -19,7 +19,7 @@
 	{% assign picked_time = picked_performance | date: "%H:%M" | date: "%s" %}
 
 	{% if picked_time >= midnight and picked_time < fringe_time %}
-		{% assign new_perf = picked_date | date: "%s" | minus: 86400 | date: "%Y-%m-%d %H:%M" %}
+		{% assign new_perf = picked_performance | date: "%s" | minus: 86400 | date: "%Y-%m-%d %H:%M" %}
 	{% else %}
 		{% assign new_perf = picked_performance | date: "%Y-%m-%d %H:%M" %}
 	{% endif %}
