@@ -25,15 +25,8 @@
 {% endif %}
 
 {% if show_duration and show_duration != nil and show_duration != 'Various' %}
-	{% if show_duration >= 60 %}
-		{% assign hrs = show_duration | divided_by: 60 | split: '.' | first | times: 1 %}
-		{% assign hrs_mins = hrs | times: 60 %}
-		{% assign mins = show_duration | minus: hrs_mins %}
-		{% if mins == 0 %}{% assign mins = nil %}{% endif %}
-		{% capture show_duration %}{{ hrs | strip }}hr{% if hrs > 1 %}s{% endif %} {{ mins }}{% endcapture %}
-	{% else %}
-		{% capture show_duration %}{{ show_duration | strip }}mins{% endcapture %}
-	{% endif %}
+	{% include manipulation/mins-duration.html minutes=show_duration %}
+	{% assign show_duration = duration %}
 {% endif %}
 
 {% comment %}

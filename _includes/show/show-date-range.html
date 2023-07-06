@@ -3,8 +3,12 @@
 {% assign show = include.show %}
 
 {% assign p_dates = '' | split: '' %} {% comment %} Initialise array for fringe-time-ification{% endcomment %}
+{% assign p_durations = '' | split: '' %}{% comment %}Initialise array for durations {% endcomment %}
+{% assign different_durations = nil %}
 
-{% comment %}FRINGE TIME 
+{% comment %}
+
+FRINGE TIME 
 
 	1. Take the performance date time 
 	2. If the time element is between 00:00 and site.fringe_time, decrement the date 
@@ -13,7 +17,19 @@
 
 {% endcomment %}
 
+{% assign num_shows = include.show.performances | size %}
 {% for perf in include.show.performances %}
+	{% if picked_performance and forloop.index > 1 and forloop.index <= num_shows %} 
+		{% comment %}If this is not the first loop, check that the end times are the same {% endcomment %}
+		{% assign prev_index = forloop.index0 | minus: 1 %}
+		{% assign prev_perf = include.show.performances[prev_index] %}
+		{% assign prev_duration = prev_perf.duration_minutes %}
+		{% assign this_duration = perf.duration_minutes %}
+		{% if prev_duration != this_duration %}
+			{% assign different_durations = true %}
+		{% endif %}
+	{% endif %}
+
 	{% assign picked_performance = perf.start %}
 	{% assign picked_date = picked_performance | date: "%Y-%m-%d" %}
 	{% assign picked_time = picked_performance | date: "%H:%M" | date: "%s" %}
@@ -24,12 +40,15 @@
 		{% assign new_perf = picked_performance | date: "%Y-%m-%d %H:%M" %}
 	{% endif %}
 	{% assign p_dates = p_dates | push: new_perf %}
+	{% capture p_date_duration %}{{ new_perf }};;{{ perf.duration_minutes }}{% endcapture %}
+	{% assign p_durations = p_durations | push: p_date_duration %}
 {% endfor %}
 
 {% comment %} DATE HANDLING {% endcomment %}
 
 {% if p_dates and show.performances != empty %}
 	{% assign performances_sorted = p_dates | sort %}
+	{% assign p_durations_sorted = p_durations | sort %}
 
 	{% assign first_performance = performances_sorted | first %}
 	{% assign last_performance = performances_sorted | reverse | first %}

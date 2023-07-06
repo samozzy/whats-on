@@ -16,14 +16,19 @@ layout: default
 				{% if date_list or show_start_time %}
 					<p class="lead">
 						<strong>Performances:</strong> 
-						{% if show_start_time contains 'Various' or show_duration contains 'Various' %}
+						{% if show_start_time contains 'Various' or different_durations %}
 							<ul>
-								{% for p in show.performances %}
-									{% assign p_year = p.start | date: "%Y" %}
-									<li>{{ p.start | date_to_long_string: "ordinal" | remove: p_year}} - {{ p.start | date: "%H:%M" }} {% if show_duration contains 'Various' %}({{ p.duration_minutes }}mins){% endif %}</li>
+								{% for p in performances_sorted %}
+									{% assign p_year = p | date: "%Y" %}
+									<li>{{ p | date_to_long_string: "ordinal" | remove: p_year}} - {{ p | date: "%H:%M" }} 
+										{% if different_durations %}
+											{% assign show_duration = p_durations_sorted[forloop.index0] | split: ';;' | last %}
+											({% include manipulation/mins-duration.html minutes=show_duration output=true %})
+										{% endif %}
+									</li>
 								{% endfor %}
 							</ul>
-							{% unless show_duration contains 'Various' %}
+							{% unless different_durations %}
 								<em>All performances are {{ show_duration }}</em>
 							{% endunless %}
 						{% else %}
