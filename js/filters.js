@@ -1,5 +1,6 @@
 // Define the shows for filter pickers 
 the_shows = document.getElementsByClassName('show-card-col');
+loading = document.querySelectorAll(".loading")
 // This contains double the number of shows due to the implementation of sorting
 var no_results_text = document.getElementById('no_results');
 var results_counter = document.getElementById('results_counter');
@@ -358,16 +359,38 @@ function doAgeFilter(){
 	});
 }
 
+function showLoading(){
+	console.log('ACTIVATING LOADING...');
+	document.getElementById('show_list').classList.add('d-none');
+	loading.forEach(function(element) {
+		element.classList.remove("d-none");
+	});
+}
 
-// UPDATE RESULTS BUTTON
-function updateFilters(){
-	console.log('UPDATE RESULTS GO GO GO');
+function hideLoading(){
+	console.log('...DEACTIVATING')
+	loading.forEach(function(element) {
+		element.classList.add("d-none");
+	});
+	document.getElementById('show_list').classList.remove('d-none')
+}
+
+function filterFunctions(){
 	searchFunction();
 	doVenueFilter();
 	doGenreFilter();
 	doAgeFilter();
 
 	countResults();
+}
+
+// UPDATE RESULTS BUTTON
+function updateFilters(){
+	console.log('UPDATE RESULTS GO GO GO');
+
+	showLoading();
+	setTimeout(filterFunctions,250);
+	setTimeout(hideLoading,1000);
 }
 
 document.getElementById('update_results').addEventListener('click', function(){
