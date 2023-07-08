@@ -82,7 +82,7 @@
 			{% assign show_genres = site.data.shows | map: "genre" | uniq %}
 			{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
 			{% for g in all_genres %}
-				{% include components/genre-badge.html genre=g %}
+				{% include components/genre-badge.html genre=g filter_list=true %}
 			{% endfor %}
 		</div>
 	</div>
