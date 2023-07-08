@@ -218,6 +218,39 @@ function searchFunction(){
 
 
 // 
+// Time Filter //
+//
+
+var time_picker = document.getElementById('time_picker_select') 
+function clearTimePicked() {
+	clearFilteredOutClass('filtered-out-by-time', null, false, null,null, 'time_picker_select');
+	document.getElementById('time_picker_text').classList.add('d-none');
+}
+function doTimeFilter(){
+	if (time_picker.value != 'false'){
+		console.log(time_picker.value)
+  	for (const show of the_shows) {
+  		show.classList.add('filtered-out-by-time');
+			if (show.dataset.show_start_time >= time_picker.value && (parseInt(show.dataset.show_start_time) > 0)) {
+				// If the venue matches one ticked, unhide the show
+				console.log('MATCH');
+				if (show.classList.contains('filtered-out-by-time')) show.classList.remove('filtered-out-by-time');
+			}
+  	}
+
+  	document.getElementById('time_picker_text').classList.remove('d-none');
+  }
+	else {
+		document.getElementById('time_picker_text').classList.add('d-none');
+		for (i=0; i< the_shows.length; i++ ) {
+			if (the_shows[i].classList.contains('filtered-out-by-time')) {
+				the_shows[i].classList.remove('filtered-out-by-time');
+			}
+		}
+	}
+};
+
+// 
 // Venue Filter //
 //
 var venue_checkboxes = document.querySelectorAll('input[name="filter-venue-item"]');
@@ -377,6 +410,7 @@ function hideLoading(){
 
 function filterFunctions(){
 	searchFunction();
+	doTimeFilter();
 	doVenueFilter();
 	doGenreFilter();
 	doAgeFilter();

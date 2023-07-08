@@ -7,7 +7,7 @@
     data-show_search="{{ show.title | downcase | remove: ' ' }} {{ show.company | downcase | remove: ' ' }}" 
     data-show_date_start="{{ first_performance | date: '%Y-%m-%d' }}" 
     data-show_date_end="{{ last_performance | date: '%Y-%m-%d' }}" 
-    data-show_time="{{ show_start_time | split: ':' | first }}"
+    data-show_start_time="{{ show_start_time | split: ':' | first }}"
     data-show_age_guidance="{{ show.age_category | downcase | remove: 'ages' | slugify | default: '' }}"
     data-show_performances="{% for p in p_dates %}{{ p }}{% endfor %}"
     data-show_price="{{ show.price.standard | default: show.price.concession }}"

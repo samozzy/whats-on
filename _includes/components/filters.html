@@ -9,11 +9,36 @@
 	</div>
 
 	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Dates</span></a>
+		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Date & Time</span></a>
 		<div class="filter-body collapse" id="datesCollapse">
 			<span class="placeholder col-7"></span>
 			<span class="placeholder col-4"></span>
 			<span class="placeholder col-4"></span>
+
+			<div id="time_picker">
+				{% assign time_counter = 0 %}
+				{% assign first_time = site.fringe_time | date: "%s" %}
+				{% assign last_time = first_time | date: "%s" | plus: 82800 %} {% comment %} 23 hours {% endcomment %}
+
+				<span>Starting after</span>
+				<select class="form-select form-select-sm" id="time_picker_select" aria-label="Time picker">
+					<option value="false">---</option>
+					{% comment %}
+						Iterate from first time, adding 3600 until we get to last time (date is irrelevant)
+					{% endcomment %}
+					{% for i in (first_time..last_time) %}
+						{% assign the_time = first_time | plus: time_counter | date: "%H:%M" %}
+						<option value="{{ the_time | split: ":" | first }}">{{ the_time }}</option>
+
+						{% assign time_counter = time_counter | plus: 3600 %}
+						{% assign the_time = the_time | date: "%s" %}
+						{% if time_counter > 82800 %}
+							{% break %}
+						{% endif %}
+					{% endfor %}
+				</select>
+				<span class="help-text d-none" id="time_picker_text"><em>Only displaying shows with 1 performance time</em></span>
+			</div>
 		</div>
 	</div>
 
