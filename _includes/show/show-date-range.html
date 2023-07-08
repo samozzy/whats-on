@@ -52,9 +52,11 @@ FRINGE TIME
 
 	{% assign first_performance = performances_sorted | first %}
 	{% assign last_performance = performances_sorted | reverse | first %}
+	{% assign first_performance_date = first_performance | date: "%Y-%m-%d" %}
+	{% assign last_performance_date = last_performance | date: "%Y-%m-%d" %}
 
-	{% if first_performance == last_performance %}
-		{% comment %}Assume show is a one-day{% endcomment %}
+	{% if first_performance_date == last_performance_date %}
+		{% comment %}Assume show is a one-day, even if there are multiple performances on that one day{% endcomment %}
 		{% assign date_string = first_performance | date_to_long_string: "ordinal" %}
 		{% assign date_list = date_string %}
 	{% else %}
