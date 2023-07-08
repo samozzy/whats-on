@@ -24,7 +24,7 @@
 		}
 	}
 }
-button.update-results {
+button.update-results, button.clear-results {
 	@extend .pg-button; 
 	@extend .w-100, .fs-5;
 	border-top: none !important;

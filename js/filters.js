@@ -30,12 +30,14 @@ function countResults() {
 			no_results_text.classList.add('d-none')
 		}
 	}
+	return number_remaining;
 }
 
 function clearFilteredOutClass(
 	className, 
 	checkboxes=null, checkbox_default_state=false, 
-	filter_buttons=null, filter_button_default_class=null){
+	filter_buttons=null, filter_button_default_class=null,
+	dropdown=null){
 	// Remove the `filtered-out-by-xxx` class from the shows
 	for (const show of the_shows){
 		show.classList.remove(className);
@@ -57,8 +59,19 @@ function clearFilteredOutClass(
 			}
 		}
 	}
-	hideActiveFilter(className.replace('filtered-out-by-',''))
+	if (dropdown!=null){
+		document.getElementById(dropdown).value = 'false'
+	}
+	// hideActiveFilter(className.replace('filtered-out-by-',''))
 	countResults();
+}
+
+function clearAll(){
+	clearSearch();
+	clearTimePicked();
+	clearAgeCheckboxes();
+	clearGenreCheckboxes();
+	clearVenueCheckboxes();
 }
 
 //
@@ -153,12 +166,12 @@ function hideActiveFilter(btn_id){
 // Search // 
 //
 search_box = document.getElementById('search-input')
-// function clearSearch(){
-// 	// Reset the search box value, show the shows, and hide the filter
-// 	search_box.value = '';
-// 	clearFilteredOutClass('filtered-out-by-search')
-// 	hideActiveFilter('search')
-// }
+function clearSearch(){
+	// Reset the search box value, show the shows, and hide the filter
+	search_box.value = '';
+	clearFilteredOutClass('filtered-out-by-search')
+	// hideActiveFilter('search')
+}
 function doSearch(term){
 	// Strip any whitespace (not that there should be any)
 	console.log('SEARCHING...')
@@ -258,7 +271,7 @@ let picked_venues = []
 // var venue_buttons = document.getElementsByClassName('btn-venue');
 
 function clearVenueCheckboxes() {
-	clearFilteredOutClass('filtered-out-by-venue', venue_checkboxes, false, venue_buttons)
+	clearFilteredOutClass('filtered-out-by-venue', venue_checkboxes, false, null)
 }
 function doVenueFilter(){
 	venue_checkboxes.forEach(function(checkbox) {
@@ -306,7 +319,7 @@ let picked_genres = []
 var genre_buttons = document.getElementsByClassName('btn-genre');
 
 function clearGenreCheckboxes() {
-	clearFilteredOutClass('filtered-out-by-genre', genre_checkboxes, false, genre_buttons);
+	clearFilteredOutClass('filtered-out-by-genre', genre_checkboxes, false, null);
 }
 function doGenreFilter(){
 	genre_checkboxes.forEach(function(checkbox) {
@@ -352,7 +365,7 @@ var age_checkboxes = document.querySelectorAll('input[name="filter-age-item"]');
 let picked_ages = [] 
 
 function clearAgeCheckboxes() {
-	clearFilteredOutClass('filtered-out-by-age', age_checkboxes, false, age_buttons)
+	clearFilteredOutClass('filtered-out-by-age', age_checkboxes, false, null)
 }
 function doAgeFilter(){
 	age_checkboxes.forEach(function(checkbox) {
@@ -424,11 +437,31 @@ function updateFilters(){
 
 	showLoading();
 	setTimeout(filterFunctions,250);
+	setTimeout(toggleResetButton, 750);
 	setTimeout(hideLoading,1000);
+}
+
+function toggleResetButton(){
+	results = countResults()
+	if (results < the_shows.length){
+		console.log('THERE ARE SOME FILTERS')
+		document.getElementById('clear_results').classList.remove('d-none')
+	}
+	else {
+		console.log('THERE ARE NO FILTERS')
+		document.getElementById('clear_results').classList.add('d-none');
+	}
 }
 
 document.getElementById('update_results').addEventListener('click', function(){
 	updateFilters();
 });
 
+document.getElementById('clear_results').addEventListener('click', function(){
+	console.log('CLEARING RESULTS');
+	showLoading()
+	setTimeout(clearAll, 250);
+	setTimeout(hideLoading, 1000);
+	setTimeout(toggleResetButton, 750);
+});
 
