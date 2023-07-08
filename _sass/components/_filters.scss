@@ -42,6 +42,12 @@ button.update-results, button.clear-results {
 		width: 75% !important;
 	}
 }
+label.genre-badge {
+	opacity: 50%;
+	&:hover, &:focus, &:active, &.active {
+		opacity: 100%;
+	}
+}
 .genre-badge {
 	-webkit-mask-image: url('/static/band/white-thick.png');
 	width: 100%;

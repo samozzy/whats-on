@@ -320,7 +320,27 @@ var genre_buttons = document.getElementsByClassName('btn-genre');
 
 function clearGenreCheckboxes() {
 	clearFilteredOutClass('filtered-out-by-genre', genre_checkboxes, false, null);
+	genre_checkboxes.forEach(function(checkbox){
+  	checkbox.labels.forEach(function(elem){
+  		elem.classList.remove('active');
+  	})
+	})
 }
+
+genre_checkboxes.forEach(function(checkbox){
+  checkbox.addEventListener('change', function() {
+	  if (this.checked) {
+	  	this.labels.forEach(function(elem){
+	  		elem.classList.add('active');
+	  	})
+	  } else {
+	  	this.labels.forEach(function(elem){
+	  		elem.classList.remove('active');
+	  	})
+	  }
+  })
+})
+
 function doGenreFilter(){
 	genre_checkboxes.forEach(function(checkbox) {
 	  picked_genres = 
