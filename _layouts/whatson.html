@@ -50,7 +50,8 @@ layout: default
 		{% endfor %}
 	</div>
 	<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-1 row-cols-xl-2 g-4" id="show_list">
-		{% for show in site.data.shows %}
+		{% assign shows_by_title = site.data.shows | sort: 'title' %}
+		{% for show in shows_by_title %}
 			{% include show/show-card.html show=show %}
 		{% endfor %}
 		<p class="lead d-none results-counter" id="results_counter"></p>

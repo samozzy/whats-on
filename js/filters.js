@@ -368,8 +368,9 @@ function doGenreFilter(){
 	  		// STEP 1: Apply the filter to the show classes
 	  		console.log(picked_genres);
 	  		for (s=0; s < the_shows.length; s++) {
-	  			if (the_shows[s].dataset.show_genre.includes(picked_genres[p])) {
+	  			if (the_shows[s].dataset.show_genre == picked_genres[p]) {
 						// If the genre matches, unhide the show
+						// Should be an exact match because there should only be one main genre per show
 						if (the_shows[s].classList.contains('filtered-out-by-genre')) the_shows[s].classList.remove('filtered-out-by-genre');
 					}
 				}

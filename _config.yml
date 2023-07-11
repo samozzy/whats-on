@@ -13,7 +13,7 @@ fringe_time: 2023-08-01 06:00
 
 paradise_blue: 0B0099
 
-test_data: true 
+test_data: false
 
 # Exclude from processing.
 # The following items will not be processed, by default.
