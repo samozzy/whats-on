@@ -78,9 +78,15 @@
 		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
 		<div class="filter-body collapse" id="genresCollapse">
 			{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
-			{% assign all_genres = site.data.genres | map: "name" %}
-			{% assign show_genres = site.data.shows | map: "genre" | uniq %}
-			{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
+			{% assign all_genres = '' | split: '' %}
+			{% if site.test_data %}
+				{% assign all_genres = site.data.genres | map: "name" %}
+				{% assign show_genres = site.data.shows | map: "genre" | uniq %}
+				{% assign all_genres = all_genres | push: show_genres | uniq | sort %}
+			{% else %}
+			{% assign all_genres = site.data.shows | map: "genre" | uniq | sort_natural %}
+			{% endif %}
+
 			{% for g in all_genres %}
 				{% include components/genre-badge.html genre=g filter_list=true %}
 			{% endfor %}
