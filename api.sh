@@ -5,7 +5,7 @@ then
 	# Recreate the output
 	rm -f output.json 
 	touch output.json 
-	echo " // " $(date) >> output.json 
+	echo "# " $(date) >> output.json 
 	echo "[" >> output.json 
 
 	echo -e "\n\n FETCHING API DATA on $(date) \n\n"
