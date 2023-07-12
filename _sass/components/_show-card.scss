@@ -8,42 +8,46 @@
 .show-card {
 	@extend .card, .rounded-0, .border-0;
 	@extend .bg-transparent;
+	position: relative;
 
 	.card-header {
 	    background: inherit;
 	    border: none;
 	    @extend .pb-0;
+	    @extend .text-center, .text-sm-start;
 	}
 	.card-body {
 		@extend .py-0, .px-3; 
 	}
 }
-.show-meta {
-	@extend .text-paradise-blue;
-	@extend .d-flex, .flex-column;
-	p:last-child {
-		@extend .mb-0;
+.show-card-background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	background-repeat: no-repeat;
+    background-size: 120% 108%;
+    background-position: -38px -47px;
+	@include media-breakpoint-up(sm) {
+		background-size:109% 109%; 
+		background-position: -5px -32px; 
 	}
-	background-color: rgb(226, 236, 255);
-	@extend .ps-2, .pe-1, .py-4;
+	z-index:0;
+	opacity:0.1;
 }
 
-.show-page .poster-wrap {
-	@include media-breakpoint-down(md) {
-		grid-template-areas: 'poster' '.';
-	}
-}
 .poster-wrap {
+	z-index: 1;
 	@extend .d-grid;
     column-count: 2;
     grid-template-areas: 'poster .' 'poster .';
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(sm) {
     	grid-template-columns: 1fr 2fr;
     	grid-template-rows: auto 2fr;
     }
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
     	column-count: 1;
     	grid-template-areas: '.' 'poster' '.';
     	div.show-poster, .show-card-buttons {
@@ -56,7 +60,23 @@
 
     div.show-poster {
     	grid-area: poster;
+    	@extend .mb-4, .mb-sm-0;
     }
+}
+.show-meta {
+	@extend .text-paradise-blue;
+	@extend .d-flex, .flex-column;
+	p:last-child {
+		@extend .mb-0;
+	}
+	background-color: rgb(226, 236, 255);
+	@extend .ps-2, .pe-1, .py-4;
+}
+
+.show-page .poster-wrap {
+	@include media-breakpoint-down(sm) {
+		grid-template-areas: 'poster' '.';
+	}
 }
 
 .show-card-buttons, .show-buttons {

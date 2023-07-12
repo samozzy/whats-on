@@ -3,7 +3,7 @@
 {% if include.filter_list %}
 <input class="d-none genre-input" name="filter-genre-item" type="checkbox" value="{{ include.genre | slugify }}" id="genre-{{ include.genre | slugify }}">
 	<label 
-		class="genre-badge px-4 text-dark {% unless match %}bg-secondary{% endunless %}" 
+		class="genre-badge px-2 text-dark {% unless match %}bg-secondary{% endunless %}" 
 		style="{% if match %}background-color: #{{ match.color }}{% endif %}" for="genre-{{ include.genre | slugify }}"
 	>
 		<span>
