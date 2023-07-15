@@ -21,7 +21,7 @@ then
 		while [ complete==false ]
 		do
 			echo "Fetching records ${i} to $((i + 99))"
-			result=$(curl "https://api.edinburghfestivalcity.com/events?key=$API_KEY&signature=$API_SIGNATURE&pretty=1&festival=fringe&venue_code=${venue}&from=${i}&to=${i+99}")
+			result=$(curl "https://api.edinburghfestivalcity.com/events?key=$API_KEY&signature=$API_SIGNATURE&pretty=1&festival=fringe&venue_code=${venue}&from=${i}&size=100")
 			# echo "${result}" 
 			len="${#result}" # How many characters is the response? If it's <5, assume we've run out of data 
 			if [ $len -lt 5 ]
