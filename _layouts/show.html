@@ -32,9 +32,17 @@ layout: default
 								<em>All performances are {{ show_duration }}</em>
 							{% endunless %}
 						{% else %}
-							{{ date_list }} {% if date_list and show_start_time %}<br>{% endif %}
-							<strong>Start time: </strong>{{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}){% endif %}</p>{% endif %}
+							{{ date_list }} 
+							{% if date_list and show_start_time %}
+								<br>
+							{% endif %}
+							<strong>Start time: </strong>{{ show_start_time }} 
+							{% if show_duration %}
+								({{ show_duration | strip }})
+							{% endif %}
 						{% endif %}
+					</p>
+				{% endif %}
 				<p>{{ show.description }}</p>
 				<div class="show-buttons mb-4">
 					{% include show/show-book-button.html show=show classes='w-100' %}
