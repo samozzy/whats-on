@@ -37,6 +37,7 @@
 }
 
 .poster-wrap {
+	position: relative;
 	z-index: 1;
 	@extend .d-grid;
     column-count: 2;
@@ -71,6 +72,8 @@
 	}
 	background-color: rgb(226, 236, 255);
 	@extend .ps-2, .pe-1, .py-4;
+	z-index: 2;
+	position: relative;
 }
 
 .show-page .poster-wrap {
