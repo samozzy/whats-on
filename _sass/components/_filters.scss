@@ -34,7 +34,7 @@ button.update-results, button.clear-results {
 	@extend .d-none;
 }
 
-.search-input {
+.search-input, .form-select {
 	border-radius: 0 !important;
 	background-color: $color-white !important;
 	@extend .ms-lg-2;
