@@ -6,6 +6,9 @@ var no_results_text = document.getElementById('no_results');
 var results_counter = document.getElementById('results_counter');
 var update_button = document.getElementById('update_results');
 
+var start_date = document.getElementById('start_date_picker')
+var end_date = document.getElementById('end_date_picker')
+
 //
 // Utility Functions // 
 //
@@ -37,7 +40,7 @@ function clearFilteredOutClass(
 	className, 
 	checkboxes=null, checkbox_default_state=false, 
 	filter_buttons=null, filter_button_default_class=null,
-	dropdown=null){
+	input_id=null,input_value="false"){
 	// Remove the `filtered-out-by-xxx` class from the shows
 	for (const show of the_shows){
 		show.classList.remove(className);
@@ -59,8 +62,8 @@ function clearFilteredOutClass(
 			}
 		}
 	}
-	if (dropdown!=null){
-		document.getElementById(dropdown).value = 'false'
+	if (input_id!=null){
+		document.getElementById(input_id).value = input_value
 	}
 	// hideActiveFilter(className.replace('filtered-out-by-',''))
 	countResults();
@@ -68,6 +71,7 @@ function clearFilteredOutClass(
 
 function clearAll(){
 	clearSearch();
+	clearDate();
 	clearTimePicked();
 	clearAgeCheckboxes();
 	clearGenreCheckboxes();
@@ -228,6 +232,54 @@ function searchFunction(){
 		// Nothing? 
 	}
 };
+
+//
+// Date Filter //
+//
+function clearDate(){
+	clearFilteredOutClass('filtered-out-by-date',null,false,null,null,'start_date_picker','');
+	clearFilteredOutClass('filtered-out-by-date',null,false,null,null,'end_date_picker','')
+
+}
+function doDateFilter() {
+
+	var picked_start_date = start_date.value || start_date.min
+	var picked_end_date = end_date.value || end_date.max 
+
+	days_to_count = ((new Date(picked_end_date)) - (new Date(picked_start_date)))/(86400000)+1;
+	all_days = [] 
+	for (let i=0; i < days_to_count; i++) {
+		next_day = new Date(picked_start_date)
+		next_day.setDate(next_day.getDate() + i)
+		next_day = new Date(next_day).toISOString().split('T')[0]
+		all_days.push(next_day)
+	}
+
+	if (picked_start_date == '' && picked_end_date == ''){
+		for (i=0; i< the_shows.length; i++ ) {
+			if (the_shows[i].classList.contains('filtered-out-by-date')) {
+				the_shows[i].classList.remove('filtered-out-by-date');
+			}
+		}
+  }
+  else {
+  	// Assuming some dates are picked, filter the shows appropriately. 
+  	// Hide all of them 
+  	for (const show of the_shows) {
+  		show.classList.add('filtered-out-by-date');
+
+  		if (show.dataset.show_date_end >= picked_start_date && show.dataset.show_date_start <= picked_end_date){
+  			// If the show has performances within the date range, 
+  			// Verify if there is an actual performance within the date range
+  			for (const day of all_days){
+  				if (show.dataset.show_performances.includes(day)){
+		  			show.classList.remove('filtered-out-by-date');
+  				}
+  			}
+  		}
+  	}
+  }
+}
 
 
 // 
@@ -444,6 +496,7 @@ function hideLoading(){
 
 function filterFunctions(){
 	searchFunction();
+	doDateFilter();
 	doTimeFilter();
 	doVenueFilter();
 	doGenreFilter();
@@ -454,12 +507,21 @@ function filterFunctions(){
 
 // UPDATE RESULTS BUTTON
 function updateFilters(){
-	console.log('UPDATE RESULTS GO GO GO');
+	error_date = "<br>The end date must be after the start date"
+	if (start_date.value != '' && end_date.value != '' && start_date.value > end_date.value) {
+		console.log("End date after start date; aborting")
+		document.getElementById('filter_error_text').innerHTML += error_date
+	}
+	else {
+		document.getElementById('filter_error_text').innerHTML = document.getElementById('filter_error_text').innerHTML.replace(error_date,'')
+		console.log('UPDATE RESULTS GO GO GO');
 
-	showLoading();
-	setTimeout(filterFunctions,250);
-	setTimeout(toggleResetButton, 750);
-	setTimeout(hideLoading,1000);
+		showLoading();
+		setTimeout(filterFunctions,250);
+		setTimeout(toggleResetButton, 750);
+		setTimeout(hideLoading,1000);
+	}
+
 }
 
 function toggleResetButton(){

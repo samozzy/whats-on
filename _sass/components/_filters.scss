@@ -30,11 +30,11 @@ button.update-results, button.clear-results {
 	border-top: none !important;
 }
 
-.filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-search, .filtered-out-by-time, .filtered-out-by-age {
+.filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-search, .filtered-out-by-time, .filtered-out-by-age, .filtered-out-by-date {
 	@extend .d-none;
 }
 
-.search-input, .form-select {
+.search-input, .form-select, .date-picker {
 	border-radius: 0 !important;
 	background-color: $color-white !important;
 	@extend .ms-lg-2;

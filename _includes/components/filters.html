@@ -1,6 +1,8 @@
 <div class="filters">
 	<h2 class="text-center">Search & Filter</h2>
 
+	<div class="error-text" id="filter_error_text"></div>
+
 	<div class="filter-box" id="search-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#searchCollapse"><i class="fa fa-chevron-down dropdown-chevron"></i> <span>Search</span></a>
 		<div class="filter-body collapse show" id="searchCollapse">
@@ -10,17 +12,20 @@
 
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Date & Time</span></a>
-		<div class="filter-body collapse" id="datesCollapse">
-			<span class="placeholder col-7"></span>
-			<span class="placeholder col-4"></span>
-			<span class="placeholder col-4"></span>
+		<div class="filter-body collapse show" id="datesCollapse">
+			<div id="date_picker">
+				<span>From:</span>
+				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">
+				<span>To:</span>
+				<input class="form-control date-picker" name="end_date" type="date" id="end_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">
+			</div>
 
 			<div id="time_picker">
 				{% assign time_counter = 0 %}
 				{% assign first_time = site.fringe_time | date: "%s" %}
 				{% assign last_time = first_time | date: "%s" | plus: 82800 %} {% comment %} 23 hours {% endcomment %}
 
-				<span>Starting after</span>
+				<span>Performance start time from</span>
 				<select class="form-select form-select-sm" id="time_picker_select" aria-label="Time picker">
 					<option value="false">---</option>
 					{% comment %}
