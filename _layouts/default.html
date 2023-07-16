@@ -44,6 +44,22 @@
 
     {% if page.layout == 'whatson' %}
       <script src="{% link js/filters.js %}"></script>
+
+      <script>
+        document.querySelectorAll('.filter-header').forEach(header_link => {
+          header_link.addEventListener('click', function(){
+            var chevron = header_link.querySelectorAll('.dropdown-chevron')[0]
+            if (chevron.classList.contains('fa-chevron-right')) {
+              chevron.classList.remove('fa-chevron-right')
+              chevron.classList.add('fa-chevron-down');
+            }
+            else if (chevron.classList.contains('fa-chevron-down')) {
+              chevron.classList.remove('fa-chevron-down')
+              chevron.classList.add('fa-chevron-right')
+            }
+          })
+        })
+      </script>
     {% endif %}
 
     <!-- Bootstrap JS -->

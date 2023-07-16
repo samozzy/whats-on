@@ -2,14 +2,14 @@
 	<h2 class="text-center">Search & Filter</h2>
 
 	<div class="filter-box" id="search-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#searchCollapse"><i class="fa fa-chevron-right"></i> <span>Search</span></a>
+		<a class="filter-header" data-bs-toggle="collapse" href="#searchCollapse"><i class="fa fa-chevron-down dropdown-chevron"></i> <span>Search</span></a>
 		<div class="filter-body collapse show" id="searchCollapse">
 			<input class="form-control search-input" type="search" placeholder="Search" aria-label="Search for a show" id="search-input">
 		</div>
 	</div>
 
 	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right"></i> <span>Date & Time</span></a>
+		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Date & Time</span></a>
 		<div class="filter-body collapse" id="datesCollapse">
 			<span class="placeholder col-7"></span>
 			<span class="placeholder col-4"></span>
@@ -52,7 +52,7 @@
 
 	{% if site.data.venues %}
 	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right"></i> <span>Venue</span></a>
+		<a class="filter-header" data-bs-toggle="collapse" href="#venuesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Venue</span></a>
 		<div class="filter-body collapse venue-list form-check" id="venuesCollapse">
 			<ul>
 				{% for venue in site.data.venues %}
@@ -75,7 +75,7 @@
 	</div>
 	{% endif %}
 	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right"></i> <span>Genres</span></a>
+		<a class="filter-header" data-bs-toggle="collapse" href="#genresCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Genres</span></a>
 		<div class="filter-body collapse" id="genresCollapse">
 			{% comment %} We assign colours to certain genres, but in case there are some bonus ones given by shows we can add them here {% endcomment %}
 			{% assign all_genres = '' | split: '' %}
@@ -117,7 +117,7 @@
 	{% endfor %}
 	{% if show_ages and show_ages != empty %}
 	<div class="filter-box">
-		<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right"></i> <span>Age</span> Guidance</a>
+		<a class="filter-header" data-bs-toggle="collapse" href="#ageCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Age</span> Guidance</a>
 		<div class="filter-body collapse age-list form-check" id="ageCollapse">
 			<ul>
 				{% for age in show_ages %}
