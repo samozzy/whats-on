@@ -49,19 +49,19 @@ label.genre-badge {
 	}
 }
 .genre-badge {
-	-webkit-mask-image: url('/static/band/white-thick.png');
-	width: 100%;
-	-webkit-mask-position: center;
-	-webkit-mask-size: 100%;
-	-webkit-mask-repeat: no-repeat;
+	@extend .smear-background;
 
 	font-size: $small-font-size;
 	min-height: 2rem; 
+	@extend .py-3;
 	@extend .d-flex;
 	span { 
 		mix-blend-mode: color-burn;
-	    font-weight: bold;
-	    @extend .text-center, .w-100, .d-inline-block, .my-auto;
+	  font-weight: bold;
+	  @extend .text-center, .w-100, .d-inline-block, .my-auto;
+	  letter-spacing: 4px;
+	  text-transform: uppercase; 
+	  line-height: 1.2;
 	}
 }
 
