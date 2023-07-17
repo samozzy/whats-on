@@ -39,6 +39,16 @@ jobs:
       - name: Install Ruby gems
         run: bundle install --jobs 4 --retry 3
 
+      ### REFRESH API DATA ###
+      # Only do this on scheduled builds, commits to main, or manual builds
+      - name: Fetch API Data 
+        id: api-fetch 
+        if: ${{ github.event_name != 'pull_request' || github.event_name == 'schedule' }}
+        run: ${GITHUB_WORKSPACE}/api.sh 
+        env: 
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SIGNATURE: ${{ secrets.API_SIGNATURE }} 
+
       ### BUILD ###
       - name: Build Jekyll 
         run: bundle exec jekyll build --baseurl /pgp-whatson

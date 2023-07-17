@@ -1,0 +1,185 @@
+[
+
+    {
+        "festival_id": "demofringe",
+        "title": "Test Event 1",
+        "sub_title": null,
+        "status": "active",
+        "code": "Test Event 1",
+        "year": 2023,
+        "venue": {
+            "name": "Testing House",
+            "map_ref": null,
+            "code": "Testing House",
+            "description": "A venue specifically for testing events",
+            "address": null,
+            "post_code": null,
+            "phone": null,
+            "fax": null,
+            "email": null,
+            "disabled_description": null,
+            "has_booking_over_phone": null,
+            "has_booking_over_card": null,
+            "has_booking_over_web": null,
+            "box_office_opening": null,
+            "box_office_fringe": null,
+            "has_bar": null,
+            "has_cafe": null,
+            "cafe_description": null,
+            "web_address": null,
+            "position": {
+                "lat": 55.944439,
+                "lon": -3.190297
+            }
+        },
+        "performances": [
+            {
+                "type": "in-person",
+                "start": "2023-08-05 04:00:00",
+                "end": "2023-08-05 04:30:00",
+                "title": null,
+                "price": 10.11,
+                "price_type": "paid",
+                "price_string": "\u00a310.11",
+                "is_at_fixed_time": true,
+                "duration_minutes": 210,
+                "concession": null,
+                "concession_family": null,
+                "concession_additional": null
+            },
+            {
+                "type": "in-person",
+                "start": "2023-08-12 13:00:00",
+                "end": "2023-08-12 16:30:00",
+                "title": null,
+                "price": 20.67,
+                "price_type": "paid",
+                "price_string": "\u00a320.67",
+                "is_at_fixed_time": true,
+                "duration_minutes": 210,
+                "concession": null,
+                "concession_family": null,
+                "concession_additional": null
+            },
+            {
+                "type": "in-person",
+                "start": "2023-08-23 01:00:00",
+                "end": "2023-08-23 04:30:00",
+                "title": null,
+                "price": 26.99,
+                "price_type": "paid",
+                "price_string": "\u00a326.99",
+                "is_at_fixed_time": true,
+                "duration_minutes": 210,
+                "concession": null,
+                "concession_family": null,
+                "concession_additional": null
+            }
+        ],
+        "performance_space": {
+            "name": null,
+            "capacity": null,
+            "wheelchair_access": null,
+            "age_limited": null,
+            "age_limit": null
+        },
+        "sub_venue": null,
+        "warnings": null,
+        "fringe_first": null,
+        "description": "This event tests basic fringe time implementation",
+        "description_teaser": null,
+        "artist": null,
+        "artist_type": null,
+        "genre": "Test",
+        "genre_tags": null,
+        "categories": {
+            "strand_titles": [],
+            "subjects": [],
+            "keywords": []
+        },
+        "discounts": {
+            "two_for_one": null,
+            "group": null,
+            "friends": null,
+            "passport": null,
+            "schools": null
+        },
+        "disabled": {
+            "audio": null,
+            "audio_dates": null,
+            "signed": null,
+            "signed_dates": null,
+            "captioning": null,
+            "captioning_dates": null,
+            "other_services": null,
+            "other_services_dates": null,
+            "other_services_information": null
+        },
+        "age_category": null,
+        "website": "https:\/\/api.edinburghfestivalcity.com\/",
+        "images": {
+            "fc32dba8ff69645c7109a1bb1415e3dd9523049c": {
+                "hash": "fc32dba8ff69645c7109a1bb1415e3dd9523049c",
+                "type": "thumb",
+                "orientation": "square",
+                "versions": {
+                    "original": {
+                        "type": "original",
+                        "width": 250,
+                        "height": 250,
+                        "mime": "image\/gif",
+                        "url": "\/\/images.api.edinburghfestivalcity.com\/fc\/32\/db\/fc32dba8ff69645c7109a1bb1415e3dd9523049c-original.gif"
+                    },
+                    "square-75": {
+                        "type": "square-75",
+                        "width": 75,
+                        "height": 75,
+                        "mime": "image\/jpeg",
+                        "url": "\/\/images.api.edinburghfestivalcity.com\/fc\/32\/db\/fc32dba8ff69645c7109a1bb1415e3dd9523049c-square-75.jpg"
+                    },
+                    "square-150": {
+                        "type": "square-150",
+                        "width": 150,
+                        "height": 150,
+                        "mime": "image\/jpeg",
+                        "url": "\/\/images.api.edinburghfestivalcity.com\/fc\/32\/db\/fc32dba8ff69645c7109a1bb1415e3dd9523049c-square-150.jpg"
+                    },
+                    "thumb-100": {
+                        "type": "thumb-100",
+                        "width": 100,
+                        "height": 100,
+                        "mime": "image\/jpeg",
+                        "url": "\/\/images.api.edinburghfestivalcity.com\/fc\/32\/db\/fc32dba8ff69645c7109a1bb1415e3dd9523049c-thumb-100.jpg"
+                    }
+                }
+            }
+        },
+        "twitter": null,
+        "country": null,
+        "performers_number": null,
+        "non_english": null,
+        "festival": "Demo Fringe",
+        "url": "https:\/\/api.edinburghfestivalcity.com\/events\/5c2c7577a25fe3d8ff816efb9383153c0341da5f",
+        "updated": "2023-02-22 18:31:21",
+        "update_times": {
+            "identity": 1677090681,
+            "title": 1677090681,
+            "description": 1677090681,
+            "venue": 1677090681,
+            "performances": 1677090681,
+            "artist": 1677090681,
+            "genre": 1677090681,
+            "discounts": 1677090681,
+            "age_category": 1677090681,
+            "fringe_first": 1677090681,
+            "other": 1677090681,
+            "disabled": 1677090681,
+            "web_links": 1677090681,
+            "images": 1677090681,
+            "status": 1677090681
+        },
+        "latitude": 55.944439,
+        "longitude": -3.190297
+    },
+
+]
