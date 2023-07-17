@@ -4,7 +4,6 @@ the_sidebar = new bootstrap.Offcanvas('#whatson-sidebar')
 // Define the shows for filter pickers 
 the_shows = document.getElementsByClassName('show-card-col');
 loading = document.querySelectorAll(".loading")
-// This contains double the number of shows due to the implementation of sorting
 var no_results_text = document.getElementById('no_results');
 var results_counter = document.getElementById('results_counter');
 var update_button = document.getElementById('update_results');
@@ -42,7 +41,6 @@ function countResults() {
 function clearFilteredOutClass(
 	className, 
 	checkboxes=null, checkbox_default_state=false, 
-	filter_buttons=null, filter_button_default_class=null,
 	input_id=null,input_value="false"){
 	// Remove the `filtered-out-by-xxx` class from the shows
 	for (const show of the_shows){
@@ -55,21 +53,10 @@ function clearFilteredOutClass(
 			cbox.indeterminate = false; 
 		}
 	}
-	// Reset the filter buttons to their default state (default: not `.active`)
-	if (filter_buttons!=null){
-		for (const btn of filter_buttons){
-			if (filter_button_default_class!=null) {
-				filter_buttons[btn].classList.add(filter_button_default_class)
-			}
-			else {
-				btn.classList.remove('active');
-			}
-		}
-	}
+	// If not using checkboxes, reset the input_id to its default value (either false or specified)
 	if (input_id!=null){
 		document.getElementById(input_id).value = input_value
 	}
-	// hideActiveFilter(className.replace('filtered-out-by-',''))
 	countResults();
 }
 
@@ -83,94 +70,6 @@ function clearAll(){
 }
 
 //
-// Active Filter Buttons
-//
-function showActiveFilter(btn_id, looking_for_checked=true){
-	// Show the filter buttons! 
-	// Because it iterates each time, this is a toggler as much as it is a show-er 
-	document.getElementById('filter-badge-container').classList.remove('d-none');
-	document.getElementById('active-filter-' + btn_id).classList.remove('d-none');
-	if (btn_id == 'access' || btn_id == 'content-warning') {
-		document.getElementById('edit-circle-'+ btn_id).classList.add('d-inline');
-	}
-	else if (btn_id != 'search'){
-		document.getElementById('edit-circle-'+ btn_id).classList.remove('d-none');
-	}
-
-	filter_query = 'filter-' + btn_id + '-item'
-	inner_text = [];
-	if (btn_id == 'date'){
-		date_options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }
-		picked_start_date = picker.getStartDate().toLocaleString(undefined,date_options)
-		picked_end_date = picker.getEndDate().toLocaleString(undefined,date_options)
-		if (picked_start_date != picked_end_date){
-			inner_text.push('Between ' + picked_start_date + ' and ' + picked_end_date)
-		}
-		else {
-			inner_text.push('On ' + picked_start_date)
-		}
-	}
-	else if (btn_id == 'search'){
-		if (typeof(looking_for_checked)=='string'){
-			inner_text.push(looking_for_checked);
-		}
-	}
-	else { 
-		if (looking_for_checked == true){
-			document.querySelectorAll('[name="'+filter_query+'"]:checked').forEach(filter_btn => {
-				el_inner_text = filter_btn.labels[0].innerText
-				if (el_inner_text == '' && filter_btn.labels[0].dataset.zoo_tooltip != ''){
-					// The access inner text is actually a picture so let's use this data attribute
-					el_inner_text = filter_btn.labels[0].dataset.zoo_tooltip
-				}
-				inner_text.push(el_inner_text);
-			});
-		}
-		else {
-			// Special case for content warnings where we click to hide rather than additive 
-			document.querySelectorAll('[name="'+filter_query+'"]:not(:checked)').forEach(filter_btn => {
-				el_inner_text = filter_btn.labels[0].innerText
-				if (el_inner_text == '' && filter_btn.labels[0].dataset.zoo_tooltip != ''){
-					el_inner_text = filter_btn.labels[0].dataset.zoo_tooltip
-				}
-				inner_text.push(el_inner_text);
-			});
-		}
-	}
-	filter_button_inner_text = document.getElementById('active-filter-' + btn_id + '-list')
-	if (inner_text.length == 0){
-		// If we've removed all the things, hide the filter badge
-		hideActiveFilter(btn_id);
-	}
-	else {
-		filter_button_inner_text.innerText = ': ' + inner_text.join('; ');
-	}
-	countResults();
-}
-
-function hideActiveFilter(btn_id){
-	filter_container = document.getElementById('filter-badge-container')
-	document.getElementById('active-filter-' + btn_id).classList.add('d-none');
-	document.getElementById('active-filter-' + btn_id + '-list').innerText = '';
-	if (btn_id == 'access' || btn_id == 'content-warning') {
-		document.getElementById('edit-circle-'+ btn_id).classList.remove('d-inline');
-	}
-	else if (btn_id != 'search'){
-		document.getElementById('edit-circle-'+ btn_id).classList.add('d-none');
-	}
-	else {
-		document.getElementById('hint-to-scroll').classList.add('d-none');
-	}
-
-	countResults();
-
-	// If all of the filters have been hidden, hide the container 
-	if (filter_container.querySelectorAll('button').length == filter_container.querySelectorAll('button.d-none').length){
-		filter_container.classList.add('d-none');
-	}
-}
-
-//
 // Search // 
 //
 search_box = document.getElementById('search-input')
@@ -178,7 +77,6 @@ function clearSearch(){
 	// Reset the search box value, show the shows, and hide the filter
 	search_box.value = '';
 	clearFilteredOutClass('filtered-out-by-search')
-	// hideActiveFilter('search')
 }
 function doSearch(term){
 	// Strip any whitespace (not that there should be any)
@@ -192,8 +90,6 @@ function doSearch(term){
 		if (show.dataset.show_search.includes(search_term)) {
 			show.classList.remove('filtered-out-by-search');
 		}
-		// Use the raw value so it's more human-readable than the query term
-		// showActiveFilter('search',search_box.value)
 	}
 }
 
@@ -208,7 +104,6 @@ function searchFunction(){
 	// Sanitise text input 
 	search_value = search_box.value.toLowerCase().replaceAll(' ', '');
 	// Do the search! 
-	// search_hint.classList.add('d-none');
 	for (const show of the_shows){
 		// Hide everything 
 		show.classList.add('filtered-out-by-search');
@@ -241,8 +136,8 @@ function searchFunction(){
 // Date Filter //
 //
 function clearDate(){
-	clearFilteredOutClass('filtered-out-by-date',null,false,null,null,'start_date_picker','');
-	clearFilteredOutClass('filtered-out-by-date',null,false,null,null,'end_date_picker','')
+	clearFilteredOutClass('filtered-out-by-date',null,false,'start_date_picker','');
+	clearFilteredOutClass('filtered-out-by-date',null,false,'end_date_picker','')
 
 }
 function doDateFilter() {
@@ -292,7 +187,7 @@ function doDateFilter() {
 
 var time_picker = document.getElementById('time_picker_select') 
 function clearTimePicked() {
-	clearFilteredOutClass('filtered-out-by-time', null, false, null,null, 'time_picker_select');
+	clearFilteredOutClass('filtered-out-by-time', null, false, 'time_picker_select');
 	document.getElementById('time_picker_text').classList.add('d-none');
 }
 function doTimeFilter(){
@@ -323,16 +218,17 @@ function doTimeFilter(){
 // Venue Filter //
 //
 var venue_checkboxes = document.querySelectorAll('input[name="filter-venue-item"]');
+var space_checkboxes = document.querySelectorAll('input[name="filter-space-item"]');
 let picked_venues = [] 
-// var venue_buttons = document.getElementsByClassName('btn-venue');
 
 function clearVenueCheckboxes() {
-	clearFilteredOutClass('filtered-out-by-venue', venue_checkboxes, false, null)
+	clearFilteredOutClass('filtered-out-by-venue', venue_checkboxes)
+	clearFilteredOutClass('filtered-out-by-venue', space_checkboxes)
 }
 function doVenueFilter(){
-	venue_checkboxes.forEach(function(checkbox) {
+	space_checkboxes.forEach(function(checkbox) {
     picked_venues = 
-      Array.from(venue_checkboxes) // Convert checkboxes to an array to use filter and map.
+      Array.from(space_checkboxes) // Convert checkboxes to an array to use filter and map.
       .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
       .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
 
@@ -353,7 +249,6 @@ function doVenueFilter(){
     	}
     	// Iterate over the picked venues and display shows that match
     	for (p=0; p < picked_venues.length; p++) {
-    		// STEP 1: Apply the filter to the show classes
     		console.log(picked_venues);
     		for (s=0; s < the_shows.length; s++) {
     			if (the_shows[s].dataset.show_performance_space.includes(picked_venues[p])) {
@@ -375,7 +270,7 @@ let picked_genres = []
 var genre_buttons = document.getElementsByClassName('btn-genre');
 
 function clearGenreCheckboxes() {
-	clearFilteredOutClass('filtered-out-by-genre', genre_checkboxes, false, null);
+	clearFilteredOutClass('filtered-out-by-genre', genre_checkboxes);
 	genre_checkboxes.forEach(function(checkbox){
   	checkbox.labels.forEach(function(elem){
   		elem.classList.remove('active');
@@ -421,7 +316,6 @@ function doGenreFilter(){
 	  	}
 	  	// Iterate over the picked genres and display shows that match
 	  	for (p=0; p < picked_genres.length; p++) {
-	  		// STEP 1: Apply the filter to the show classes
 	  		console.log(picked_genres);
 	  		for (s=0; s < the_shows.length; s++) {
 	  			if (the_shows[s].dataset.show_genre == picked_genres[p]) {
@@ -442,7 +336,7 @@ var age_checkboxes = document.querySelectorAll('input[name="filter-age-item"]');
 let picked_ages = [] 
 
 function clearAgeCheckboxes() {
-	clearFilteredOutClass('filtered-out-by-age', age_checkboxes, false, null)
+	clearFilteredOutClass('filtered-out-by-age', age_checkboxes)
 }
 function doAgeFilter(){
 	age_checkboxes.forEach(function(checkbox) {
@@ -468,7 +362,6 @@ function doAgeFilter(){
     	}
     	// Iterate over the picked ages and display shows that match
     	for (p=0; p < picked_ages.length; p++) {
-    		// STEP 1: Apply the filter to the show classes
     		console.log(picked_ages);
     		for (s=0; s < the_shows.length; s++) {
     			if (the_shows[s].dataset.show_age_guidance.includes(picked_ages[p])) {
