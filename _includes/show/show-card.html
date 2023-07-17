@@ -20,7 +20,7 @@
     id="{{ show.title | slugify }}"
 >
   <div class="show-card h-100" style="position: relative;">
-    <div class="show-card-background" style="background-image:url('/static/band/vstroke-blue-2.png');"></div>
+    <div class="show-card-background" style="background-image:url('{% link static/band/vstroke-blue-2.png %}');"></div>
     <div class="poster-wrap py-5 pe-sm-3">
       <div class="show-poster">
         <a href="{{ show_link }}">{% include show/show-get-poster.html show=show %}</a>
