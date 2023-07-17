@@ -1,3 +1,6 @@
+// Define offcanvas sidebar so we can close it on a successful update
+the_sidebar = new bootstrap.Offcanvas('#whatson-sidebar')
+
 // Define the shows for filter pickers 
 the_shows = document.getElementsByClassName('show-card-col');
 loading = document.querySelectorAll(".loading")
@@ -517,6 +520,7 @@ function updateFilters(){
 		console.log('UPDATE RESULTS GO GO GO');
 
 		showLoading();
+		the_sidebar.hide(); 
 		setTimeout(filterFunctions,250);
 		setTimeout(toggleResetButton, 750);
 		setTimeout(hideLoading,1000);
