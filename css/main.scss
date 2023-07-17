@@ -3,7 +3,7 @@
 
 /* Comment out the Bootstrap imports you're not using to save on render size and time  */
 
-$color-paradise-blue: #0B0099;
+$color-paradise-blue: #{{ site.paradise_blue }};
 $primary: $color-paradise-blue;
 
 @import "bootstrap/mixins/banner";
@@ -29,6 +29,20 @@ $body-color: $color-text;
 @import "bootstrap/mixins";
 @import "bootstrap/utilities";
 
+.pg-button {
+	@extend .rounded-0, .text-center;
+	@extend .btn, .btn-outline-light;
+	border-width: 3px !important;
+}
+
+.smear-background {
+	-webkit-mask-image: url('/static/band/white-thick.png');
+	width: 100%;
+	-webkit-mask-position: center;
+	-webkit-mask-size: 100% 150%;
+	-webkit-mask-repeat: no-repeat;
+}
+
 @import "components/sidebar";
 @import "components/filters";
 @import "components/show-card";
@@ -42,7 +56,7 @@ $body-color: $color-text;
 @import "bootstrap/containers";
 @import "bootstrap/grid";
 @import "bootstrap/tables";
-// /*@import "bootstrap/forms";*/
+@import "bootstrap/forms";
 @import "bootstrap/buttons";
 @import "bootstrap/transitions";
 @import "bootstrap/dropdown";

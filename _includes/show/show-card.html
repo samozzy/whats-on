@@ -1,27 +1,49 @@
 {% assign show = include.show %}
 {% include show/show-link.html show=show %}
-<div class="show-card h-100">
-  <div class="poster-wrap">
-    <div class="show-poster">
-      <a href="{{ show_link }}">{% include show/show-get-poster.html show=show %}</a>
-      {% include show/show-meta.html show=show %}
-    </div>
-    <div class="wrap-content">
-      <div class="card-header">
-        {% include show/show-date-range.html show=show %}
-        <h2><a href="{{ show_link }}">{{ show.title }}</a></h2>
-        <p class="lead">{{ show.company }}{% if date_string or show.start_time %}<br>
-          {% if date_string %}{{ date_string }} {% if show.start_time %}--{% endif %} {% endif %}{{ show.start_time }} {% if show.duration %}({{ show.duration }}){% endif %}{% endif %}
-        </p>
+{% include show/show-start-time.html show=show %}
+{% include show/show-date-range.html show=show %}
+
+<div class="col show-card-col"
+    data-show_search="{{ show.title | downcase | remove: ' ' }} {{ show.company | downcase | remove: ' ' }}" 
+    data-show_date_start="{{ first_performance | date: '%Y-%m-%d' }}" 
+    data-show_date_end="{{ last_performance | date: '%Y-%m-%d' }}" 
+    data-show_start_time="{{ standard_start_time | default: show_start_time | split: ':' | first }}"
+    data-show-previews="{{ preview_time | split: ':' | first }}"
+    data-show_age_guidance="{{ show.age_category | downcase | remove: 'ages' | slugify | default: '' }}"
+    data-show_performances="{% for p in p_dates %}{{ p }}{% endfor %}"
+    data-show_price="{{ show.price.standard | default: show.price.concession }}"
+    data-show_genre="{{ show.genre | join:',' | slugify }}"
+    data-show_access="{% if show.access and show.access != empty %}{{ show.access | join: ',' | downcase | slugify | default: '' }}{% endif %}"
+    data-show_content_warnings="{{ show.content_warnings | join: ',' | slugify }}"
+    data-show_venue="{{ show.venue.name | slugify }}"
+    data-show_performance_space="{% if site.test_data == true %}{{ show.venue.name | slugify }}{% else %}{% assign perf_space = show.performance_space[0].name | default: show.performance_space.name %}{{ perf_space | slugify }}{% endif %}"
+    id="{{ show.title | slugify }}"
+>
+  <div class="show-card h-100" style="position: relative;">
+    <div class="show-card-background" style="background-image:url('/static/band/vstroke-blue-2.png');"></div>
+    <div class="poster-wrap py-5 pe-sm-3">
+      <div class="show-poster">
+        <a href="{{ show_link }}">{% include show/show-get-poster.html show=show %}</a>
+        {% include show/show-meta.html show=show class='shadow' %}
+      </div>
+      <div class="wrap-content">
+        <div class="card-header">
+          <h2><a href="{{ show_link }}">{{ show.title }}</a></h2>
+          <p class="lead">{{ show.artist }}{% if date_string and show.artist or show_start_time and show.artist%}<br>{% endif %}
+          {% if date_string %}
+            {{ date_string }}
+            {% if show_start_time %}&middot;{% endif %} 
+          {% endif %}
+          {{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}){% endif %}
+          </p>
+        </div>
+      </div>
+      <div class="body-wrapper">
         <div class="show-card-buttons d-flex flex-row justify-items-between mb-4">
           {% include show/show-book-button.html show=show %}
         </div>
-      </div>
-      <div class="card-body px-0 my-4 mt-4">
-        {{ show.copy_short | markdownify | truncatewords:50 | remove: '...' }} | <a href="{{ show_link }}" class="link-secondary">Read more...</a>
+        {% include show/show-card-body.html show=show %}
       </div>
     </div>
-  </div>
-  <div class="card-footer bg-transparent px-0 border-0">
   </div>
 </div>

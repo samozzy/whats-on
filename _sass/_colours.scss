@@ -14,14 +14,6 @@ $color-paradise: (
 	"paradise-white": #f1f1f1,
 );
 
-$color-genres: (
-	"comedy": map-get($color-paradise, "paradise-blue"),
-	"theatre": green,
-	"dance": red,
-	"musical": orange,
-	"poetry": purple,
-);
-
 $color-black: #1c1c1c;
 
 $color-text-white: #eee;

@@ -1,20 +1,28 @@
 .whatson-wrapper {
+  @extend .g-0, .g-xl-2;
   @include media-breakpoint-up(lg) {
     display: grid;
     grid-template-areas: "sidebar main";
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 3fr;
     gap: $grid-gutter-width;
   }
+}
+.pg-offcanvas {
+  @extend .offcanvas-lg;
+}
+.sidebar-toggler {
+  @extend .d-lg-none;
 }
 .sidebar {
   @extend .bg-primary; // Ensure the background is full height of the page when the page is longer than the viewport
   grid-area: sidebar;
   @include media-breakpoint-up(lg) {
     padding: 1rem;
+    padding-left: 1.7rem;
     margin-left: -1rem;
   }
   #whatson-sidebar {  
-    @extend .sticky-lg-top;
+    @extend .sticky-xl-top;
     @include media-breakpoint-up(lg) {
       // Override collapse behaviors
       display: block !important;
@@ -38,25 +46,14 @@
   }
 
   @include media-breakpoint-down(lg) {
-    .offcanvas-lg {
+    .pg-offcanvas {
       border-right-color: var(--bs-border-color);
       box-shadow: $box-shadow-lg;
     }
   }
-  // ul.sidebar-navigation {
-  //   margin-left: -1rem;
-  // }
-  // ul.sidebar-navigation, ul.sidebar-navigation ul {
-  //   list-style-type: none;
-  //   line-height: 2;
-  //   li span {
-  //     margin-left: 2px;
-  //     text-indent: -2px;
-  //   }
-  // }
 }
 main {
-  // @extend .mx-lg-5;
+  @extend .container-fluid;
   @include media-breakpoint-up(lg){
     grid-area: main;
     min-height: 100vh;
