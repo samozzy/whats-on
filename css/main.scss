@@ -36,7 +36,7 @@ $body-color: $color-text;
 }
 
 .smear-background {
-	-webkit-mask-image: url('/static/band/white-thick.png');
+	-webkit-mask-image: url('{% link static/band/white-thick.png %}');
 	width: 100%;
 	-webkit-mask-position: center;
 	-webkit-mask-size: 100% 150%;
