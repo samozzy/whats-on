@@ -52,6 +52,7 @@ function clearFilteredOutClass(
 	if (checkboxes!=null){
 		for (const cbox of checkboxes){
 			cbox.checked = checkbox_default_state;
+			cbox.indeterminate = false; 
 		}
 	}
 	// Reset the filter buttons to their default state (default: not `.active`)

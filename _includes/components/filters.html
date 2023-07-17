@@ -61,18 +61,18 @@
 		<div class="filter-body collapse venue-list form-check" id="venuesCollapse">
 			<ul>
 				{% for venue in site.data.venues %}
-					<li><input class="form-check-input" type="checkbox" id="venue-{{ venue.name | slugify }}"><label class="form-check-label" for="venue-{{ venue.name | slugify }}">{{ venue.name }}</label></li>
+					<li><input class="form-check-input" type="checkbox" id="venue-{{ venue.name | slugify }}" name="filter-venue-item"><label class="form-check-label" for="venue-{{ venue.name | slugify }}">{{ venue.name }}</label></li>
 					{% if venue.spaces %}
 					<ul>
 						{% for space in venue.spaces %}
-							<li><input class="form-check-input {{ venue.name | slugify }}-spaces" name="filter-venue-item" type="checkbox" value="{{ space | slugify }}" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
+							<li><input class="form-check-input {{ venue.name | slugify }}-spaces" name="filter-space-item" type="checkbox" value="{{ space | slugify }}" id="space-{{ space | slugify }}"><label class="form-check-label" for="space-{{ space | slugify }}">{{ space }}</label></li>
 						{% endfor %}
 					</ul>
 					{% endif %}
 				{% endfor %}
 				{% if site.test_data %}
 					{% for venue in show_venues %}
-						<li><input class="form-check-input venue-{{ venue | slugify }}" name="filter-venue-item" type="checkbox" value="{{ venue | slugify }}" id="venue-{{ venue | slugify }}"><label class="form-check-label" for="venue-{{ venue | slugify }}">{{ venue }}</label></li>
+						<li><input class="form-check-input venue-{{ venue | slugify }}" name="filter-space-item" type="checkbox" value="{{ venue | slugify }}" id="venue-{{ venue | slugify }}"><label class="form-check-label" for="venue-{{ venue | slugify }}">{{ venue }}</label></li>
 					{% endfor %}
 				{% endif %}
 			</ul>
