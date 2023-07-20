@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Work+Sans:wght@200..900&display=swap');
 
 .help-text {
 	font-size: 8pt;
 }
 
 // Our variables;
-$body-font-stack: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
+$body-font-stack: 'Work Sans', 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
 $header-font-stack: $body-font-stack;
