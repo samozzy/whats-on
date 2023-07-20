@@ -25,33 +25,38 @@
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Date & Time</span></a>
 		<div class="filter-body collapse" id="datesCollapse">
-			<div id="date_picker">
-				<span>From:</span>
-				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">
-				<span>To:</span>
-				<input class="form-control date-picker" name="end_date" type="date" id="end_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">
-			</div>
-
-			<div id="time_picker">
+			<div id="date_time_picker">
 				{% assign time_counter = 0 %}
 				{% assign first_time = site.fringe_time | date: "%s" %}
 				{% assign last_time = first_time | date: "%s" | plus: 82800 %} {% comment %} 23 hours {% endcomment %}
+				{% assign time_list = '' | split: '' %}
+				{% comment %}
+					Iterate from first time, adding 3600 until we get to last time (date is irrelevant)
+				{% endcomment %}
+				{% for i in (first_time..last_time) %}
+					{% assign the_time = first_time | plus: time_counter | date: "%H:%M" %}
+					{% assign time_list = time_list | push: the_time %}
+					{% assign time_counter = time_counter | plus: 3600 %}
+					{% assign the_time = the_time | date: "%s" %}
+					{% if time_counter > 82800 %}
+						{% break %}
+					{% endif %}
+				{% endfor %}
 
-				<span>Performance start time from</span>
-				<select class="form-select form-select-sm" id="time_picker_select" aria-label="Time picker">
-					<option value="false">---</option>
-					{% comment %}
-						Iterate from first time, adding 3600 until we get to last time (date is irrelevant)
-					{% endcomment %}
-					{% for i in (first_time..last_time) %}
-						{% assign the_time = first_time | plus: time_counter | date: "%H:%M" %}
+				<span>From:</span>
+				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">
+				<select class="form-select form-select-sm" id="start_time_picker" aria-label="Picker for starting after X o'clock">
+					<option value="false">(Select time)</option>
+					{% for the_time in time_list %}
 						<option value="{{ the_time | split: ":" | first }}">{{ the_time }}</option>
-
-						{% assign time_counter = time_counter | plus: 3600 %}
-						{% assign the_time = the_time | date: "%s" %}
-						{% if time_counter > 82800 %}
-							{% break %}
-						{% endif %}
+					{% endfor %}
+				</select>
+				<span>To:</span>
+				<input class="form-control date-picker" name="end_date" type="date" id="end_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">
+				<select class="form-select form-select-sm" id="end_time_picker" aria-label="Picker for starting before X o'clock">
+					<option value="false">(Select time)</option>
+					{% for the_time in time_list %}
+						<option value="{{ the_time | split: ":" | first }}">{{ the_time }}</option>
 					{% endfor %}
 				</select>
 				<span class="help-text d-none" id="time_picker_text"><em>Only using standard show times (not previews)</em></span>
