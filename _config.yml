@@ -36,6 +36,8 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  - api.sh 
+  - docker-compose.yml 
 
 strict_front_matter: true 
 livereload: true 
