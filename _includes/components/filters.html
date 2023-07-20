@@ -3,6 +3,18 @@
 
 	<div class="error-text" id="filter_error_text"></div>
 
+	<div class="filter-box">
+		<div class="filter-header ms-3">Sort by</div>
+		<div class="filter-body" id="sort_by">
+			<div id="sort_picker">
+				<select class="form-select form-select-sm" id="sort_picker_select" aria-label="Sort Results">
+					<option value="title">Show title</option>
+					<option value="time">Start time</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<hr>
 	<div class="filter-box" id="search-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#searchCollapse"><i class="fa fa-chevron-down dropdown-chevron"></i> <span>Search</span></a>
 		<div class="filter-body collapse show" id="searchCollapse">
@@ -12,7 +24,7 @@
 
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Date & Time</span></a>
-		<div class="filter-body collapse show" id="datesCollapse">
+		<div class="filter-body collapse" id="datesCollapse">
 			<div id="date_picker">
 				<span>From:</span>
 				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="{{ site.start_date | date: "%Y-%m-%d" }}" max="{{ site.end_date | date: "%Y-%m-%d" }}">

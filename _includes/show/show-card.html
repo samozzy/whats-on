@@ -8,6 +8,7 @@
     data-show_date_start="{{ first_performance | date: '%Y-%m-%d' }}" 
     data-show_date_end="{{ last_performance | date: '%Y-%m-%d' }}" 
     data-show_start_time="{{ standard_start_time | default: show_start_time | split: ':' | first }}"
+    data-show_sort_time="{{ standard_start_time | default: show_start_time | remove: ':' }}"
     data-show-previews="{{ preview_time | split: ':' | first }}"
     data-show_age_guidance="{{ show.age_category | downcase | remove: 'ages' | slugify | default: '' }}"
     data-show_performances="{% for p in p_dates %}{{ p }}{% endfor %}"

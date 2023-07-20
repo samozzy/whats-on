@@ -375,6 +375,21 @@ function doAgeFilter(){
 	});
 }
 
+function doSort(value="title"){
+	var showsArray = Array.from(the_shows);
+	let sorted = showsArray.sort(sorter);
+	function sorter(a,b) {
+		if (value == "time"){
+			return a.dataset.show_sort_time.localeCompare(b.dataset.show_sort_time)
+		}
+		else {
+			// If the value isn't time, default to title.
+			return a.id.localeCompare(b.id);
+		}
+	}
+	sorted.forEach(e => document.querySelector("#show_list").appendChild(e))
+}
+
 function showLoading(){
 	console.log('ACTIVATING LOADING...');
 	document.getElementById('show_list').classList.add('d-none');
@@ -411,11 +426,14 @@ function updateFilters(){
 	}
 	else {
 		document.getElementById('filter_error_text').innerHTML = document.getElementById('filter_error_text').innerHTML.replace(error_date,'')
+		sort_value = document.getElementById('sort_picker_select').value
 		console.log('UPDATE RESULTS GO GO GO');
 
 		showLoading();
 		the_sidebar.hide(); 
+		console.log("SORTING BY " + sort_value);
 		setTimeout(filterFunctions,250);
+		setTimeout(doSort(sort_value), 500)
 		setTimeout(toggleResetButton, 750);
 		setTimeout(hideLoading,1000);
 	}
