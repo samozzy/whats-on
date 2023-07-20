@@ -62,11 +62,17 @@ layout: default
 						<p class="lead text-primary">Age {% if show.age_restricted %}restriction{% else %}guidance{% endif %}: {{ show.age_category }}</p>
 					{% endif %}
 					{% if show.warnings and show.warnings != empty and show.warnings != "None" %}
-						<ul>
-							{% for cw in show.warnings %}
-								<li>{{ cw }}</li>
-							{% endfor %}
-						</ul>
+						{% assign the_warnings = show.warnings | jsonify | remove: '"' | split: "\n" %}
+						{% if the_warnings.size == 2 %}
+							{% assign more_information = the_warnings | first %}
+							<p>{{ the_warnings | last | replace: "More information", more_information }}</p>
+						{% else %}
+							<ul>
+								{% for cw in show.warnings %}
+									<li>{{ cw | remove: "More information" }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
 					{% endif %}
 					{% if show.warning_detail and show.warning_detail != empty %}
 						{{ show.warning_detail | markdownify }}
