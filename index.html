@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="/pgp-whatson/css/main.css?cachebust=202307201638">
+    <link rel="stylesheet" href="/pgp-whatson/css/main.css?cachebust=202307201912">
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/e464ea3a91.js" crossorigin="anonymous"></script>
 
@@ -56,6 +56,18 @@
 
 	<div class="error-text" id="filter_error_text"></div>
 
+	<div class="filter-box">
+		<div class="filter-header ms-3">Sort by</div>
+		<div class="filter-body" id="sort_by">
+			<div id="sort_picker">
+				<select class="form-select form-select-sm" id="sort_picker_select" aria-label="Sort Results">
+					<option value="title">Show title</option>
+					<option value="time">Start time</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<hr>
 	<div class="filter-box" id="search-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#searchCollapse"><i class="fa fa-chevron-down dropdown-chevron"></i> <span>Search</span></a>
 		<div class="filter-body collapse show" id="searchCollapse">
@@ -65,7 +77,7 @@
 
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Date & Time</span></a>
-		<div class="filter-body collapse show" id="datesCollapse">
+		<div class="filter-body collapse" id="datesCollapse">
 			<div id="date_picker">
 				<span>From:</span>
 				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="2023-08-01" max="2023-08-28">
@@ -782,6 +794,7 @@
 
 
 
+
 	
 	
 		
@@ -852,6 +865,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-22" 
     data-show_start_time="14"
+    data-show_sort_time="1445"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-21 14:452023-08-22 14:45"
@@ -926,6 +940,7 @@
 </div>
 		
 			
+
 
 
 
@@ -1387,6 +1402,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="22"
+    data-show_sort_time="2235"
     data-show-previews=""
     data-show_age_guidance="18"
     data-show_performances="2023-08-05 22:352023-08-06 22:352023-08-07 22:352023-08-08 22:352023-08-09 22:352023-08-10 22:352023-08-11 22:352023-08-12 22:352023-08-14 22:352023-08-15 22:352023-08-16 22:352023-08-17 22:352023-08-18 22:352023-08-19 22:352023-08-21 22:352023-08-22 22:352023-08-23 22:352023-08-24 22:352023-08-25 22:352023-08-26 22:352023-08-27 22:35"
@@ -1461,6 +1477,7 @@
 </div>
 		
 			
+
 
 
 
@@ -1662,6 +1679,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
     data-show_start_time="12"
+    data-show_sort_time="1230"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-05 12:302023-08-06 12:302023-08-07 12:302023-08-08 12:302023-08-09 12:302023-08-10 12:302023-08-11 12:302023-08-12 12:30"
@@ -1736,6 +1754,7 @@
 </div>
 		
 			
+
 
 
 
@@ -1897,6 +1916,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="16"
+    data-show_sort_time="1650"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 16:502023-08-15 16:502023-08-16 16:502023-08-17 16:502023-08-18 16:502023-08-19 16:50"
@@ -1971,6 +1991,7 @@
 </div>
 		
 			
+
 
 
 
@@ -2132,6 +2153,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-26" 
     data-show_start_time="17"
+    data-show_sort_time="1700"
     data-show-previews=""
     data-show_age_guidance="3"
     data-show_performances="2023-08-21 17:002023-08-22 17:002023-08-23 17:002023-08-24 17:002023-08-25 17:002023-08-26 17:00"
@@ -2206,6 +2228,7 @@
 </div>
 		
 			
+
 
 
 
@@ -2367,6 +2390,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="19"
+    data-show_sort_time="1925"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 19:252023-08-15 19:252023-08-16 19:252023-08-17 19:252023-08-18 19:252023-08-19 19:25"
@@ -2441,6 +2465,7 @@
 </div>
 		
 			
+
 
 
 
@@ -2762,6 +2787,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="10"
+    data-show_sort_time="1050"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-05 10:502023-08-06 10:502023-08-07 10:502023-08-08 10:502023-08-09 10:502023-08-10 10:502023-08-11 10:502023-08-12 10:502023-08-14 10:502023-08-15 10:502023-08-16 10:502023-08-17 10:502023-08-18 10:502023-08-19 10:50"
@@ -2836,6 +2862,7 @@
 </div>
 		
 			
+
 
 
 
@@ -3017,6 +3044,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="18"
+    data-show_sort_time="1835"
     data-show-previews=""
     data-show_age_guidance="0"
     data-show_performances="2023-08-21 18:352023-08-22 18:352023-08-23 18:352023-08-24 18:352023-08-25 18:352023-08-26 18:352023-08-27 18:35"
@@ -3091,6 +3119,7 @@
 </div>
 		
 			
+
 
 
 
@@ -3412,6 +3441,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="15"
+    data-show_sort_time="1535"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-05 15:352023-08-06 15:352023-08-07 15:352023-08-08 15:352023-08-09 15:352023-08-10 15:352023-08-11 15:352023-08-12 15:352023-08-14 15:352023-08-15 15:352023-08-16 15:352023-08-17 15:352023-08-18 15:352023-08-19 15:35"
@@ -3486,6 +3516,7 @@
 </div>
 		
 			
+
 
 
 
@@ -3827,6 +3858,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="21"
+    data-show_sort_time="2150"
     data-show-previews=""
     data-show_age_guidance="18"
     data-show_performances="2023-08-05 21:502023-08-06 21:502023-08-07 21:502023-08-08 21:502023-08-09 21:502023-08-10 21:502023-08-11 21:502023-08-12 21:502023-08-21 21:502023-08-22 21:502023-08-23 21:502023-08-24 21:502023-08-25 21:502023-08-26 21:502023-08-27 21:50"
@@ -3901,6 +3933,7 @@
 </div>
 		
 			
+
 
 
 
@@ -4082,6 +4115,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="13"
+    data-show_sort_time="1315"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-21 13:152023-08-22 13:152023-08-23 13:152023-08-24 13:152023-08-25 13:152023-08-26 13:152023-08-27 13:15"
@@ -4167,6 +4201,7 @@
 
 
 
+
 	
 	
 		
@@ -4237,6 +4272,7 @@
     data-show_date_start="2023-08-08" 
     data-show_date_end="2023-08-09" 
     data-show_start_time="15"
+    data-show_sort_time="1510"
     data-show-previews=""
     data-show_age_guidance="5"
     data-show_performances="2023-08-08 15:102023-08-09 15:10"
@@ -4311,6 +4347,7 @@
 </div>
 		
 			
+
 
 
 
@@ -4472,6 +4509,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="19"
+    data-show_sort_time="1915"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 19:152023-08-15 19:152023-08-16 19:152023-08-17 19:152023-08-18 19:152023-08-19 19:15"
@@ -4546,6 +4584,7 @@
 </div>
 		
 			
+
 
 
 
@@ -4747,6 +4786,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
     data-show_start_time="17"
+    data-show_sort_time="1730"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-05 17:302023-08-06 17:302023-08-07 17:302023-08-08 17:302023-08-09 17:302023-08-10 17:302023-08-11 17:302023-08-12 17:30"
@@ -4821,6 +4861,7 @@
 </div>
 		
 			
+
 
 
 
@@ -5002,6 +5043,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="17"
+    data-show_sort_time="1715"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-21 17:152023-08-22 17:152023-08-23 17:152023-08-24 17:152023-08-25 17:152023-08-26 17:152023-08-27 17:15"
@@ -5076,6 +5118,7 @@
 </div>
 		
 			
+
 
 
 
@@ -5377,6 +5420,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="14"
+    data-show_sort_time="1415"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-14 14:152023-08-15 14:152023-08-16 14:152023-08-17 14:152023-08-18 14:152023-08-19 14:152023-08-21 14:152023-08-22 14:152023-08-23 14:152023-08-24 14:152023-08-25 14:152023-08-26 14:152023-08-27 14:15"
@@ -5451,6 +5495,7 @@
 </div>
 		
 			
+
 
 
 
@@ -5801,6 +5846,7 @@
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="21"
+    data-show_sort_time="2100"
     data-show-previews="21"
     data-show_age_guidance="18"
     data-show_performances="2023-08-04 21:002023-08-05 21:002023-08-06 21:002023-08-07 21:002023-08-08 21:002023-08-09 21:002023-08-10 21:002023-08-11 21:002023-08-12 21:002023-08-14 21:002023-08-15 21:002023-08-16 21:002023-08-17 21:002023-08-18 21:002023-08-19 21:00"
@@ -5875,6 +5921,7 @@
 </div>
 		
 			
+
 
 
 
@@ -6036,6 +6083,7 @@
     data-show_date_start="2023-08-07" 
     data-show_date_end="2023-08-12" 
     data-show_start_time="14"
+    data-show_sort_time="1445"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-07 14:452023-08-08 14:452023-08-09 14:452023-08-10 14:452023-08-11 14:452023-08-12 14:45"
@@ -6110,6 +6158,7 @@
 </div>
 		
 			
+
 
 
 
@@ -6271,6 +6320,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-26" 
     data-show_start_time="11"
+    data-show_sort_time="1115"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-21 11:152023-08-22 11:152023-08-23 11:152023-08-24 11:152023-08-25 11:152023-08-26 11:15"
@@ -6345,6 +6395,7 @@
 </div>
 		
 			
+
 
 
 
@@ -6506,6 +6557,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="16"
+    data-show_sort_time="1620"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 16:202023-08-15 16:202023-08-16 16:202023-08-17 16:202023-08-18 16:202023-08-19 16:20"
@@ -6580,6 +6632,7 @@
 </div>
 		
 			
+
 
 
 
@@ -6761,6 +6814,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="21"
+    data-show_sort_time="2100"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-21 21:002023-08-22 21:002023-08-23 21:002023-08-24 21:002023-08-25 21:002023-08-26 21:002023-08-27 21:00"
@@ -6835,6 +6889,7 @@
 </div>
 		
 			
+
 
 
 
@@ -7136,6 +7191,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="12"
+    data-show_sort_time="1220"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 12:202023-08-15 12:202023-08-16 12:202023-08-17 12:202023-08-18 12:202023-08-19 12:202023-08-21 12:202023-08-22 12:202023-08-23 12:202023-08-24 12:202023-08-25 12:202023-08-26 12:202023-08-27 12:20"
@@ -7210,6 +7266,7 @@
 </div>
 		
 			
+
 
 
 
@@ -7520,6 +7577,7 @@
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="16"
+    data-show_sort_time="1615"
     data-show-previews="16"
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 16:152023-08-15 16:152023-08-16 16:152023-08-17 16:152023-08-18 16:152023-08-19 16:152023-08-21 16:152023-08-22 16:152023-08-23 16:152023-08-24 16:152023-08-25 16:152023-08-26 16:152023-08-27 16:15"
@@ -7594,6 +7652,7 @@
 </div>
 		
 			
+
 
 
 
@@ -7724,6 +7783,7 @@
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-07" 
     data-show_start_time="15"
+    data-show_sort_time="1510"
     data-show-previews="17"
     data-show_age_guidance="5"
     data-show_performances="2023-08-04 17:202023-08-05 15:102023-08-06 15:102023-08-07 15:10"
@@ -7798,6 +7858,7 @@
 </div>
 		
 			
+
 
 
 
@@ -8028,6 +8089,7 @@
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-12" 
     data-show_start_time="16"
+    data-show_sort_time="1620"
     data-show-previews="18"
     data-show_age_guidance="8"
     data-show_performances="2023-08-04 18:202023-08-05 16:202023-08-06 16:202023-08-07 16:202023-08-08 16:202023-08-09 16:202023-08-10 16:202023-08-11 16:202023-08-12 16:20"
@@ -8102,6 +8164,7 @@
 </div>
 		
 			
+
 
 
 
@@ -8451,7 +8514,8 @@
     data-show_search="kingofmore:veza " 
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="16"
+    data-show_start_time="18"
+    data-show_sort_time="1840"
     data-show-previews="18"
     data-show_age_guidance="14"
     data-show_performances="2023-08-04 18:402023-08-05 18:402023-08-06 18:402023-08-07 18:402023-08-08 18:402023-08-09 18:402023-08-10 18:402023-08-11 18:402023-08-12 18:402023-08-14 18:402023-08-15 18:402023-08-16 18:402023-08-17 18:402023-08-18 18:402023-08-19 18:40"
@@ -8526,6 +8590,7 @@
 </div>
 		
 			
+
 
 
 
@@ -8726,7 +8791,8 @@
     data-show_search="lights!donkey!action! " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="16"
+    data-show_start_time="12"
+    data-show_sort_time="1200"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-05 12:002023-08-06 12:002023-08-07 12:002023-08-08 12:002023-08-09 12:002023-08-10 12:002023-08-11 12:002023-08-12 12:00"
@@ -8801,6 +8867,7 @@
 </div>
 		
 			
+
 
 
 
@@ -8961,7 +9028,8 @@
     data-show_search="littlewomen " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="16"
+    data-show_start_time="20"
+    data-show_sort_time="2000"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-14 20:002023-08-15 20:002023-08-16 20:002023-08-17 20:002023-08-18 20:002023-08-19 20:00"
@@ -9036,6 +9104,7 @@
 </div>
 		
 			
+
 
 
 
@@ -9265,7 +9334,8 @@
     data-show_search="love,monty " 
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="16"
+    data-show_start_time="19"
+    data-show_sort_time="1925"
     data-show-previews="19"
     data-show_age_guidance="14"
     data-show_performances="2023-08-04 19:252023-08-05 19:252023-08-06 19:252023-08-07 19:252023-08-08 19:252023-08-09 19:252023-08-10 19:252023-08-11 19:252023-08-12 19:25"
@@ -9340,6 +9410,7 @@
 </div>
 		
 			
+
 
 
 
@@ -9540,7 +9611,8 @@
     data-show_search="macbeth " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="16"
+    data-show_start_time="13"
+    data-show_sort_time="1300"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-05 13:002023-08-06 13:002023-08-07 13:002023-08-08 13:002023-08-09 13:002023-08-10 13:002023-08-11 13:002023-08-12 13:00"
@@ -9615,6 +9687,7 @@
 </div>
 		
 			
+
 
 
 
@@ -9915,7 +9988,8 @@
     data-show_search="marktwain'sthestolenwhiteelephant " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="16"
+    data-show_start_time="20"
+    data-show_sort_time="2000"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 20:002023-08-15 20:002023-08-16 20:002023-08-17 20:002023-08-18 20:002023-08-19 20:002023-08-21 20:002023-08-22 20:002023-08-23 20:002023-08-24 20:002023-08-25 20:002023-08-26 20:002023-08-27 20:00"
@@ -9990,6 +10064,7 @@
 </div>
 		
 			
+
 
 
 
@@ -10150,7 +10225,8 @@
     data-show_search="mementomoribitches " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="16"
+    data-show_start_time="10"
+    data-show_sort_time="1030"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-14 10:302023-08-15 10:302023-08-16 10:302023-08-17 10:302023-08-18 10:302023-08-19 10:30"
@@ -10225,6 +10301,7 @@
 </div>
 		
 			
+
 
 
 
@@ -10405,7 +10482,8 @@
     data-show_search="messhead " 
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="16"
+    data-show_start_time="19"
+    data-show_sort_time="1900"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-21 19:002023-08-22 19:002023-08-23 19:002023-08-24 19:002023-08-25 19:002023-08-26 19:002023-08-27 19:00"
@@ -10480,6 +10558,7 @@
 </div>
 		
 			
+
 
 
 
@@ -10681,6 +10760,7 @@
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
     data-show_start_time="16"
+    data-show_sort_time="1655"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-05 16:552023-08-06 16:552023-08-07 16:552023-08-08 16:552023-08-09 16:552023-08-10 16:552023-08-11 16:552023-08-12 16:55"
@@ -10771,6 +10851,7 @@
 
 
 
+
  
 
 
@@ -10786,7 +10867,8 @@
     data-show_search="mustafaalgiyadi:alittlekillinghurtsnoone " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="16"
+    data-show_start_time=""
+    data-show_sort_time=""
     data-show-previews=""
     data-show_age_guidance="18"
     data-show_performances=""
@@ -10858,6 +10940,7 @@
 </div>
 		
 			
+
 
 
 
@@ -11198,7 +11281,8 @@
     data-show_search="paddyenglishman,paddyirishmanandpaddy...? " 
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="16"
+    data-show_start_time="22"
+    data-show_sort_time="2230"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-04 22:302023-08-05 22:302023-08-06 22:302023-08-07 22:302023-08-08 22:302023-08-09 22:302023-08-10 22:302023-08-11 22:302023-08-12 22:302023-08-14 22:302023-08-15 22:302023-08-16 22:302023-08-17 22:302023-08-18 22:302023-08-19 22:30"
@@ -11273,6 +11357,7 @@
 </div>
 		
 			
+
 
 
 
@@ -11433,7 +11518,8 @@
     data-show_search="puppets " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="16"
+    data-show_start_time="20"
+    data-show_sort_time="2045"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-14 20:452023-08-15 20:452023-08-16 20:452023-08-17 20:452023-08-18 20:452023-08-19 20:45"
@@ -11508,6 +11594,7 @@
 </div>
 		
 			
+
 
 
 
@@ -11738,6 +11825,7 @@
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-12" 
     data-show_start_time="19"
+    data-show_sort_time="1940"
     data-show-previews="20"
     data-show_age_guidance="12"
     data-show_performances="2023-08-04 20:002023-08-05 19:402023-08-06 19:402023-08-07 19:402023-08-08 19:402023-08-09 19:402023-08-10 19:402023-08-11 19:402023-08-12 19:40"
@@ -11812,6 +11900,7 @@
 </div>
 		
 			
+
 
 
 
@@ -11993,6 +12082,7 @@
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
     data-show_start_time="19"
+    data-show_sort_time="1915"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-21 19:152023-08-22 19:152023-08-23 19:152023-08-24 19:152023-08-25 19:152023-08-26 19:152023-08-27 19:15"
@@ -12067,6 +12157,7 @@
 </div>
 		
 			
+
 
 
 
@@ -12247,7 +12338,8 @@
     data-show_search="rockbottom " 
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="19"
+    data-show_start_time="22"
+    data-show_sort_time="2205"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-21 22:052023-08-22 22:052023-08-23 22:052023-08-24 22:052023-08-25 22:052023-08-26 22:052023-08-27 22:05"
@@ -12322,6 +12414,7 @@
 </div>
 		
 			
+
 
 
 
@@ -12551,7 +12644,8 @@
     data-show_search="sheldrakeonshakespeare:live! " 
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="19"
+    data-show_start_time="20"
+    data-show_sort_time="2000"
     data-show-previews="20"
     data-show_age_guidance="16"
     data-show_performances="2023-08-04 20:002023-08-05 20:002023-08-06 20:002023-08-07 20:002023-08-08 20:002023-08-09 20:002023-08-10 20:002023-08-11 20:002023-08-12 20:00"
@@ -12626,6 +12720,7 @@
 </div>
 		
 			
+
 
 
 
@@ -12786,7 +12881,8 @@
     data-show_search="sofar " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="19"
+    data-show_start_time="11"
+    data-show_sort_time="1150"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-14 11:502023-08-15 11:502023-08-16 11:502023-08-17 11:502023-08-18 11:502023-08-19 11:50"
@@ -12861,6 +12957,7 @@
 </div>
 		
 			
+
 
 
 
@@ -13021,7 +13118,8 @@
     data-show_search="songsforanewworld " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="19"
+    data-show_start_time="20"
+    data-show_sort_time="2025"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 20:252023-08-15 20:252023-08-16 20:252023-08-17 20:252023-08-18 20:252023-08-19 20:25"
@@ -13096,6 +13194,7 @@
 </div>
 		
 			
+
 
 
 
@@ -13446,6 +13545,7 @@
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="17"
+    data-show_sort_time="1715"
     data-show-previews="19"
     data-show_age_guidance="16"
     data-show_performances="2023-08-04 19:002023-08-05 17:152023-08-06 17:152023-08-07 17:152023-08-08 17:152023-08-09 17:152023-08-10 17:152023-08-11 17:152023-08-12 17:152023-08-14 17:152023-08-15 17:152023-08-16 17:152023-08-17 17:152023-08-18 17:152023-08-19 17:15"
@@ -13521,6 +13621,7 @@
 </div>
 		
 			
+
 
 
 
@@ -13871,6 +13972,7 @@
     data-show_date_start="2023-08-04" 
     data-show_date_end="2023-08-19" 
     data-show_start_time="18"
+    data-show_sort_time="1820"
     data-show-previews="20"
     data-show_age_guidance="18"
     data-show_performances="2023-08-04 20:452023-08-05 18:202023-08-06 18:202023-08-07 18:202023-08-08 18:202023-08-09 18:202023-08-10 18:202023-08-11 18:202023-08-12 18:202023-08-14 18:202023-08-15 18:202023-08-16 18:202023-08-17 18:202023-08-18 18:202023-08-19 18:20"
@@ -13945,6 +14047,7 @@
 </div>
 		
 			
+
 
 
 
@@ -14105,7 +14208,8 @@
     data-show_search="sundayintheparkwithgeorge " 
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-26" 
-    data-show_start_time="18"
+    data-show_start_time="11"
+    data-show_sort_time="1155"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-21 11:552023-08-22 11:552023-08-23 11:552023-08-24 11:552023-08-25 11:552023-08-26 11:55"
@@ -14180,6 +14284,7 @@
 </div>
 		
 			
+
 
 
 
@@ -14340,7 +14445,8 @@
     data-show_search="theburdenoftruth " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="18"
+    data-show_start_time="12"
+    data-show_sort_time="1245"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 12:452023-08-15 12:452023-08-16 12:452023-08-17 12:452023-08-18 12:452023-08-19 12:45"
@@ -14415,6 +14521,7 @@
 </div>
 		
 			
+
 
 
 
@@ -14715,7 +14822,8 @@
     data-show_search="thecrispreview:live " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="18"
+    data-show_start_time="17"
+    data-show_sort_time="1750"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-14 17:502023-08-15 17:502023-08-16 17:502023-08-17 17:502023-08-18 17:502023-08-19 17:502023-08-21 17:502023-08-22 17:502023-08-23 17:502023-08-24 17:502023-08-25 17:502023-08-26 17:502023-08-27 17:50"
@@ -14790,6 +14898,7 @@
 </div>
 		
 			
+
 
 
 
@@ -15250,7 +15359,8 @@
     data-show_search="thefruityprince " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="18"
+    data-show_start_time="23"
+    data-show_sort_time="2305"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-05 23:052023-08-06 23:052023-08-07 23:052023-08-08 23:052023-08-09 23:052023-08-10 23:052023-08-11 23:052023-08-12 23:052023-08-14 23:052023-08-15 23:052023-08-16 23:052023-08-17 23:052023-08-18 23:052023-08-19 23:052023-08-21 23:052023-08-22 23:052023-08-23 23:052023-08-24 23:052023-08-25 23:052023-08-26 23:052023-08-27 23:05"
@@ -15325,6 +15435,7 @@
 </div>
 		
 			
+
 
 
 
@@ -15625,7 +15736,8 @@
     data-show_search="thegrandreturnoftheedinburghrevue " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="18"
+    data-show_start_time="14"
+    data-show_sort_time="1400"
     data-show-previews=""
     data-show_age_guidance="16"
     data-show_performances="2023-08-14 14:002023-08-15 14:002023-08-16 14:002023-08-17 14:002023-08-18 14:002023-08-19 14:002023-08-21 14:002023-08-22 14:002023-08-23 14:002023-08-24 14:002023-08-25 14:002023-08-26 14:002023-08-27 14:00"
@@ -15700,6 +15812,7 @@
 </div>
 		
 			
+
 
 
 
@@ -15860,7 +15973,8 @@
     data-show_search="thegrandmothersgrimm " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="18"
+    data-show_start_time="21"
+    data-show_sort_time="2130"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-14 21:302023-08-15 21:302023-08-16 21:302023-08-17 21:302023-08-18 21:302023-08-19 21:30"
@@ -15935,6 +16049,7 @@
 </div>
 		
 			
+
 
 
 
@@ -16095,7 +16210,8 @@
     data-show_search="thelegendsofmountainsandseas " 
     data-show_date_start="2023-08-14" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="18"
+    data-show_start_time="12"
+    data-show_sort_time="1255"
     data-show-previews=""
     data-show_age_guidance="3"
     data-show_performances="2023-08-14 12:552023-08-15 12:552023-08-16 12:552023-08-17 12:552023-08-18 12:552023-08-19 12:55"
@@ -16170,6 +16286,7 @@
 </div>
 		
 			
+
 
 
 
@@ -16630,7 +16747,8 @@
     data-show_search="themadwoman " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="18"
+    data-show_start_time="14"
+    data-show_sort_time="1400"
     data-show-previews=""
     data-show_age_guidance="8"
     data-show_performances="2023-08-05 14:002023-08-06 14:002023-08-07 14:002023-08-08 14:002023-08-09 14:002023-08-10 14:002023-08-11 14:002023-08-12 14:002023-08-14 14:002023-08-15 14:002023-08-16 14:002023-08-17 14:002023-08-18 14:002023-08-19 14:002023-08-21 14:002023-08-22 14:002023-08-23 14:002023-08-24 14:002023-08-25 14:002023-08-26 14:002023-08-27 14:00"
@@ -16705,6 +16823,7 @@
 </div>
 		
 			
+
 
 
 
@@ -16885,7 +17004,8 @@
     data-show_search="theother " 
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="18"
+    data-show_start_time="15"
+    data-show_sort_time="1520"
     data-show-previews=""
     data-show_age_guidance="12"
     data-show_performances="2023-08-21 15:202023-08-22 15:202023-08-23 15:202023-08-24 15:202023-08-25 15:202023-08-26 15:202023-08-27 15:20"
@@ -16960,6 +17080,7 @@
 </div>
 		
 			
+
 
 
 
@@ -17120,7 +17241,8 @@
     data-show_search="thepiratesofpenzance " 
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-26" 
-    data-show_start_time="18"
+    data-show_start_time="20"
+    data-show_sort_time="2025"
     data-show-previews=""
     data-show_age_guidance="0"
     data-show_performances="2023-08-21 20:252023-08-22 20:252023-08-23 20:252023-08-24 20:252023-08-25 20:252023-08-26 20:25"
@@ -17195,6 +17317,7 @@
 </div>
 		
 			
+
 
 
 
@@ -17395,7 +17518,8 @@
     data-show_search="therelationshipplays:marriedlifeandsiblingrivalry " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="18"
+    data-show_start_time="16"
+    data-show_sort_time="1630"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-05 16:302023-08-06 16:302023-08-07 16:302023-08-08 16:302023-08-09 16:302023-08-10 16:302023-08-11 16:302023-08-12 16:30"
@@ -17470,6 +17594,7 @@
 </div>
 		
 			
+
 
 
 
@@ -17799,7 +17924,8 @@
     data-show_search="theserpent'stooth " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-19" 
-    data-show_start_time="18"
+    data-show_start_time="14"
+    data-show_sort_time="1445"
     data-show-previews="14"
     data-show_age_guidance="14"
     data-show_performances="2023-08-05 14:452023-08-06 14:452023-08-07 14:452023-08-08 14:452023-08-09 14:452023-08-10 14:452023-08-11 14:452023-08-12 14:452023-08-14 14:452023-08-15 14:452023-08-16 14:452023-08-17 14:452023-08-18 14:452023-08-19 14:45"
@@ -17874,6 +18000,7 @@
 </div>
 		
 			
+
 
 
 
@@ -18054,7 +18181,8 @@
     data-show_search="thesorcerer " 
     data-show_date_start="2023-08-21" 
     data-show_date_end="2023-08-27" 
-    data-show_start_time="18"
+    data-show_start_time="20"
+    data-show_sort_time="2045"
     data-show-previews=""
     data-show_age_guidance="5"
     data-show_performances="2023-08-21 20:452023-08-22 20:452023-08-23 20:452023-08-24 20:452023-08-25 20:452023-08-26 20:452023-08-27 20:45"
@@ -18129,6 +18257,7 @@
 </div>
 		
 			
+
 
 
 
@@ -18289,7 +18418,8 @@
     data-show_search="victor,viandthevolvo " 
     data-show_date_start="2023-08-06" 
     data-show_date_end="2023-08-11" 
-    data-show_start_time="18"
+    data-show_start_time="12"
+    data-show_sort_time="1215"
     data-show-previews=""
     data-show_age_guidance="14"
     data-show_performances="2023-08-06 12:152023-08-07 12:152023-08-08 12:152023-08-09 12:152023-08-10 12:152023-08-11 12:15"
@@ -18364,6 +18494,7 @@
 </div>
 		
 			
+
 
 
 
@@ -18564,7 +18695,8 @@
     data-show_search="who'sbeenanaughtychops? " 
     data-show_date_start="2023-08-05" 
     data-show_date_end="2023-08-12" 
-    data-show_start_time="18"
+    data-show_start_time="20"
+    data-show_sort_time="2030"
     data-show-previews=""
     data-show_age_guidance="18"
     data-show_performances="2023-08-05 20:302023-08-06 20:302023-08-07 20:302023-08-08 20:302023-08-09 20:302023-08-10 20:302023-08-11 20:302023-08-12 20:30"
