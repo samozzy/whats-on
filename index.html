@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="/pgp-whatson/css/main.css?cachebust=202307201912">
+    <link rel="stylesheet" href="/pgp-whatson/css/main.css?cachebust=202307202000">
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/e464ea3a91.js" crossorigin="anonymous"></script>
 
@@ -78,191 +78,265 @@
 	<div class="filter-box">
 		<a class="filter-header" data-bs-toggle="collapse" href="#datesCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Date & Time</span></a>
 		<div class="filter-body collapse" id="datesCollapse">
-			<div id="date_picker">
-				<span>From:</span>
-				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="2023-08-01" max="2023-08-28">
-				<span>To:</span>
-				<input class="form-control date-picker" name="end_date" type="date" id="end_date_picker" min="2023-08-01" max="2023-08-28">
-			</div>
-
-			<div id="time_picker">
+			<div id="date_time_picker">
 				
 				
 				 
-
-				<span>Performance start time from</span>
-				<select class="form-select form-select-sm" id="time_picker_select" aria-label="Time picker">
-					<option value="false">---</option>
+				
+				
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
+					
+					
+				
+					
+					
+					
 					
 					
 						
+
+				<span>From:</span>
+				<input class="form-control date-picker" name="start_date" type="date" id="start_date_picker" min="2023-08-01" max="2023-08-28">
+				<select class="form-select form-select-sm" id="start_time_picker" aria-label="Picker for starting after X o'clock">
+					<option value="false">(Select time)</option>
+					
 						<option value="06">06:00</option>
-
-						
-						
-						
 					
-						
 						<option value="07">07:00</option>
-
-						
-						
-						
 					
-						
 						<option value="08">08:00</option>
-
-						
-						
-						
 					
-						
 						<option value="09">09:00</option>
-
-						
-						
-						
 					
-						
 						<option value="10">10:00</option>
-
-						
-						
-						
 					
-						
 						<option value="11">11:00</option>
-
-						
-						
-						
 					
-						
 						<option value="12">12:00</option>
-
-						
-						
-						
 					
-						
 						<option value="13">13:00</option>
-
-						
-						
-						
 					
-						
 						<option value="14">14:00</option>
-
-						
-						
-						
 					
-						
 						<option value="15">15:00</option>
-
-						
-						
-						
 					
-						
 						<option value="16">16:00</option>
-
-						
-						
-						
 					
-						
 						<option value="17">17:00</option>
-
-						
-						
-						
 					
-						
 						<option value="18">18:00</option>
-
-						
-						
-						
 					
-						
 						<option value="19">19:00</option>
-
-						
-						
-						
 					
-						
 						<option value="20">20:00</option>
-
-						
-						
-						
 					
-						
 						<option value="21">21:00</option>
-
-						
-						
-						
 					
-						
 						<option value="22">22:00</option>
-
-						
-						
-						
 					
-						
 						<option value="23">23:00</option>
-
-						
-						
-						
 					
-						
 						<option value="00">00:00</option>
-
-						
-						
-						
 					
-						
 						<option value="01">01:00</option>
-
-						
-						
-						
 					
-						
 						<option value="02">02:00</option>
-
-						
-						
-						
 					
-						
 						<option value="03">03:00</option>
-
-						
-						
-						
 					
-						
 						<option value="04">04:00</option>
-
-						
-						
-						
 					
-						
 						<option value="05">05:00</option>
-
-						
-						
-						
-							
+					
+				</select>
+				<span>To:</span>
+				<input class="form-control date-picker" name="end_date" type="date" id="end_date_picker" min="2023-08-01" max="2023-08-28">
+				<select class="form-select form-select-sm" id="end_time_picker" aria-label="Picker for starting before X o'clock">
+					<option value="false">(Select time)</option>
+					
+						<option value="06">06:00</option>
+					
+						<option value="07">07:00</option>
+					
+						<option value="08">08:00</option>
+					
+						<option value="09">09:00</option>
+					
+						<option value="10">10:00</option>
+					
+						<option value="11">11:00</option>
+					
+						<option value="12">12:00</option>
+					
+						<option value="13">13:00</option>
+					
+						<option value="14">14:00</option>
+					
+						<option value="15">15:00</option>
+					
+						<option value="16">16:00</option>
+					
+						<option value="17">17:00</option>
+					
+						<option value="18">18:00</option>
+					
+						<option value="19">19:00</option>
+					
+						<option value="20">20:00</option>
+					
+						<option value="21">21:00</option>
+					
+						<option value="22">22:00</option>
+					
+						<option value="23">23:00</option>
+					
+						<option value="00">00:00</option>
+					
+						<option value="01">01:00</option>
+					
+						<option value="02">02:00</option>
+					
+						<option value="03">03:00</option>
+					
+						<option value="04">04:00</option>
+					
+						<option value="05">05:00</option>
+					
 				</select>
 				<span class="help-text d-none" id="time_picker_text"><em>Only using standard show times (not previews)</em></span>
 			</div>

@@ -5,11 +5,13 @@ the_sidebar = new bootstrap.Offcanvas('#whatson-sidebar')
 the_shows = document.getElementsByClassName('show-card-col');
 loading = document.querySelectorAll(".loading")
 var no_results_text = document.getElementById('no_results');
-var results_counter = document.getElementById('results_counter');
+var error_text = document.getElementById('filter_error_text');
+// var results_counter = document.getElementById('results_counter');
 var update_button = document.getElementById('update_results');
 
 var start_date = document.getElementById('start_date_picker')
 var end_date = document.getElementById('end_date_picker')
+var time_picker = { start_time_picker: document.getElementById('start_time_picker'), end_time_picker: document.getElementById('end_time_picker')}
 
 //
 // Utility Functions // 
@@ -18,20 +20,20 @@ function countResults() {
 	filtered_out_shows = document.querySelectorAll('#show_list div[class*="filtered-out-by"]').length
 	number_remaining = (the_shows.length - filtered_out_shows)
 	console.log(number_remaining)
-	has_results_text = document.getElementById('results_counter')
+	// has_results_text = document.getElementById('results_counter')
 	if (number_remaining == 0) {
-		has_results_text.classList.add('d-none')
+		// has_results_text.classList.add('d-none')
 		no_results_text.classList.remove('d-none')
 	}
 	else {
 		if (filtered_out_shows == 0){
 			// If the filter badge container isn't visible, assume nothing is being filtered 
 			no_results_text.classList.add('d-none')
-			has_results_text.classList.add('d-none')
+			// has_results_text.classList.add('d-none')
 		}
 		else {
 			// Somewhere between 1 and everything has been filtered in, let's go
-			has_results_text.classList.remove('d-none')
+			// has_results_text.classList.remove('d-none')
 			no_results_text.classList.add('d-none')
 		}
 	}
@@ -185,18 +187,45 @@ function doDateFilter() {
 // Time Filter //
 //
 
-var time_picker = document.getElementById('time_picker_select') 
 function clearTimePicked() {
-	clearFilteredOutClass('filtered-out-by-time', null, false, 'time_picker_select');
+	for (const picker in time_picker) {
+		clearFilteredOutClass('filtered-out-by-time', null, false, `${picker}`);
+	}
 	document.getElementById('time_picker_text').classList.add('d-none');
 }
 function doTimeFilter(){
-	if (time_picker.value != 'false'){
-		console.log(time_picker.value)
+
+	if (time_picker.start_time_picker.value != 'false' || time_picker.end_time_picker.value != 'false'){
+		for (const picker in time_picker) { console.log( picker + ': ' + time_picker[picker].value);}
   	for (const show of the_shows) {
   		show.classList.add('filtered-out-by-time');
-			if (show.dataset.show_start_time >= time_picker.value && (parseInt(show.dataset.show_start_time) > 0)) {
-				// If the venue matches one ticked, unhide the show
+
+  		let show_start_time = parseInt(show.dataset.show_start_time)
+  		console.log(show_start_time)
+  		match = false 
+  		if (show_start_time > 0) {
+  			console.log(show_start_time)
+  			// Show's start time is not "Various times"; only working on standard start times (sorry, previews)
+  			if (time_picker.start_time_picker.value != 'false' && time_picker.end_time_picker.value != 'false'){
+  				console.log('There is both a start and end time picked')
+  				if (show_start_time >= time_picker.start_time_picker.value && show_start_time < time_picker.end_time_picker.value){
+  					match = true 
+  				}
+  			}	
+  			else if (time_picker.start_time_picker.value != 'false' && show_start_time >= time_picker.start_time_picker.value) {
+  				console.log('Only a start time is picked')
+ 					match = true 
+  			}
+  			else if (time_picker.end_time_picker.value != 'false' && show_start_time < time_picker.end_time_picker.value){
+  				console.log('Only an end time is picked')
+  				match = true 
+  			}
+  			else {
+  				match = false 
+  			}
+  		}
+  		if (match == true){
+  			console.log('A show has matched!')
 				console.log('MATCH');
 				if (show.classList.contains('filtered-out-by-time')) show.classList.remove('filtered-out-by-time');
 			}
@@ -419,12 +448,23 @@ function filterFunctions(){
 
 // UPDATE RESULTS BUTTON
 function updateFilters(){
-	error_date = "<br>The end date must be after the start date"
+	has_error = false 
+	error_text.innerHTML = '' 
+	error_date = "The end date must be after the start date"
+	error_time = "The end time must be after the start time"
 	if (start_date.value != '' && end_date.value != '' && start_date.value > end_date.value) {
 		console.log("End date after start date; aborting")
-		document.getElementById('filter_error_text').innerHTML += error_date
+		if (error_text.innerHTML.length > 0) { error_text.innerHTML += '<br>' }
+		error_text.innerHTML += error_date
+		has_error = true 
 	}
-	else {
+	if (time_picker.start_time_picker.value != 'false' && time_picker.end_time_picker.value != 'false' && time_picker.start_time_picker.value > time_picker.end_time_picker.value){
+		console.log("End time after start time; aborting")
+		if (error_text.innerHTML.length > 0) { error_text.innerHTML += '<br>' }
+		error_text.innerHTML += error_time 
+		has_error = true 
+	}
+	if (has_error == false){
 		document.getElementById('filter_error_text').innerHTML = document.getElementById('filter_error_text').innerHTML.replace(error_date,'')
 		sort_value = document.getElementById('sort_picker_select').value
 		console.log('UPDATE RESULTS GO GO GO');
@@ -437,14 +477,20 @@ function updateFilters(){
 		setTimeout(toggleResetButton, 750);
 		setTimeout(hideLoading,1000);
 	}
-
+	else {
+		toggleResetButton(has_error) 
+	}
 }
 
-function toggleResetButton(){
+function toggleResetButton(error=false){
 	results = countResults()
 	if (results < the_shows.length){
 		console.log('THERE ARE SOME FILTERS')
-		document.getElementById('clear_results').classList.remove('d-none')
+		document.getElementById('clear_results').classList.remove('d-none');
+	}
+	else if (error){
+		console.log('THERE ARE SOME ERRORS, OFFERING RESET BUTTON')
+		document.getElementById('clear_results').classList.remove('d-none');
 	}
 	else {
 		console.log('THERE ARE NO FILTERS')
