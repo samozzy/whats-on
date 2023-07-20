@@ -1,5 +1,7 @@
 name: Build to GitHub pages
 on:
+  schedule:
+    - cron: 00 07 * 7-8 *
   push:
     branches:
       - main 
