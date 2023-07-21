@@ -40,6 +40,7 @@ layout: default
 							{% if show_duration %}
 								({{ show_duration | strip }})
 							{% endif %}
+							{% if preview_time %}<br><strong>Previews:</strong> {{ preview_dates | join: ", " }} at {{ preview_time }}{% endif %}
 						{% endif %}
 					</p>
 				{% endif %}

@@ -35,7 +35,7 @@
             {{ date_string }}
             {% if show_start_time %}&middot;{% endif %} 
           {% endif %}
-          {{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}){% endif %}
+          {{ show_start_time }} {% if show_duration %}({{ show_duration | strip }}) {% if preview_time %}<br><small>Preview{% if preview_dates.size > 1 %}s{% endif %} on {{ preview_dates | join: ", " }} {% unless preview_time == show_start_time %}at {{ preview_time }}{% endunless %}</small>{% endif %}{% endif %}
           </p>
         </div>
       </div>

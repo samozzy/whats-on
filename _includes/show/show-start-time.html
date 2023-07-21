@@ -42,7 +42,6 @@
 
 	{% if show_start_time != "Various times" and preview_time != nil and preview_time != show_start_time %}
 		{% assign standard_start_time = show_start_time %}
-		{% capture show_start_time %}Previews at {{ preview_time | lowercase }} on {{ preview_dates | join: ', '}}; standard performances at {{ show_start_time }}{% endcapture %}
 	{% endif %}
 {% endif %}
 
