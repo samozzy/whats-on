@@ -16,7 +16,7 @@
 }
 
 .smear-background, .genre-badge {
-  -webkit-mask-image: url("/whats-on/static/band/white-thick.png");
+  -webkit-mask-image: url("/static/band/white-thick.png");
   width: 100%;
   -webkit-mask-position: center;
   -webkit-mask-size: 100% 150%;
