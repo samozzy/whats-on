@@ -98,7 +98,7 @@ layout: default
 									{% else %}
 										{% capture i_dates %}{{ i[0] }}_dates{% endcapture %}
 										{% capture i_info %}{{ i[0] }}_information{% endcapture %}
-										<li>{{ i[0] | capitalize }} 
+										<li>{% if i[0] == "other_services" %}{{ show.disabled[i_info] }}{% else %}{{ i[0] | capitalize }}{% endif %}
 											{% if show.disabled[i_dates] %}
 												on 
 												{% assign date_array = show.disabled[i_dates] | split: "," %}
@@ -110,7 +110,7 @@ layout: default
 												{% endif %}
 											{% endif %}
 											{% if show.disabled[i_dates] and show.disabled[i_info] %}<br>{% endif %} 
-											{{ show.disabled[i_info] }}
+											{% unless i[0] == "other_services" %}{{ show.disabled[i_info] }}{% endunless %}
 										</li>
 									{% endif %}
 								{% endif %}
