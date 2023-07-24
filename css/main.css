@@ -6179,7 +6179,7 @@ textarea.form-control-lg {
   display: inline-flex !important;
 }
 
-.d-none, .filtered-out-by-search, .filtered-out-by-date, .filtered-out-by-time, .filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-age {
+.d-none, .filtered-out-by-search, .filtered-out-by-date, .filtered-out-by-time, .filtered-out-by-venue, .filtered-out-by-genre, .filtered-out-by-age, .filtered-out-by-access {
   display: none !important;
 }
 

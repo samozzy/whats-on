@@ -69,6 +69,7 @@ function clearAll(){
 	clearAgeCheckboxes();
 	clearGenreCheckboxes();
 	clearVenueCheckboxes();
+	clearAccessCheckboxes();
 }
 
 //
@@ -404,6 +405,52 @@ function doAgeFilter(){
 	});
 }
 
+//
+// Access Filter //
+//
+var access_checkboxes = document.querySelectorAll('input[name="filter-access-item"]');
+let picked_access = [] 
+
+function clearAccessCheckboxes() {
+	clearFilteredOutClass('filtered-out-by-access', access_checkboxes);
+}
+
+function doAccessFilter(){
+	access_checkboxes.forEach(function(checkbox) {
+	  picked_access = 
+	    Array.from(access_checkboxes) // Convert checkboxes to an array to use filter and map.
+	    .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+	    .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+
+	  // If all checkboxes are empty, show everything (rather than nothing)
+	  if (picked_access.length == 0) {
+			for (i=0; i< the_shows.length; i++ ) {
+				if (the_shows[i].classList.contains('filtered-out-by-access')) {
+					the_shows[i].classList.remove('filtered-out-by-access');
+				}
+			}
+	  }
+	  else {
+	  	// Assuming something is ticked, filter the shows appropriately. 
+	  	// Hide all of them 
+	  	for (const show of the_shows) {
+	  		show.classList.add('filtered-out-by-access');
+	  	}
+	  	// Iterate over the picked accesss and display shows that match
+	  	for (p=0; p < picked_access.length; p++) {
+	  		console.log(picked_access);
+	  		for (s=0; s < the_shows.length; s++) {
+	  			if (the_shows[s].dataset.show_access.includes(picked_access[p])) {
+						// If the access matches, unhide the show
+	  				// Access in the dataset is a list so going for includes() 
+						if (the_shows[s].classList.contains('filtered-out-by-access')) the_shows[s].classList.remove('filtered-out-by-access');
+					}
+				}
+	  	}
+	  }
+	});
+}
+
 function doSort(value="title"){
 	var showsArray = Array.from(the_shows);
 	let sorted = showsArray.sort(sorter);
@@ -442,6 +489,7 @@ function filterFunctions(){
 	doVenueFilter();
 	doGenreFilter();
 	doAgeFilter();
+	doAccessFilter();
 
 	countResults();
 }
