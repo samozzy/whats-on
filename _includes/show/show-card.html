@@ -14,7 +14,7 @@
     data-show_performances="{% for p in p_dates %}{{ p }}{% endfor %}"
     data-show_price="{{ show.price.standard | default: show.price.concession }}"
     data-show_genre="{{ show.genre | join:',' | slugify }}"
-    data-show_access="{% if show.access and show.access != empty %}{{ show.access | join: ',' | downcase | slugify | default: '' }}{% endif %}"
+    data-show_access="{% if show.disabled.captioning %}captioning{% endif %} {% if show.disabled.audio %}audio_description{% endif %} {% if show.disabled.signed %}signed{% endif %} {% if show.disabled.other_services_information contains "Relaxed" %}relaxed{% endif %} {% if show.access and show.access != empty %}{{ show.access | join: ',' | downcase | slugify | default: '' }}{% endif %}"
     data-show_content_warnings="{{ show.content_warnings | join: ',' | slugify }}"
     data-show_venue="{{ show.venue.name | slugify }}"
     data-show_performance_space="{% if site.test_data == true %}{{ show.venue.name | slugify }}{% else %}{% assign perf_space = show.performance_space[0].name | default: show.performance_space.name %}{{ perf_space | slugify }}{% endif %}"

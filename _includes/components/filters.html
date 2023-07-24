@@ -154,6 +154,36 @@
 		</div>
 	</div>
 	{% endif %}
+	{% if site.data.access %}
+		{% assign has_access = false %}
+		{% comment %} Make sure there are some shows with access provisions before showing the filters {% endcomment %}
+		{% for access in site.data.access %}
+			{% assign access_lookup = access.lookup | default: access.value %}
+			{% assign access_shows = site.data.shows | where_exp: "show", "show.disabled[access_lookup] == true" %}
+			{% if access_shows.size > 0 %}
+				{% assign has_access = true %}
+				{% break %}
+			{% endif %}
+		{% endfor %}
+		{% if has_access %}
+			<div class="filter-box">
+				<a class="filter-header" data-bs-toggle="collapse" href="#accessCollapse"><i class="fa fa-chevron-right dropdown-chevron"></i> <span>Access</a>
+				<div class="filter-body collapse age-list form-check" id="accessCollapse">
+					<ul>
+						{% for access in site.data.access %}
+							{% assign access_lookup = access.lookup | default: access.value %}
+							{% assign access_shows = site.data.shows | where_exp: "show", "show.disabled[access_lookup] == true" %}
+							{% if access_shows.size > 0 %}
+							<li>
+								<input class="form-check-input access-{{ access.value | slugify }}" name="filter-access-item" type="checkbox" value="{{ access.value | slugify }}" id="access-{{ access.value | slugify }}"><label class="form-check-label" for="access-{{ access.value | slugify }}">{{ access.name }}</label>
+							</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
 </div>
 <button class="update-results" type="button" id="update_results">Update results</button>
 <button class="clear-results d-none" type="button" id="clear_results" data-bs-dismiss="offcanvas" data-bs-target="#whatson-sidebar">Reset all</button>
