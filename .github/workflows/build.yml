@@ -11,6 +11,8 @@ on:
   workflow_dispatch:
     branches:
       - main
+  repository_dispatch:
+    types: deploy-remote
 
 jobs: 
   build:
