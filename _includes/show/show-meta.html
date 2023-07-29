@@ -1,5 +1,6 @@
 {% if page.layout contains 'upcoming' %}
-<div class="w-100 my-4">
+<div class="w-100 show-meta">
+  {% if include.show.performance_space.name and include.show.performance_space.name != empty %}<p class="text-center fs-5">{{ include.show.performance_space.name }}</p>{% endif %}
   <p>{% for g in include.show.genre %}{% include components/genre-badge.html genre=g %}{% endfor %}</p>
 </div>
 {% else %}
