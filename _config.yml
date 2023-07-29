@@ -74,7 +74,7 @@ page_gen:
     name_expr: record['title'].gsub('.','')
     dir: '/' 
   - data: 'venues'
-    template: 'upcoming/nownext'
+    template: 'upcoming/upcoming'
     name: 'name'
     dir: '/upcoming'
 
@@ -87,5 +87,5 @@ defaults:
   - scope:
       type: upcoming 
     values: 
-      layout: upcoming/nownext 
+      layout: upcoming/upcoming
       hide_footer: true 
