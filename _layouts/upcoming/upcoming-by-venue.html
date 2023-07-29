@@ -58,11 +58,12 @@ layout: outer
 								<h3 class="display-5">Scan for full programme</h3>
 								<div class="row">
 									<div class="col show-card-col">
-									  <div class="show-card my-4" style="position: relative;opacity:0.95 !important">
-									    <div class="show-card-background" style="background-image:url('{% link static/band/vstroke-white.png %}');opacity:1 !important;"></div>
-									    <div class="text-center w-100" style="z-index:9;">
-									    	<img src="{% link static/logos/qr.png %}" class="ms-5 p-5">
-									    </div>
+										<div class="show-card my-4" style="position: relative;opacity:0.95 !important">
+									    	<div class="show-card-background" style="background-image:url('{% link static/band/vstroke-white.png %}');opacity:1 !important;"></div>
+										    <div class="text-center w-100" style="z-index:9;">
+										    	<img src="{% link static/logos/qr.png %}" class="ms-5 p-5">
+										    </div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -72,11 +73,19 @@ layout: outer
 			{% endfor %}
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-9 offset-1 my-auto text-center">
+			<h1 class="nownext-website">whatson.paradise-green.co.uk</h1>
+		</div>
+		<div class="col-2 my-auto text-center">
+			<img src="{% link static/logos/qr.png %}" alt="QR code for whatson.paradise-green.co.uk" class="img-fluid w-75">
+		</div>
+	</div>
 </div>
 <div class="container-fluid mt-auto">
 	<div class="row my-5">
 		<div class="col-12 text-end" style="position:relative;height:50px;">
-			<div class="autoplay-progress">
+			<div class="autoplay-progress" onclick="swiper.autoplay.paused = true">
 		    	<svg viewBox="0 0 48 48">
 				    <circle cx="24" cy="24" r="20"></circle>
 		    	</svg>
