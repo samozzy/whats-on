@@ -52,32 +52,46 @@
 
       <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
-  <script>
-    const progressCircle = document.querySelector(".autoplay-progress svg");
-    var swiper = new Swiper(".nownextSwiper", {
-      spaceBetween: 30,
-      centeredSlides: true,
-      autoplay: {
-        delay: 8000,
-        disableOnInteraction: false
-      },
-      loop: true,
-      speed: 1000,
-      // pagination: {
-      //   el: ".swiper-pagination",
-      //   clickable: true
-      // },
-      // navigation: {
-      //   nextEl: ".swiper-button-next",
-      //   prevEl: ".swiper-button-prev"
-      // },
-      on: {
-        autoplayTimeLeft(s, time, progress) {
-          progressCircle.style.setProperty("--progress", 1 - progress);
+      <script>
+        const progressBar = document.getElementById("nownext_progress");
+        var swiper = new Swiper(".nownextSwiper", {
+          spaceBetween: 30,
+          // centeredSlides: true,
+          autoplay: {
+            delay: 8000,
+            disableOnInteraction: false
+          },
+          loop: true,
+          speed: 1000,
+          breakpoints: {
+              480: {
+                  slidesPerView: 1,
+                  slidesPerGroup: 1,
+              },
+              768: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 2,
+              },
+              992: {
+                  slidesPerView: 3,
+                  slidesPerGroup: 3,
+              },
+          },
+          on: {
+            autoplayTimeLeft(s, time, progress) {
+              progressBar.style.setProperty("width", (100 - (progress * 100) + "%"));
+            }
+          }
+        });
+
+        if (all_shows.length <=3 ){
+          swiper.autoplay.stop();
+          progressBar.classList.add('d-none')
         }
-      }
-    });
-  </script>
+        else {
+          progressBar.classList.remove('d-none')
+        }
+      </script>
     {% endif %}
   </body>
 </html>
