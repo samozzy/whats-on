@@ -1,4 +1,11 @@
+{% if page.layout contains 'upcoming' %}
+<div class="w-100 show-meta">
+  {% if include.show.performance_space.name and include.show.performance_space.name != empty %}<p class="text-center fs-5">{{ include.show.performance_space.name }}</p>{% endif %}
+  <p>{% for g in include.show.genre %}{% include components/genre-badge.html genre=g %}{% endfor %}</p>
+</div>
+{% else %}
 <div class="show-meta {{ include.class }}">
   <p class="text-center">{{ include.show.performance_space.name | default: show.venue.name }} {% if include.show.performance_space.name %}<br><small class="mt-2">{{ include.show.venue.name }}</small>{% endif %}</p>
   <p>{% for g in include.show.genre %}{% include components/genre-badge.html genre=g %}{% endfor %}</p>
 </div>
+{% endif %}

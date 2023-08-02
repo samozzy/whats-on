@@ -1,0 +1,16 @@
+.nownext {
+	.show-card {
+		.card-header, .card-header a {
+			color: map-get($color-paradise, "paradise-white");
+		}
+	}
+	.show-card-background {
+		opacity: 0.2;
+	}
+}
+.nownext-website {
+  @extend .display-4;
+  letter-spacing: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}

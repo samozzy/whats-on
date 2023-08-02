@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}?cachebust={{ site.time | date: "%Y%m%d%H%M"}}">
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/e464ea3a91.js" crossorigin="anonymous"></script>
+
+
+    <title>{% if page.title and page.title != empty %}{{ page.title | append: " | Paradise Green" }}{% else %}{{ site.title }}{% endif %}</title>
+  </head>
+  <body class="h-100 d-flex flex-column">
+    {{ content }}
+
+    {% unless page.hide_footer %}
+      {% include structure/footer.html %}
+    {% endunless %}
+
+    <!-- Bootstrap JS -->
+    <!-- Popper is optional so uncomment if you use dropdowns, popovers, or tooltips. -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+
+    {% if page.layout == 'whatson' %}
+      <script src="{% link js/filters.js %}"></script>
+
+      <script>
+        document.querySelectorAll('.filter-header').forEach(header_link => {
+          header_link.addEventListener('click', function(){
+            var chevron = header_link.querySelectorAll('.dropdown-chevron')[0]
+            if (chevron.classList.contains('fa-chevron-right')) {
+              chevron.classList.remove('fa-chevron-right')
+              chevron.classList.add('fa-chevron-down');
+            }
+            else if (chevron.classList.contains('fa-chevron-down')) {
+              chevron.classList.remove('fa-chevron-down')
+              chevron.classList.add('fa-chevron-right')
+            }
+          })
+        })
+      </script>
+    {% endif %}
+    {% if page.layout contains 'upcoming' %}
+      <script src="{% link js/nownext.js %}"></script>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+      />
+
+      <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+      <script>
+        const progressBar = document.getElementById("nownext_progress");
+        var swiper = new Swiper(".nownextSwiper", {
+          spaceBetween: 30,
+          // centeredSlides: true,
+          autoplay: {
+            delay: 8000,
+            disableOnInteraction: false
+          },
+          loop: true,
+          speed: 1000,
+          breakpoints: {
+              480: {
+                  slidesPerView: 1,
+                  slidesPerGroup: 1,
+              },
+              768: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 2,
+              },
+              992: {
+                  slidesPerView: 3,
+                  slidesPerGroup: 3,
+              },
+          },
+          on: {
+            autoplayTimeLeft(s, time, progress) {
+              progressBar.style.setProperty("width", (100 - (progress * 100) + "%"));
+            }
+          }
+        });
+
+        if (all_shows.length <=3 ){
+          swiper.autoplay.stop();
+          progressBar.classList.add('d-none')
+        }
+        else {
+          progressBar.classList.remove('d-none')
+        }
+      </script>
+    {% endif %}
+  </body>
+</html>
+

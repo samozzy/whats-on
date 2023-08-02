@@ -5,13 +5,23 @@
 {% assign p_start_time = nil %}
 {% assign preview_time = nil %}
 {% assign preview_dates = '' | split: '' %}
-{% assign today = 'now' | date: "%Y-%m-%d" %}
+{% assign performance_today = false %}
+{% if include.date %}
+	{% assign today_date = include.date | date: "%Y-%m-%d" %}
+{% else %}
+	{% assign today_date = 'now' | date: "%Y-%m-%d" %}
+{% endif %}
 
 {% if show.performances and show.performances != empty %}
 
 	{% assign show_performances = show.performances | sort: "start" %}
 	{% for p in show_performances %}
 		{% assign p_start_time = p.start | date: "%H:%M" %}
+		{% include manipulation/fringe-time.html picked_performance=p.start %}
+		{% assign new_perf_date = new_perf | date: "%Y-%m-%d" %}
+		{% if new_perf_date == today_date %}
+			{% assign performance_today = new_perf %}
+		{% endif %}
 
 		{% if p.title == "PREVIEW" %}
 			{% comment %} Handle previews separately to standard performances {% endcomment %}
@@ -20,7 +30,6 @@
 			{% else %}
 				{% assign preview_time = p_start_time %}
 			{% endif %}
-			{% include manipulation/fringe-time.html picked_performance=p.start %}
 			{% assign preview_date = new_perf | date_to_long_string: "ordinal" %}
 			{% assign month_year = preview_date | date: "%B %Y" %}
 			{% assign preview_date = preview_date | remove: month_year | strip %}

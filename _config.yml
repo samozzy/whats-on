@@ -10,8 +10,9 @@ timezone: Europe/Edinburgh
 event_title: Fringe 2023 
 
 fringe_time: 2023-08-01 06:00 
-start_date: 2023-08-01
+start_date: 2023-08-04
 end_date: 2023-08-28
+# test_date: 2023-08-09 14:30
 
 paradise_blue: 0B0099
 
@@ -61,6 +62,9 @@ collections:
   content:
     output: true
     permalink: :path/
+  upcoming:
+    output: true 
+    permalink: :path/
 
 page_gen-dirs: true 
 page_gen:
@@ -69,6 +73,10 @@ page_gen:
     name: 'title'  
     name_expr: record['title'].gsub('.','')
     dir: '/' 
+  - data: 'venues'
+    template: 'upcoming/upcoming'
+    name: 'name'
+    dir: '/upcoming'
 
 defaults:
   # Defaults for pages
@@ -76,3 +84,8 @@ defaults:
       type: content
     values:
       layout: default
+  - scope:
+      type: upcoming 
+    values: 
+      layout: upcoming/upcoming
+      hide_footer: true 

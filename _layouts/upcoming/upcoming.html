@@ -1,0 +1,114 @@
+---
+layout: outer
+---
+
+{% assign the_shows = site.data.shows %}
+{% assign the_shows_today = '' | split: '' %}
+{% assign the_showtimes_today = '' | split: '' %}
+{% if site.test_date %}
+	{% assign today = site.test_date | date: "%Y-%m-%d %H:%M" %}
+{% else %}	
+	{% assign today = 'now' | date: "%Y-%m-%d %H:%M" %}
+{% endif %}
+{% assign today_time = today | date: "%H:%M" %}
+{% assign today_date = today | date: "%Y-%m-%d" %}
+{% for show in the_shows %}
+	{% include show/show-start-time.html show=show date=today_date %}
+	{% if performance_today %}
+		{% assign the_shows_today = the_shows_today | push: show %}
+		{% assign the_showtimes_today = the_showtimes_today | push: performance_today %}
+	{% endif %}
+{% endfor %}
+
+{% assign fringe_start_date = site.start_date | date: "%Y-%m-%d" %}
+
+{% if the_shows_today.size != the_showtimes_today.size %}
+	{% comment %} Just in case... {% endcomment %}
+	<script>console.log("ERROR: Show size and showtime size are different");</script>
+{% endif %}
+
+<div class="container-fluid nownext h-100">
+	<div class="row my-5">
+		<div class="col-6">
+			{% unless fringe_start_date > today_date %}
+				<h1 class="display-1">{{ page.title }}</h1>
+				<span class="h3"id="current_datetime">{{ today_date | date_to_string }} {{ today_time | date: "%H:%M" }}</span>
+			{% endunless %}
+		</div>
+		<div class="col-6 text-end"><img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="150px" width="auto" class="mx-4"></div>
+	</div>
+	{% if page.venue %}
+		<div class="row gx-5">
+			<h2 class="display-2">{{ page.venue }}</h2>
+		</div>
+	{% endif %}
+	<div class="swiper nownextSwiper">
+		<div class="swiper-wrapper show-list" id="nownext-wrapper">
+			{% for show in the_shows_today %}
+				<div class="swiper-slide show-item" id="{{ show.title | slugify | replace: "-", "_" }}_slide">
+					<div class="gx-5 row">
+						{% include show/show-card.html show=show hide_blurb=true background='static/band/vstroke-white.png' performance_date=today_date %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="display-3 d-none col-12 no-more-shows">
+		{% assign tomorrow_date = today | date: "%s" | plus: 86400 | date: "%Y-%m-%d" %}
+		{% assign the_shows_tomorrow = '' | split: '' %}
+		{% assign the_showtimes_tomorrow = '' | split: '' %}
+
+		{% for show in the_shows %}
+			{% include show/show-start-time.html show=show date=tomorrow_date %}
+			{% if performance_today %}
+				{% assign the_shows_tomorrow = the_shows_tomorrow | push: show %}
+				{% assign the_showtimes_tomorrow = the_showtimes_tomorrow | push: performance_today %}
+			{% endif %}
+		{% endfor %}
+
+		{% if the_shows_tomorrow.size > 1 %}
+			<h1>Coming up tomorrow...</h1>
+			<ul>
+				{% for show in the_shows_tomorrow %}
+					<li>{{ show.title }} at {{ the_showtimes_tomorrow[forloop.index] | date: "%H:%M" }}</li>
+				{% endfor %}
+			</ul>
+		{% elsif today_date < fringe_start_date %}
+			<p class="text-center">Festival starts {{ fringe_start_date | date_to_long_string: "ordinal" }}</p>
+			{% assign show_thumbs = true %}
+		{% else %}
+			<p>No more shows here today!</p>
+			{% assign show_thumbs = true %}
+		{% endif %}
+
+		{% if show_thumbs %}
+			{% assign random_shows = site.data.shows | sample: 12 %}
+			<div class="row w-75 mx-auto">
+				{% for show in random_shows %}
+					<div class="col-2 py-2 px-4">
+						{% include show/show-get-poster.html show=show %}
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+</div>
+<div class="container-fluid mt-auto">
+	<div class="row py-3">
+		<div class="col-9 offset-1 my-auto text-center">
+			<h1 class="nownext-website">whatson.paradise-green.co.uk</h1>
+		</div>
+		<div class="col-2 my-auto text-center">
+			<img src="{% link static/logos/qr.png %}" alt="QR code for whatson.paradise-green.co.uk" class="img-fluid w-75">
+		</div>
+	</div>
+	<div class="row my-2">
+		<div class="col-12">
+			<div class="progress-bar bg-white rounded-0" style="width: 0%; height: 5px;" id="nownext_progress"></div>
+		</div>
+	</div>
+</div>
+
+<script>
+	today = new Date('{{ today }}')
+</script>

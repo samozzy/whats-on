@@ -1,0 +1,99 @@
+---
+layout: outer
+---
+
+{% assign the_shows = site.data.shows %}
+{% assign the_shows_today = '' | split: '' %}
+{% assign the_showtimes_today = '' | split: '' %}
+{% if site.test_date %}
+	{% assign today = site.test_date | date: "%Y-%m-%d %H:%M" %}
+{% else %}	
+	{% assign today = 'now' | date: "%Y-%m-%d %H:%M" %}
+{% endif %}
+{% assign today_time = today | date: "%H:%M" %}
+{% assign today_date = today | date: "%Y-%m-%d" %}
+{% for show in the_shows %}
+	{% include show/show-start-time.html show=show date=today_date %}
+	{% if performance_today %}
+		{% assign the_shows_today = the_shows_today | push: show %}
+		{% assign the_showtimes_today = the_showtimes_today | push: performance_today %}
+	{% endif %}
+{% endfor %}
+
+{% if the_shows_today.size != the_showtimes_today.size %}
+	{% comment %} Just in case... {% endcomment %}
+	<script>console.log("ERROR: Show size and showtime size are different");</script>
+{% endif %}
+
+<div class="container-fluid nownext h-100">
+	<div class="row my-5">
+		<div class="col-6">
+			<h1 class="display-1">{{ page.title }}</h1>
+			<span class="h3"id="current_datetime">{{ today | date_to_string }} {{ today | date: "%H:%M" }}</span>
+		</div>
+		<div class="col-6 text-end"><img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="150px" width="auto" class="mx-4"></div>
+	</div>
+	<div class="swiper nownextSwiper">
+		<div class="swiper-wrapper">
+			{% for venue in site.data.venues %}
+				<div class="swiper-slide">
+					<div class="row gx-5">
+						<h2 class="display-2">{{ venue.name }}</h2>
+						{% for space in venue.spaces %}
+							<div class="col-12 col-lg">
+								<h3 class="display-4">{{ space }}</h3>
+								{% assign space_shows = the_shows_today | where_exp: "show", "show.performance_space.name == space" %}
+								<div class="row show-list" id="{{ space | slugify | replace: "-", "_" }}_shows">
+									{% if space_shows %}
+										{% for show in space_shows %}
+											{% include show/show-card.html show=show hide_blurb=true hide_venue=true background='static/band/vstroke-white.png' performance_date=today_date %}
+										{% endfor %}
+									{% endif %}
+									<div class="help-text d-none col-12 no-more-shows">No more shows here today!</div>
+								</div>
+							</div>
+						{% endfor %}
+						{% if forloop.last %}
+							<div class="col-12 col-lg">
+								<h3 class="display-5">Scan for full programme</h3>
+								<div class="row">
+									<div class="col show-card-col">
+										<div class="show-card my-4" style="position: relative;opacity:0.95 !important">
+									    	<div class="show-card-background" style="background-image:url('{% link static/band/vstroke-white.png %}');opacity:1 !important;"></div>
+										    <div class="text-center w-100" style="z-index:9;">
+										    	<img src="{% link static/logos/qr.png %}" class="ms-5 p-5">
+										    </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-9 offset-1 my-auto text-center">
+			<h1 class="nownext-website">whatson.paradise-green.co.uk</h1>
+		</div>
+		<div class="col-2 my-auto text-center">
+			<img src="{% link static/logos/qr.png %}" alt="QR code for whatson.paradise-green.co.uk" class="img-fluid w-75">
+		</div>
+	</div>
+</div>
+<div class="container-fluid mt-auto">
+	<div class="row my-5">
+		<div class="col-12 text-end" style="position:relative;height:50px;">
+			<div class="autoplay-progress" onclick="swiper.autoplay.paused = true">
+		    	<svg viewBox="0 0 48 48">
+				    <circle cx="24" cy="24" r="20"></circle>
+		    	</svg>
+		    </div>
+		</div>
+	</div>
+</div>
+
+<script>
+	today = new Date('{{ today }}')
+</script>
