@@ -211,6 +211,19 @@ img.show-poster {
   height: auto;
 }
 
+.nownext .show-card .card-header, .nownext .show-card .card-header a {
+  color: #f1f1f1;
+}
+.nownext .show-card-background {
+  opacity: 0.2;
+}
+
+.nownext-website {
+  letter-spacing: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -739,13 +752,13 @@ progress {
   }
 }
 
-.display-4 {
+.display-4, .nownext-website {
   font-size: calc(1.475rem + 2.7vw);
   font-weight: 300;
   line-height: 1.2;
 }
 @media (min-width: 1200px) {
-  .display-4 {
+  .display-4, .nownext-website {
     font-size: 3.5rem;
   }
 }
