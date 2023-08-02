@@ -1,40 +1,44 @@
 console.log('NOW / NEXT FUNCTIONS')
-console.log(today) // Defined in nownext.html 
+console.log(today) // Defined in upcoming.html 
 
 function sorter(a,b) {
-	return a.dataset.show_sort_time.localeCompare(b.dataset.show_sort_time)
+	return a.querySelector('.show-card-col').dataset.show_performance_today.localeCompare(b.querySelector('.show-card-col').dataset.show_performance_today)
 }
 
-show_lists = document.querySelectorAll('.show-list')
-show_lists.forEach(function(space){
-	space_shows = space.querySelectorAll('.show-card-col')
-	space_shows.forEach(function(show){
-		// Remove the shows that have already started 
-		show.classList.add('d-none') // Hide all of them, we'll unhide the current one later
-		if (show.dataset.show_performance_today){
-			let show_performance_time = new Date(show.dataset.show_performance_today)
-			if (show_performance_time <= today) {
-				// console.log(show.id + ' has happened')
-				document.getElementById(show.id).remove()
-			}
+wrapper = document.getElementById('nownext-wrapper');
+all_shows = document.querySelectorAll('.show-item') // Iterate over each .show-card-col 
+all_shows.forEach(function(show_item){
+	// Remove the shows that have already started 
+	// show_item.classList.add('d-none') // Hide all of them, we'll unhide the current one later
+	show = show_item.querySelector('.show-card-col')
+	if (show.dataset.show_performance_today){
+		let show_performance_time = new Date(show.dataset.show_performance_today)
+		if (show_performance_time <= today) {
+			console.log(show.id + ' has happened')
+			document.getElementById(show_item.id).remove()
 		}
-		else {
-			// console.log(show.id + ' is not on today, removing')
-			document.getElementById(show.id).remove()
-		}
-	})
-	// Then, order the shows based on show_performance_today 
-	space_shows = space.querySelectorAll('.show-card-col') // Reset the variable based on what's now in the DOM
-	if (space_shows.length > 0){
-		// If there are still shows today, sort them in time order and show the first one only
-		var space_shows = Array.from(space_shows);
-		space_shows_sorted = space_shows.sort(sorter);
-		space_shows_sorted.forEach(e => space.appendChild(e))
-		space_shows_sorted[0].classList.remove('d-none')
 	}
 	else {
-		// No shows for this space, let's display appropriately.
-		space.querySelectorAll('.no-more-shows').forEach(e => e.classList.remove('d-none'))
+		console.log(show.id + ' is not on today, removing')
+		document.getElementById(show_item.id).remove()
 	}
 })
+// Then, order the shows based on show_performance_today 
+all_shows = document.querySelectorAll('.show-item') // Reset the variable based on what's now in the DOM
+if (all_shows.length > 0){
+	// If there are still shows today, sort them in time order and show the first one only
+	var all_shows = Array.from(all_shows);
+	all_shows_sorted = all_shows.sort(sorter);
+	all_shows_sorted.forEach(e => wrapper.appendChild(e))
+	// space_shows_sorted[0].classList.remove('d-none')
+	for (let i = 0; i < 5; i++){
+		if (all_shows[i]){
+			all_shows_sorted[i].classList.remove('d-none');
+		}
+	}
+}
+else {
+	// No shows for this space, let's display appropriately.
+	document.querySelectorAll('.no-more-shows').forEach(e => e.classList.remove('d-none'))
+}
 
