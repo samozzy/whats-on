@@ -84,7 +84,7 @@
           }
         });
 
-        if (all_shows.length <=3 ){
+        if (typeof all_shows == "undefined" || all_shows.length <=3 ){
           swiper.autoplay.stop();
           progressBar.classList.add('d-none')
         }
