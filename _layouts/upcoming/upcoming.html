@@ -32,7 +32,7 @@ layout: outer
 		<div class="col-6">
 			{% unless fringe_start_date > today_date %}
 				<h1 class="display-1">{{ page.title }}</h1>
-				<span class="h3"id="current_datetime">{{ today_date | date_to_string }} {{ today_time | date: "%H:%M" }}</span>
+				<span class="h3"id="current_datetime">{{ today_date | date_to_long_string: "ordinal" }} <span class="d-none" id="current_time">{{ today_time | date: "%H:%M" }}</span></span>
 			{% endunless %}
 		</div>
 		<div class="col-6 text-end"><img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="150px" width="auto" class="mx-4"></div>
