@@ -14,12 +14,12 @@ all_shows.forEach(function(show_item){
 	if (show.dataset.show_performance_today){
 		let show_performance_time = new Date(show.dataset.show_performance_today)
 		if (show_performance_time <= today) {
-			console.log(show.id + ' has happened')
+			// console.log(show.id + ' has happened')
 			document.getElementById(show_item.id).remove()
 		}
 	}
 	else {
-		console.log(show.id + ' is not on today, removing')
+		// console.log(show.id + ' is not on today, removing')
 		document.getElementById(show_item.id).remove()
 	}
 })
@@ -41,11 +41,15 @@ else {
 	// No shows for this space, let's display appropriately.
 	document.querySelectorAll('.no-more-shows').forEach(e => e.classList.remove('d-none'))
 }
-
-// Hide pagination if there is only one page 
-if (document.querySelectorAll('.swiper-pagination-total')[0].innerHTML == '1'){
-	document.getElementById('pagination_wrapper').classList.add('d-none')
+function hidePagination(){
+	// Hide pagination if there is only one page 
+	if (document.querySelectorAll('.swiper-pagination-total')){
+		if (document.querySelectorAll('.swiper-pagination-total')[0].innerHTML == '1'){
+			document.getElementById('pagination_wrapper').classList.add('d-none')
+		}
+		else {
+			document.getElementById('pagination_wrapper').classList.remove('d-none');
+		}
+	}
 }
-else {
-	document.getElementById('pagination_wrapper').classList.remove('d-none');
-}
+setTimeout(hidePagination, 500); // Wait for swiper to initialise and create the component 
