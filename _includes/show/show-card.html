@@ -30,6 +30,14 @@
       </div>
       <div class="wrap-content">
         <div class="card-header">
+          {% if include.show_venue_logo %}
+            {% assign venue = site.data.venues | where_exp: "venue", "venue.name == show.venue.name" | first %}
+            {% if venue and venue.logo %}
+            <div>
+              <img class="venue-logo" src="{% link {{ venue.logo }} %}" alt="{{ venue.name }} logo">
+            </div>
+            {% endif %}
+          {% endif %}
           <h2><a href="{{ show_link }}">{{ show.title }}</a></h2>
           <p class="lead">{{ show.artist }}
             {% if date_string and show.artist or show_start_time and show.artist%}<br>{% endif %}
@@ -44,7 +52,7 @@
               {% endif %}
             {% endif %}
             {% if performance_today %}
-                <br><br><span class="lead"><strong>Next performance: {{ performance_today | date: "%H:%M" }}</strong></span><br>
+              <br><br><span class="lead"><strong>Next performance: {{ performance_today | date: "%H:%M" }}</strong></span><br>
             {% endif %}
           </p>
         </div>

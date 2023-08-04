@@ -1,9 +1,11 @@
 - name: Paradise in Augustines
+  logo: static/logos/augustines.png
   spaces: 
     - The Sanctuary
     - The Studio
     - The Snug 
 - name: Paradise in The Vault 
+  logo: static/logos/vault.png 
   spaces: 
     - The Vault 
     - The Annexe 
