@@ -42,3 +42,10 @@ else {
 	document.querySelectorAll('.no-more-shows').forEach(e => e.classList.remove('d-none'))
 }
 
+// Hide pagination if there is only one page 
+if (document.querySelectorAll('.swiper-pagination-total')[0].innerHTML == '1'){
+	document.getElementById('pagination_wrapper').classList.add('d-none')
+}
+else {
+	document.getElementById('pagination_wrapper').classList.remove('d-none');
+}

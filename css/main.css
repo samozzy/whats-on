@@ -7118,7 +7118,7 @@ textarea.form-control-lg {
   font-size: calc(1.3rem + 0.6vw) !important;
 }
 
-.fs-4, .sidebar .pgp-nav a.nav-link {
+.fs-4, .sidebar .pgp-nav a.nav-link, .swiper-pagination {
   font-size: calc(1.275rem + 0.3vw) !important;
 }
 
@@ -10048,7 +10048,7 @@ textarea.form-control-lg {
   .fs-3 {
     font-size: 1.75rem !important;
   }
-  .fs-4, .sidebar .pgp-nav a.nav-link {
+  .fs-4, .sidebar .pgp-nav a.nav-link, .swiper-pagination {
     font-size: 1.5rem !important;
   }
 }

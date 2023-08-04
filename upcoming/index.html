@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="/css/main.css?cachebust=202308041616">
+    <link rel="stylesheet" href="/css/main.css?cachebust=202308041704">
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/e464ea3a91.js" crossorigin="anonymous"></script>
 
@@ -8832,7 +8832,7 @@
 		<div class="col-6">
 			
 				<h1 class="display-1">Still to come</h1>
-				<span class="h3"id="current_datetime">04 Aug 2023 16:16</span>
+				<span class="h3"id="current_datetime">04 Aug 2023 17:04</span>
 			
 		</div>
 		<div class="col-6 text-end"><img src="/static/logos/paradise-logo.png" alt="Paradise Green Logo" height="150px" width="auto" class="mx-4"></div>
@@ -21712,6 +21712,13 @@
 		
 	</div>
 </div>
+<div class="container-fluid" id="pagination_wrapper">
+	<div class="row">
+		<div class="col-12">
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+</div>
 <div class="container-fluid mt-auto">
 	<div class="row py-3">
 		<div class="col-9 offset-1 my-auto text-center">
@@ -21729,7 +21736,7 @@
 </div>
 
 <script>
-	today = new Date('2023-08-04 16:16')
+	today = new Date('2023-08-04 17:04')
 </script>
 
     
@@ -21773,6 +21780,10 @@
                   slidesPerView: 3,
                   slidesPerGroup: 3,
               },
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
           },
           on: {
             autoplayTimeLeft(s, time, progress) {
