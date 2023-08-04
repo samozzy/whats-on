@@ -47,7 +47,7 @@ layout: outer
 			{% for show in the_shows_today %}
 				<div class="swiper-slide show-item" id="{{ show.title | slugify | replace: "-", "_" }}_slide">
 					<div class="gx-5 row">
-						{% include show/show-card.html show=show hide_blurb=true background='static/band/vstroke-white.png' performance_date=today_date %}
+						{% include show/show-card.html show=show hide_blurb=true show_venue_logo=true background='static/band/vstroke-white.png' performance_date=today_date %}
 					</div>
 				</div>
 			{% endfor %}
