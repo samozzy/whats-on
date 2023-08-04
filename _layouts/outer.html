@@ -77,6 +77,10 @@
                   slidesPerGroup: 3,
               },
           },
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+          },
           on: {
             autoplayTimeLeft(s, time, progress) {
               progressBar.style.setProperty("width", (100 - (progress * 100) + "%"));

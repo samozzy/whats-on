@@ -64,7 +64,7 @@ collections:
     permalink: :path/
   upcoming:
     output: true 
-    permalink: :path/
+    permalink: upcoming/:path/
 
 page_gen-dirs: true 
 page_gen:
@@ -76,6 +76,10 @@ page_gen:
   - data: 'venues'
     template: 'upcoming/upcoming'
     name: 'name'
+    dir: '/upcoming'
+  - data: 'pgtv_spaces'
+    name: 'space'
+    template: 'upcoming/upcoming-single-venue'
     dir: '/upcoming'
 
 defaults:

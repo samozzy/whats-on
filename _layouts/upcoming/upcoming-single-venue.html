@@ -1,0 +1,51 @@
+---
+---
+
+{% assign the_shows = site.data.shows %}
+{% assign the_shows_today = '' | split: '' %}
+{% assign the_showtimes_today = '' | split: '' %}
+{% if site.test_date %}
+	{% assign today = site.test_date | date: "%Y-%m-%d %H:%M" %}
+{% else %}	
+	{% assign today = 'now' | date: "%Y-%m-%d %H:%M" %}
+{% endif %}
+{% assign today_time = today | date: "%H:%M" %}
+{% assign today_date = today | date: "%Y-%m-%d" %}
+{% for show in the_shows %}
+	{% include show/show-start-time.html show=show date=today_date %}
+	{% if performance_today %}
+		{% assign the_shows_today = the_shows_today | push: show %}
+		{% assign the_showtimes_today = the_showtimes_today | push: performance_today %}
+	{% endif %}
+{% endfor %}
+
+{% if page.space %}
+	{% assign venue_shows = the_shows_today | where_exp: "show", "show.performance_space.name==page.space" %}
+	{% if venue_shows.size > 0 %}
+		{% assign the_shows_today = venue_shows %}
+	{% endif %}
+{% endif %}
+
+{% if the_shows_today.size != the_showtimes_today.size %}
+	{% comment %} Just in case... {% endcomment %}
+	<script>console.log("ERROR: Show size and showtime size are different");document.getElementById('no_more_shows').style.display = 'block';</script>
+{% endif %}
+
+<div class="container-fluid nownext h-100">
+	<div class="row my-5">
+		<div class="col-6">
+			<h1 class="display-1">{{ page.space | default: page.title }}</h1>
+			<span class="h3"id="current_datetime">{{ today | date_to_string }} {{ today | date: "%H:%M" }}</span>
+		</div>
+	</div>
+	<div class="row show-list" id="{{ page.space | default: page.title }}_shows">
+			{% for show in the_shows_today %}
+				{% include show/show-card.html show=show hide_blurb=true hide_venue=true background='static/band/vstroke-white.png' performance_date=today_date %}
+				<hr>
+			{% endfor %}
+		<div class="help-text d-none col-12 no-more-shows" style="display:none;">No more shows here today!</div>
+	</div>
+</div>
+<script>
+	today = new Date('{{ today }}')
+</script>
