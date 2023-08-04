@@ -217,7 +217,6 @@ img.show-poster {
 .nownext .show-card-background {
   opacity: 0.2;
 }
-
 .nownext-website {
   letter-spacing: 15px;
   text-transform: uppercase;
@@ -825,7 +824,7 @@ progress {
   content: "— ";
 }
 
-.img-fluid {
+.img-fluid, .nownext img.venue-logo {
   max-width: 100%;
   height: auto;
 }
@@ -6947,7 +6946,7 @@ textarea.form-control-lg {
   padding-left: 1.5rem !important;
 }
 
-.px-5 {
+.px-5, .nownext img.venue-logo {
   padding-right: 3rem !important;
   padding-left: 3rem !important;
 }
