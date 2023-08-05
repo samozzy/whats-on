@@ -30,7 +30,8 @@
       </div>
       <div class="wrap-content">
         <div class="card-header">
-          {% if include.show_venue_logo %}
+          <h2 {% if include.upcoming %}class="text-center"{% endif %}><a href="{{ show_link }}">{{ show.title }}</a></h2>
+          {% if include.upcoming %}
             {% assign venue = site.data.venues | where_exp: "venue", "venue.name == show.venue.name" | first %}
             {% if venue and venue.logo %}
             <div>
@@ -38,7 +39,6 @@
             </div>
             {% endif %}
           {% endif %}
-          <h2><a href="{{ show_link }}">{{ show.title }}</a></h2>
           <p class="lead">{{ show.artist }}
             {% if date_string and show.artist or show_start_time and show.artist%}<br>{% endif %}
             {% if date_string %}
@@ -57,7 +57,7 @@
           </p>
         </div>
       </div>
-      {% unless include.hide_blurb %}
+      {% unless include.upcoming %}
         <div class="body-wrapper">
           <div class="show-card-buttons d-flex flex-row justify-items-between mb-4">
             {% include show/show-book-button.html show=show %}
