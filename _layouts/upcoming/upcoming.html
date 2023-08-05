@@ -75,22 +75,18 @@ layout: outer
 			</ul>
 		{% elsif today_date < fringe_start_date %}
 			<p class="text-center">Festival starts {{ fringe_start_date | date_to_long_string: "ordinal" }}</p>
-			{% assign show_thumbs = true %}
 		{% else %}
 			<p>No more shows here today!</p>
-			{% assign show_thumbs = true %}
 		{% endif %}
 
-		{% if show_thumbs %}
-			{% assign random_shows = site.data.shows | sample: 12 %}
-			<div class="row w-75 mx-auto">
-				{% for show in random_shows %}
-					<div class="col-2 py-2 px-4">
-						{% include show/show-get-poster.html show=show %}
-					</div>
-				{% endfor %}
-			</div>
-		{% endif %}
+		{% assign random_shows = site.data.shows | sample: 12 %}
+		<div class="row w-75 mx-auto d-none" id="show_thumbs">
+			{% for show in random_shows %}
+				<div class="col-2 py-2 px-4">
+					{% include show/show-get-poster.html show=show %}
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 </div>
 <div class="container-fluid" id="pagination_wrapper">
