@@ -223,6 +223,10 @@ img.show-poster {
   font-weight: bold;
 }
 
+.progress-bar {
+  max-width: 100% !important;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
