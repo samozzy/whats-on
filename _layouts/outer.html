@@ -83,7 +83,13 @@
           // },
           on: {
             autoplayTimeLeft(s, time, progress) {
-              progressBar.style.setProperty("width", (100 - (progress * 100) + "%"));
+              if (document.querySelectorAll('.show-card-col').length <=3 ){
+                progressBar.classList.add('d-none')
+              }
+              else {
+                progressBar.classList.remove('d-none');
+                progressBar.style.setProperty("width", (100 - (progress * 100) + "%"));
+              }
             }
           }
         });
