@@ -27,15 +27,16 @@ layout: outer
 	<script>console.log("ERROR: Show size and showtime size are different");</script>
 {% endif %}
 
-<div class="container-fluid nownext h-100">
-	<div class="row my-5">
+<div class="container-fluid nownext h-100" id="upcoming_wrapper">
+	<div class="row my-5" id="upcoming_title">
 		<div class="col-6">
 			{% unless fringe_start_date > today_date %}
 				<h1 class="display-1">{{ page.title }}</h1>
-				<span class="h3"id="current_datetime">{{ today_date | date_to_long_string: "ordinal" }} <span class="d-none" id="current_time">{{ today_time | date: "%H:%M" }}</span></span>
 			{% endunless %}
 		</div>
-		<div class="col-6 text-end"><img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="150px" width="auto" class="mx-4"></div>
+<!-- 		<div class="col-6 text-end">
+			<img src="{% link static/logos/paradise-logo.png %}" alt="Paradise Green Logo" height="150px" width="auto" class="mx-4">
+		</div> -->
 	</div>
 	{% if page.venue %}
 		<div class="row gx-5">
@@ -47,13 +48,22 @@ layout: outer
 			{% for show in the_shows_today %}
 				<div class="swiper-slide show-item" id="{{ show.title | slugify | replace: "-", "_" }}_slide">
 					<div class="gx-5 row">
-						{% include show/show-card.html show=show hide_blurb=true show_venue_logo=true background='static/band/vstroke-white.png' performance_date=today_date %}
+						{% include show/show-card.html show=show upcoming=true background='static/band/vstroke-white.png' performance_date=today_date %}
 					</div>
 				</div>
 			{% endfor %}
 		</div>
 	</div>
-	<div class="display-3 d-none col-12 no-more-shows">
+</div>
+<div class="container-fluid" id="last_updated">
+	<div class="row">
+		<div class="col-12 text-end">
+			<span class="h5"id="current_datetime">Last updated: {{ today_date | date_to_long_string: "ordinal" }} <span class="d-none" id="current_time">{{ today_time | date: "%H:%M" }}</span></span>
+		</div>
+	</div>
+</div>
+<div class="container-fluid d-flex flex-row d-none" id="no_shows_wrapper">
+	<div class="display-3 col-12 no-more-shows my-auto">
 		{% assign tomorrow_date = today | date: "%s" | plus: 86400 | date: "%Y-%m-%d" %}
 		{% assign the_shows_tomorrow = '' | split: '' %}
 		{% assign the_showtimes_tomorrow = '' | split: '' %}
@@ -67,12 +77,14 @@ layout: outer
 		{% endfor %}
 
 		{% if the_shows_tomorrow.size > 1 %}
-			<h1>Coming up tomorrow...</h1>
-			<ul>
-				{% for show in the_shows_tomorrow %}
-					<li>{{ show.title }} at {{ the_showtimes_tomorrow[forloop.index] | date: "%H:%M" }}</li>
-				{% endfor %}
-			</ul>
+			<h1 class="text-center">Coming up tomorrow...</h1>
+			{% comment %}
+				<ul>
+					{% for show in the_shows_tomorrow %}
+						<li>{{ show.title }} at {{ the_showtimes_tomorrow[forloop.index] | date: "%H:%M" }}</li>
+					{% endfor %}
+				</ul>
+			{% endcomment %}
 		{% elsif today_date < fringe_start_date %}
 			<p class="text-center">Festival starts {{ fringe_start_date | date_to_long_string: "ordinal" }}</p>
 		{% else %}
@@ -80,14 +92,16 @@ layout: outer
 		{% endif %}
 
 		{% assign random_shows = site.data.shows | sample: 12 %}
-		<div class="row w-75 mx-auto d-none" id="show_thumbs">
+		<div class="row w-75 mx-auto d-none no-more-shows" id="show_thumbs">
 			{% for show in random_shows %}
 				<div class="col-2 py-2 px-4">
 					{% include show/show-get-poster.html show=show %}
+					<h5 class="text-center">{{ show.title }}</h5>
 				</div>
 			{% endfor %}
 		</div>
 	</div>
+</div>
 <div class="container-fluid d-none" id="pagination_wrapper">
 	<div class="row">
 		<div class="col-12">
@@ -112,5 +126,10 @@ layout: outer
 </div>
 
 <script>
-	today = new Date('{{ today }}')
+	{% if site.test_date %}
+		today = new Date('{{ today }}')
+		test_data = true 
+	{% else %}
+		today = new Date()
+	{% endif %}
 </script>

@@ -88,13 +88,13 @@
           }
         });
 
-        // if (typeof all_shows == "undefined" || all_shows.length <=3 ){
-        //   swiper.autoplay.stop();
-        //   progressBar.classList.add('d-none')
-        // }
-        // else {
-        //   progressBar.classList.remove('d-none')
-        // }
+        if (typeof all_shows == "undefined" || all_shows.length <=3 ){
+          swiper.autoplay.stop();
+          progressBar.classList.add('d-none')
+        }
+        else {
+          progressBar.classList.remove('d-none')
+        }
       </script>
     {% endif %}
   </body>
