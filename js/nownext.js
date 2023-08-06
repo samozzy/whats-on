@@ -59,7 +59,7 @@ function reloadUpcomingShows(){
 		else {
 			document.getElementById('current_time').classList.add('d-none')
 		}
-		if (typeof swiper == 'object'){
+		if (typeof swiper == 'object' && document.querySelectorAll('.show-card-col').length > 3){
 			console.log('Resuming swiper')
 			setTimeout(swiper.autoplay.resume(),900);
 		}
