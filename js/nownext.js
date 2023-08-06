@@ -1,11 +1,6 @@
 console.log('NOW / NEXT FUNCTIONS')
 console.log(today) // Defined in upcoming.html 
 var timeout = 60 * 1000;
-// if (test_date != true ){
-// 	var today = today.setSeconds(today.getSeconds()+(timeup))
-// 	var today = new Date(today)
-// }
-// console.log('TODAY FIRST: ' + today)
 
 function sorter(a,b) {
 	return a.querySelector('.show-card-col').dataset.show_performance_today.localeCompare(b.querySelector('.show-card-col').dataset.show_performance_today)
@@ -16,6 +11,10 @@ function reloadUpcomingShows(){
 	console.log("RELOADING SHOWS");
 	var today = new Date();
 	console.log(today)
+	if (today.getMinutes() == 21){
+		console.log('RELOADING in 60 seconds')
+		setTimeout(() => {  location.reload(); }, 60000);
+	}
 	var wrapper = document.getElementById('nownext-wrapper');
 	all_shows = document.querySelectorAll('.show-item')
 	all_shows.forEach(function(show_item){ // Iterate over each .show-card-col 
